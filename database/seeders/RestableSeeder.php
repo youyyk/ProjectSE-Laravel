@@ -14,6 +14,6 @@ class RestableSeeder extends Seeder
      */
     public function run()
     {
-        Restable::factory(20)->create();
+        Restable::factory(10)->create();
     }
 }

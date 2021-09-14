@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMenusTable extends Migration
+class CreateBillMenuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('bill_menu', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(\App\Models\Department::class);
-            $table->string('name');
-            $table->integer('price');
-            $table->integer('processTime');
-            $table->enum('category',['Dish','Dessert']);
+            $table->foreignIdFor(\App\Models\Menu::class); //menu_id
+            $table->foreignIdFor(\App\Models\Bill::class); //bill_id
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +28,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('menus');
+        Schema::dropIfExists('bill_menu');
     }
 }

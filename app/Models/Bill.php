@@ -14,4 +14,11 @@ class Bill extends Model
         return $this->belongsTo(Restable::class);
     }
 
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
+
+    public function menus(){
+        return $this->belongsToMany(Menu::class)->withTimestamps();
+    }
 }

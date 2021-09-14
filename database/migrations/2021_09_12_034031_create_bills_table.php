@@ -16,10 +16,11 @@ class CreateBillsTable extends Migration
         Schema::create('bills', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(\App\Models\Restable::class);
+            $table->foreignIdFor(\App\Models\User::class);
             $table->integer('total');
-            $table->date('date_time');
-            $table->boolean('status');
+            $table->boolean('status')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

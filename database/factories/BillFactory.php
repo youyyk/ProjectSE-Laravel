@@ -23,8 +23,6 @@ class BillFactory extends Factory
     {
         return [
             'total' => $this->faker->numberBetween(100,1000),
-            'date_time' => $this->faker->dateTimeBetween('-15 days', '+15 days')
-                    ->format('Y-m-d H:i:s'),
             'status' => $this->faker->boolean(),
         ];
     }
