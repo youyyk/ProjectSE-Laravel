@@ -23,8 +23,8 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'username' => $this->faker->userName(),
-            'password' => $this->faker->password(5,10),
+//            'username' => $this->faker->userName(),
+//            'password' => $this->faker->password(5,10),
             'name' => $this->faker->name(),
             'type' => $this->faker->randomElement(['Admin','Worker']),
             'last_login' => $this->faker->dateTimeBetween('-15 days', '+15 days')

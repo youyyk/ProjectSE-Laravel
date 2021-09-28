@@ -14,6 +14,17 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
+        $username = "admin";
+        $type = "Admin";
+        for ($i=0; $i<5; $i++){
+            if ($i != 0){
+                $username = "worker{$i}";
+                $type = "Worker";
+            }
+            User::factory(1)->create([
+                'username'=>$username,
+                "type" => $type
+            ]);
+        }
     }
 }
