@@ -27,6 +27,25 @@
                           @if(\Request::routeIs('bills.*')) bg-dark text-white rounded-3 @endif"
                    href="{{route("bills.index")}}">Bills</a>
             </li>
+
+            @if(Auth::check())
+                <a href="#">
+                    {{ Auth::user()->name }}
+                </a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit">
+                        LOGOUT
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">
+                    Login
+                </a>
+                <a href="{{ route('register') }}">
+                    Register
+                </a>
+            @endif
         </ul>
     </div>
 </nav>
