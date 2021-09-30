@@ -27,7 +27,7 @@ class MenuController extends Controller
      */
     public function create()
     {
-        //
+        return view('menus.create');
     }
 
     /**
@@ -49,7 +49,8 @@ class MenuController extends Controller
      */
     public function show($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        return view('menus.show',['menu' => $menu]);
     }
 
     /**
@@ -60,7 +61,8 @@ class MenuController extends Controller
      */
     public function edit($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        return view('menus.edit',['menu' => $menu]);
     }
 
     /**

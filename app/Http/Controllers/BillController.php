@@ -27,7 +27,7 @@ class BillController extends Controller
      */
     public function create()
     {
-        //
+        return view('bills.create');
     }
 
     /**
@@ -49,7 +49,8 @@ class BillController extends Controller
      */
     public function show($id)
     {
-        //
+        $bill = Bill::findOrFail($id);
+        return view('bills.show',['bill' => $bill]);
     }
 
     /**
@@ -60,7 +61,7 @@ class BillController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('bills.edit');
     }
 
     /**

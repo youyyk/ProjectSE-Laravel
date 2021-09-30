@@ -49,7 +49,10 @@ class DepartmentController extends Controller
      */
     public function show($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        return view('departments.show',[
+            'department' => $department
+        ]);
     }
 
     /**
@@ -60,7 +63,10 @@ class DepartmentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $department = Department::findOrFail($id);
+        return view('departments.edit',[
+            'department' => $department
+        ]);
     }
 
     /**

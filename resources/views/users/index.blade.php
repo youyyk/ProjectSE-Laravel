@@ -1,6 +1,9 @@
 @extends('welcome')
 
 @section('content')
+    <h1 class="mt-3">
+        User's List
+    </h1>
     <table class="table border-2 mt-3">
         <thead>
         <tr>

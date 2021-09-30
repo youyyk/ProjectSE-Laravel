@@ -1,6 +1,17 @@
 @extends('welcome')
 
 @section('content')
+    <h1 class="mt-3">
+        แผนกครัว
+        <span class="float-end">
+            <div class="input-group">
+              <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">+ เพิ่ม</button>
+              </div>
+            </div>
+        </span>
+    </h1>
     <table class="table border-2 mt-3">
         <thead>
         <tr>
@@ -13,9 +24,15 @@
         @foreach($departments as $department)
             <tr>
                 <td class="border-2 p-0.5">{{$department->id}}</td>
-                <td class="border-2 p-0.5">{{$department->name}}</td>
+                <td class="border-2 p-0.5"><a href="{{route('departments.show',['department'=>$department->id])}}" class="text-info">{{$department->name}}</a></td>
 
-                <td class="border-2 p-0.5">{{$department->menus}}</td>
+                <td class="border-2 p-0.5">
+                    @foreach($department->menus as $menu)
+                        <div>
+                            {{ $menu->name }}
+                        </div>
+                    @endforeach
+                </td>
             </tr>
         @endforeach
         </tbody>

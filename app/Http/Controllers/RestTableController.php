@@ -60,7 +60,10 @@ class RestTableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resTable = Restable::findOrFail($id);
+        return view('resTables.edit',[
+            'resTable' => $resTable
+        ]);
     }
 
     /**
