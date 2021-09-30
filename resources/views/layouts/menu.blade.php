@@ -37,6 +37,25 @@
                     <a class="dropdown-item" href="#">Something else here</a>
                 </div>
             </li>
+
+            @if(Auth::check())
+                <a href="#">
+                    {{ Auth::user()->name }}
+                </a>
+                <form action="{{ route('logout') }}" method="post">
+                    @csrf
+                    <button type="submit">
+                        LOGOUT
+                    </button>
+                </form>
+            @else
+                <a href="{{ route('login') }}">
+                    Login
+                </a>
+                <a href="{{ route('register') }}">
+                    Register
+                </a>
+            @endif
         </ul>
     </div>
 </nav>

@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';
+
 Route::resource('users',\App\Http\Controllers\UserController::class);
 Route::resource('menus',\App\Http\Controllers\MenuController::class);
 Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
