@@ -2,35 +2,45 @@
 
 @section('content')
     <h1 class="mb-4 mt-4">แก้ไขแผนก</h1>
-    <form>
+    <form action="{{ route('departments.update', ['department' => $department->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
         {{--    Department's name    --}}
         <div class="mb-3 form-group row">
-            <label class="col-sm-2 col-form-label" >ชื่อแผนก</label>
+            <label class="col-sm-2 col-form-label">ชื่อแผนก</label>
             <div class="col-sm-3">
-                <input name="name" type="text" class="form-control text-center">
+                <input name="name" type="text" class="form-control text-center" value="{{ $department->name }}">
             </div>
         </div>
+    </form>
+
+    <form action="">
+        @csrf
+        @method('PUT')
         {{--    Menu's Name    --}}
         <div class="mb-5 form-group row">
             <label class="col-sm-2 col-form-label">รายชื่อเมนู</label>
-            <div class="col-sm-3">
-                <input type="text" class="form-control text-center">
-            </div>
+                <div class="col-sm-3">
+                    @foreach($department->menus as $menu)
+{{--                        <input type="text" class="form-control text-center mb-lg-3" value="{{ $menu->name }}">--}}
+                         {{ $menu->name }}
+{{--                        <button type="submit" class="m-lg-2 btn btn-danger">--}}
+{{--                            ลบ--}}
+{{--                        </button>--}}
+                        <br>
+                    @endforeach
+                </div>
         </div>
-        <a href="{{route("departments.index")}}" >
-            <button type="button" class="btn btn-primary" style="margin-right: 20px">
-                แก้ไข
-            </button>
-        </a>
-
-        <a>
-            <button type="button" class="btn btn-danger">
-                ลบ
-            </button>
-        </a>
     </form>
 
 
+    <form action="{{ route('departments.destroy', ['department' => $department->id]) }}" method="POST">
+        @method('DELETE')
+        @csrf
 
+        <button type="submit" class="mt-2 btn btn-danger">
+            ลบ
+        </button>
+    </form>
 
 @endsection

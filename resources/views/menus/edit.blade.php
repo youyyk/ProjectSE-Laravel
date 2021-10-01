@@ -2,7 +2,10 @@
 
 @section('content')
     <h1 class="mb-4 mt-4">แก้ไขเมนู</h1>
-    <form>
+    <form action="{{ route('menus.update', ['menu' => $menu->id]) }}" method="POST">
+        @csrf
+        @method('PUT')
+
         {{--   Menu's Name   --}}
         <div class="mb-3 form-group row">
             <label class="col-sm-2 col-form-label">ชื่อเมนู</label>
@@ -40,17 +43,21 @@
                 <input name="department_id" type="number" class="form-control text-center" value="{{$menu->department_id}}">
             </div>
         </div>
-        <a href="{{route("menus.index")}}" >
-            <button type="button" class="btn btn-primary" style="margin-right: 20px">
+
+        <div>
+            <button type="submit" class="btn btn-primary" style="margin-right: 20px">
                 แก้ไข
             </button>
-        </a>
+        </div>
+    </form>
 
-        <a>
-            <button type="button" class="btn btn-danger">
-                ลบ
-            </button>
-        </a>
+    <form action="{{ route('menus.destroy', ['menu' => $menu->id]) }}" method="POST">
+        @method('DELETE')
+        @csrf
+
+        <button type="submit" class="mt-2 btn btn-danger">
+            ลบ
+        </button>
     </form>
 
 

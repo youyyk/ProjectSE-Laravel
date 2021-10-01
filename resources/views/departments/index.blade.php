@@ -4,12 +4,15 @@
     <h1 class="mt-3">
         แผนกครัว
         <span class="float-end">
-            <div class="input-group">
-              <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -">
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">+ เพิ่ม</button>
-              </div>
-            </div>
+            <form action="{{ route('departments.store') }}" method="POST">
+                @csrf
+                <div class="input-group">
+                  <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -">
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
+                  </div>
+                </div>
+            </form>
         </span>
     </h1>
     <table class="table border-2 mt-3">

@@ -2,7 +2,8 @@
 
 @section('content')
     <h1 class="mb-4 mt-4">เพิ่มเมนู</h1>
-    <form>
+    <form action="{{ route('menus.store') }}" method="POST">
+        @csrf
         {{--   Menu's Name   --}}
         <div class="mb-3 form-group row">
             <label class="col-sm-2 col-form-label">ชื่อเมนู</label>
@@ -40,11 +41,12 @@
                 <input name="department_id" type="number" class="form-control">
             </div>
         </div>
-        <a href="{{route("menus.index")}}">
-            <button type="button" class="btn btn-primary">
+
+        <div>
+            <button type="submit" class="btn btn-primary">
                 + Add Menu
             </button>
-        </a>
+        </div>
     </form>
 
 

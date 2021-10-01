@@ -4,12 +4,16 @@
     <h1 class="mt-3">
         รายการโต๊ะ
         <span class="float-end">
-            <div class="input-group">
-{{--              <input type="number" class="form-control mt-lg-2 text-center" placeholder="create new table">--}}
-              <div class="input-group-append">
-                <button class="btn btn-primary" type="button">+ เพิ่มโต๊ะใหม่</button>
-              </div>
-            </div>
+            <form action="{{ route('resTables.store') }}" method="POST">
+                @csrf
+
+                <div class="input-group">
+{{--                  <input type="number" class="form-control mt-lg-2 text-center" placeholder="create new table">--}}
+                  <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
+                  </div>
+                </div>
+            </form>
         </span>
     </h1>
     <table class="table border-2">

@@ -14,7 +14,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::get();
+        $menus = Menu::latest('updated_at')->get();
         return view('menus.index',[
             'menus' => $menus
         ]);
@@ -38,7 +38,16 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $menu = new Menu();
+        $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
+        $menu->price = $request->input('price');
+        $menu->processTime = $request->input('processTime');
+        $menu->category = $request->input('category');
+        $menu->department_id = $request->input('department_id');
+
+        $menu->save();
+
+        return redirect()->route('menus.index');
     }
 
     /**
@@ -74,7 +83,16 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
+        $menu->price = $request->input('price');
+        $menu->processTime = $request->input('processTime');
+        $menu->category = $request->input('category');
+        $menu->department_id = $request->input('department_id');
+
+        $menu->save();
+
+        return redirect()->route('menus.index');
     }
 
     /**
@@ -85,6 +103,9 @@ class MenuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $menu = Menu::findOrFail($id);
+        $menu->delete();
+
+        return redirect()->route('menus.index');
     }
 }
