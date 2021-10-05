@@ -23,6 +23,9 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
+    ->name('menu.choose.index');
+
 Route::resource('users', \App\Http\Controllers\UserController::class);
 Route::resource('menus', \App\Http\Controllers\MenuController::class);
 Route::resource('resTables', \App\Http\Controllers\RestTableController::class);

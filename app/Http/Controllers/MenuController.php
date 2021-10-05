@@ -85,4 +85,13 @@ class MenuController extends Controller
     {
         //
     }
+
+    // Not default method
+    public function chooseMenuIndex()
+    {
+        $menus = Menu::paginate(12);
+        return view('menus.chooseMenuIndex',[
+            'menus' => $menus
+        ]);
+    }
 }
