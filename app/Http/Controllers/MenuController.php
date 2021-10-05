@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Phattarachai\LineNotify\Facade\Line;
 
 class MenuController extends Controller
 {
@@ -90,6 +91,7 @@ class MenuController extends Controller
     public function chooseMenuIndex()
     {
         $menus = Menu::paginate(12);
+        
         return view('menus.chooseMenuIndex',[
             'menus' => $menus
         ]);
