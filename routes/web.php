@@ -28,3 +28,6 @@ Route::resource('menus',\App\Http\Controllers\MenuController::class);
 Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
+
+Route::get('/backworker', [\App\Http\Controllers\BillController::class, 'indexforBW'])
+    ->name('backworker');

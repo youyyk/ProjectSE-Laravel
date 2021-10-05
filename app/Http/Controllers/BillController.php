@@ -85,4 +85,11 @@ class BillController extends Controller
     {
         //
     }
+
+    public function indexforBW() {
+        $bills = Bill::get();
+        return view('bills.backworker',[
+            'bills' => $bills
+        ]);
+    }
 }

@@ -19,6 +19,6 @@ class Bill extends Model
     }
 
     public function menus(){
-        return $this->belongsToMany(Menu::class)->withTimestamps();
+        return $this->belongsToMany(Menu::class)->withTimestamps()->withPivot('amount','status');
     }
 }
