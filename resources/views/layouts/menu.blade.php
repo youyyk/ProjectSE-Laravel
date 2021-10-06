@@ -27,6 +27,11 @@
                               @if(\Request::routeIs('bills.*')) bg-dark text-white rounded-3 @endif"
                        href="{{route("bills.index")}}">Bills</a>
                 </li>
+                <li class="nav-item active">
+                    <a class="nav-link
+                              @if(\Request::routeIs('backWorker')) bg-dark text-white rounded-3 @endif"
+                       href="{{route("backWorker")}}">Back-Worker</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Dropdown

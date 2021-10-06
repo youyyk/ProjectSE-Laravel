@@ -32,11 +32,5 @@ Route::resource('bills',\App\Http\Controllers\BillController::class);
 
 Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
-Route::get('/backworker', [\App\Http\Controllers\BillController::class, 'indexforBW'])
-    ->name('backworker');
-
-//=======
-//Auth::routes();
-//
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-//>>>>>>> lina
+Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
+    ->name('backWorker');

@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => \Hash::make('123456'),
             'remember_token' => Str::random(10),
-            'type' => 'Worker',
+            'type' => $this->faker->randomElement(['FrontWorker','BackWorker']),
             'last_login' => $this->faker->dateTimeBetween('-15 days', '+15 days')
                 ->format('Y-m-d H:i:s')
         ];

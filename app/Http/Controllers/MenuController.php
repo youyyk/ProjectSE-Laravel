@@ -114,7 +114,7 @@ class MenuController extends Controller
     public function chooseMenuIndex()
     {
         $menus = Menu::paginate(12);
-        
+        Line::send("Test");
         return view('menus.chooseMenuIndex',[
             'menus' => $menus
         ]);
