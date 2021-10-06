@@ -27,7 +27,7 @@ class RestTableController extends Controller
      */
     public function create()
     {
-        //
+        return view('resTables.create');
     }
 
     /**
@@ -38,7 +38,11 @@ class RestTableController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $resTable = new resTable();
+
+        $resTable->save();
+
+        return redirect()->route('resTables.index');
     }
 
     /**
@@ -49,7 +53,8 @@ class RestTableController extends Controller
      */
     public function show($id)
     {
-        //
+        $resTable = Menu::findOrFail($id);
+        return view('resTables.show',['resTable' => $resTable]);
     }
 
     /**
@@ -60,7 +65,10 @@ class RestTableController extends Controller
      */
     public function edit($id)
     {
-        //
+        $resTable = Restable::findOrFail($id);
+        return view('resTables.edit',[
+            'resTable' => $resTable
+        ]);
     }
 
     /**
@@ -72,7 +80,12 @@ class RestTableController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $resTable = resTable::findOrFail($id);
+        $resTable->status = $request->input('status');
+
+        $resTable->save();
+
+        return redirect()->route('resTables.index');
     }
 
     /**
@@ -83,6 +96,9 @@ class RestTableController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $resTable = resTable::findOrFail($id);
+        $resTable->delete();
+
+        return redirect()->route('resTables.index');
     }
 }
