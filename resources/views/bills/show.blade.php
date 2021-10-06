@@ -6,7 +6,7 @@
     <h1 class="mt-3">
         บิล #{{$bill->id}}
         <span class="float-end">
-                <a href="{{route("bills.edit",['bill'=>$bill->id])}}">
+                <a href="{{ route("bills.edit",['bill'=> $bill->id]) }}">
                     <button type="button" class="btn btn-primary">
                         แก้ไข
                     </button>

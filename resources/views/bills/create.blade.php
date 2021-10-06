@@ -2,7 +2,8 @@
 
 @section('content')
     <h1 class="mb-4 mt-4">Create Bill</h1>
-    <form>
+    <form action="{{ route('bills.store') }}" method="POST">
+        @csrf
 {{--        --}}{{--   Bill's ID   --}}
 {{--        <div class="mb-3 form-group row">--}}
 {{--            <label class="col-sm-2 col-form-label">Bill's ID</label>--}}
@@ -19,7 +20,7 @@
         </div>
         {{--    Menu's ID    --}}
         <div class="mb-3 form-group row">
-            <label class="col-sm-2 col-form-label">Menus' ID</label>
+            <label class="col-sm-2 col-form-label">Menus' ID (separated with comma)</label>
             <div class="col-sm-2">
                 <input name="menus_id" type="text" class="form-control text-center">
             </div>
@@ -39,7 +40,7 @@
             </div>
         </div>
         <a href="{{route("bills.index")}}">
-            <button type="button" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">
                 + Add bill
             </button>
         </a>

@@ -21,4 +21,8 @@ class Bill extends Model
     public function menus(){
         return $this->belongsToMany(Menu::class)->withTimestamps();
     }
+
+    public function getMenusIdAttribute() {
+           return implode(", ", $this->menus->pluck('id')->all());
+       }
 }
