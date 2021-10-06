@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+//Route::get('/dashboard', function () {
+//    return view('dashboard');
+//})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
 
@@ -29,7 +29,14 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 
+
 Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
 Route::get('/backworker', [\App\Http\Controllers\BillController::class, 'indexforBW'])
     ->name('backworker');
+
+//=======
+//Auth::routes();
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//>>>>>>> lina
