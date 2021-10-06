@@ -14,16 +14,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $username = "admin";
-        $type = "Admin";
+        $admin = new User();
+        $admin->name = "Administrator";
+        $admin->email = "admin@res.com";
+        $admin->password = \Hash::make('123456');
+        $admin->type = "Admin";
+        $admin->save();
+
         for ($i=0; $i<5; $i++){
-            if ($i != 0){
-                $username = "worker{$i}";
-                $type = "Worker";
-            }
             User::factory(1)->create([
-                'username'=>$username,
-                "type" => $type
+                'email' => "worker{$i}@res.com"
             ]);
         }
     }

@@ -17,6 +17,8 @@ class CreateBillMenuTable extends Migration
             $table->id();
             $table->foreignIdFor(\App\Models\Menu::class); //menu_id
             $table->foreignIdFor(\App\Models\Bill::class); //bill_id
+            $table->integer('amount')->default(1);
+            $table->enum('status',['notStarted','inProcess','finish'])->default('notStarted');
             $table->timestamps();
         });
     }

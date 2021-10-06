@@ -124,4 +124,11 @@ class BillController extends Controller
 
         return redirect()->route('bills.index');
     }
+
+    public function indexforBW() {
+        $bills = Bill::get();
+        return view('bills.backworker',[
+            'bills' => $bills
+        ]);
+    }
 }

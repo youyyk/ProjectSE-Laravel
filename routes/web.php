@@ -23,12 +23,13 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::resource('users',\App\Http\Controllers\UserController::class);
+Route::resource('menus',\App\Http\Controllers\MenuController::class);
+Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
+Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
+Route::resource('bills',\App\Http\Controllers\BillController::class);
+
 Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
-
-Route::resource('users', \App\Http\Controllers\UserController::class);
-Route::resource('menus', \App\Http\Controllers\MenuController::class);
-Route::resource('resTables', \App\Http\Controllers\RestTableController::class);
-Route::resource('departments', \App\Http\Controllers\DepartmentController::class);
-Route::resource('bills', \App\Http\Controllers\BillController::class);
-
+Route::get('/backworker', [\App\Http\Controllers\BillController::class, 'indexforBW'])
+    ->name('backworker');
