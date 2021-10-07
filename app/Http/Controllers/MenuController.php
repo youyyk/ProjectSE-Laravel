@@ -16,9 +16,14 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::latest('updated_at')->get();
+        $keep = Menu::first();
         return view('menus.index',[
-            'menus' => $menus
+            'menus' => $menus,
+            'keep'=>$keep
         ]);
+    }
+    public static function popUpMenu($id,$keep){
+        return $keep = Menu::findOrFail($id);
     }
 
     /**
@@ -114,7 +119,7 @@ class MenuController extends Controller
     public function chooseMenuIndex()
     {
         $menus = Menu::paginate(12);
-        Line::send("Test");
+//        Line::send("Test");
         return view('menus.chooseMenuIndex',[
             'menus' => $menus
         ]);
