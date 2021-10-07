@@ -39,19 +39,27 @@
         }
     }
 </style>
+<?php
+    $choosed = ['test33'];
+    $filter = "";
+?>
+@inject('menuController', 'App\Http\Controllers\MenuController')
 @section('content')
-
     <div class="sidebar">
-        <h4 style="margin-left: 16px; margin-top: 10px">รายการอาหาร</h4>
-        <p>ชื่อเมนู x จำนวน</p>
-        <p>ชื่อเมนู x จำนวน</p>
+        <h3 style="text-align: center; margin-top: 20px"> โต๊ะที่ {{$table->id}} </h3>
+        <h5 style="text-align: center; margin-top: 10px">รายการอาหาร</h5>
+        @foreach($choosed as $choose)
+            <p>{{$choose}}</p>
+        @endforeach
     </div>
 
     <div class="content">
         <div class="row container-fluid">
-            {{$menus->links()}}  <!-- Set in boot Laravel -->
+            <div style="margin-top: 20px;">
+                {{$menus->links()}}
+            </div>  <!-- Set in boot Laravel -->
             @foreach($menus as $menu)
-                <div class="col-sm-2 mb-4"> <!-- Size Card -->
+                <div class="col-sm-2 mb-3"> <!-- Size Card -->
                     <div class="card">
                         <img class="card-img-top"
                              src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" alt="Card image cap">
@@ -62,7 +70,6 @@
                                 <p class="card-text">Price : {{$menu->price}} ฿</p>
                                 <p class="card-text">Cooking Time : {{$menu->processTime}} minutes</p>
                                 <p class="card-text"># {{$menu->category}}</p>
-{{--                                <a href="{{route('menus.edit',['menu'=>$menu->id])}}" class="btn btn-primary float-end">edit</a>--}}
                                 </tbody>
                             </table>
                         </div>
@@ -73,4 +80,3 @@
     </div>
 
 @endsection
-

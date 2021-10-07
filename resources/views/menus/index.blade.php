@@ -12,15 +12,9 @@
             </a>
             </span>
             <span class="float-end">
-            <a href="{{route("menu.choose.index")}}">
-                <button class="btn btn-primary">
-                    Go to choose Menu
-                </button>
-            </a>
             </span>
         </h1>
         <hr>
-
         <div class="row">
             @foreach($menus as $menu)
                 <div class="col-sm-3 mb-4">

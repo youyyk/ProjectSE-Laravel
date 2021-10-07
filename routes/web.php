@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,7 +29,7 @@ Route::resource('departments',\App\Http\Controllers\DepartmentController::class)
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 
 
-Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
+Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
     ->name('backWorker');

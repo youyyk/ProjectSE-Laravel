@@ -101,4 +101,10 @@ class RestTableController extends Controller
 
         return redirect()->route('resTables.index');
     }
+
+    // Not default method
+    public function getInfoTableById($id){
+        $resTable = resTable::findOrFail($id);
+        return $resTable;
+    }
 }
