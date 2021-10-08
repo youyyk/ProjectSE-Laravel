@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Restable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RestTableController extends Controller
 {
@@ -14,7 +16,7 @@ class RestTableController extends Controller
      */
     public function index()
     {
-        $resTables = Restable::get();
+        $resTables = restable::get();
         return view('resTables.index',[
             'resTables' => $resTables
         ]);
@@ -38,9 +40,21 @@ class RestTableController extends Controller
      */
     public function store(Request $request)
     {
-        $resTable = new resTable();
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('resTables'), // unique ไม่ซ้ำกับในตาราง
+                // Rule ต้อง use Illuminate\Validation\Rule;
+            ],
+        ])->validate();
 
+        $resTable = new resTable();
+        $resTable->name = $request->input('name');
         $resTable->save();
+
+//         if ($resTable->id == 1) {
+//             $resTable->name = "home";
+//             $resTable->save();
+//         }
 
         return redirect()->route('resTables.index');
     }
@@ -53,7 +67,7 @@ class RestTableController extends Controller
      */
     public function show($id)
     {
-        $resTable = Menu::findOrFail($id);
+        $resTable = resTable::findOrFail($id);
         return view('resTables.show',['resTable' => $resTable]);
     }
 
@@ -65,7 +79,7 @@ class RestTableController extends Controller
      */
     public function edit($id)
     {
-        $resTable = Restable::findOrFail($id);
+        $resTable = restable::findOrFail($id);
         return view('resTables.edit',[
             'resTable' => $resTable
         ]);
@@ -80,7 +94,16 @@ class RestTableController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('resTables')->ignore($id),
+                // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
+                // Rule ต้อง use Illuminate\Validation\Rule;
+            ],
+        ])->validate();
+
         $resTable = resTable::findOrFail($id);
+        $resTable->name = $request->input('name');
         $resTable->status = $request->input('status');
 
         $resTable->save();
@@ -96,8 +119,10 @@ class RestTableController extends Controller
      */
     public function destroy($id)
     {
-        $resTable = resTable::findOrFail($id);
-        $resTable->delete();
+        if($id != 1) {
+            $resTable = resTable::findOrFail($id);
+            $resTable->delete();
+        }
 
         return redirect()->route('resTables.index');
     }

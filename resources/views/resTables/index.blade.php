@@ -10,9 +10,10 @@
                 @csrf
 
                 <div class="input-group">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
-                  </div>
+                    <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มโต๊ะ - - -">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
+                    </div>
                 </div>
             </form>
         </span>
@@ -28,7 +29,7 @@
         <tbody>
         @foreach($resTables as $resTable)
             <tr>
-                <td class="border-2 p-0.5"><a href="{{route("resTables.edit",['resTable'=>$resTable->id])}}">{{$resTable->id}}</a></td>
+                <td class="border-2 p-0.5"><a href="{{route("resTables.edit",['resTable'=>$resTable->id])}}">{{$resTable->name}}</a></td>
                 <td class="border-2 p-0.5">{{$resTable->status}}</td>
                 <td class="border-2 p-0.5">
                     @foreach($resTable->bills as $bill)

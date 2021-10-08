@@ -14,6 +14,10 @@ class RestableSeeder extends Seeder
      */
     public function run()
     {
-        Restable::factory(10)->create();
+        for ($i=0; $i<10; $i++) {
+            Restable::factory(1)->create([
+            'name' => "A{$i}"
+            ]);
+        }
     }
 }
