@@ -10,9 +10,10 @@
                 @csrf
 
                 <div class="input-group">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
-                  </div>
+                    <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มโต๊ะ - - -">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
+                    </div>
                 </div>
             </form>
         </span>
