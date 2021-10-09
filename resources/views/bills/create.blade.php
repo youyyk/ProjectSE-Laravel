@@ -4,13 +4,6 @@
     <h1 class="mb-4 mt-4">Create Bill</h1>
     <form action="{{ route('bills.store') }}" method="POST">
         @csrf
-{{--        --}}{{--   Bill's ID   --}}
-{{--        <div class="mb-3 form-group row">--}}
-{{--            <label class="col-sm-2 col-form-label">Bill's ID</label>--}}
-{{--            <div class="col-sm-2">--}}
-{{--                <input name="name" type="number" class="form-control">--}}
-{{--            </div>--}}
-{{--        </div>--}}
         {{--    Table's ID    --}}
         <div class="mb-3 form-group row">
             <label class="col-sm-2 col-form-label">Table's ID</label>

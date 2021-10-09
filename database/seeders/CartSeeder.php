@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Database\Seeder;
 
-class RestableSeeder extends Seeder
+class CartSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,9 +15,10 @@ class RestableSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=1; $i<=10; $i++){
-            Restable::factory(1)->create([
-                'name' => "A{$i}"
+        $restables = Restable::get();
+        foreach ($restables as $restable){
+            Cart::factory(1)->create([
+                'restable_id' => "$restable->id"
             ]);
         }
     }

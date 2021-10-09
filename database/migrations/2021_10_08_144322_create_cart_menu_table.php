@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRestablesTable extends Migration
+class CreateCartMenuTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateRestablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('restables', function (Blueprint $table) {
+        Schema::create('cart_menu', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->boolean('status')->default(true);
+            $table->foreignIdFor(\App\Models\Cart::class); //menu_id
+            $table->foreignIdFor(\App\Models\Menu::class); //menu_id
+            $table->integer('total')->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +29,6 @@ class CreateRestablesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('restables');
+        Schema::dropIfExists('cart_menu');
     }
 }

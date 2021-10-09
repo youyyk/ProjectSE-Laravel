@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
-
 class MenuController extends Controller
 {
+    private $resTable_controller;
 
+    public function __construct()
+    {
+        $this->resTable_controller = new RestTableController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -113,11 +117,17 @@ class MenuController extends Controller
     // Not default method
     public function chooseMenuIndex($tableId)
     {
-        $table = (new RestTableController())->getInfoTableById($tableId);
+        $resTable = $this->resTable_controller->getInfoTableById($tableId);
         $menus = Menu::paginate(12);
         return view('menus.chooseMenuIndex',[
             'menus' => $menus,
-            'table' => $table,
+            'resTable' => $resTable,
+            'cart' => $resTable->cart,
         ]);
+    }
+
+    public function getInfoMenuById($id){
+        $menu = Menu::findOrFail($id);
+        return $menu;
     }
 }

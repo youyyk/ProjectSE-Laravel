@@ -13,4 +13,8 @@ class Restable extends Model
     public function bills(){
         return $this->hasMany(Bill::class);
     }
+
+    public function cart(){
+        return $this->hasOne(Cart::class);
+    }
 }

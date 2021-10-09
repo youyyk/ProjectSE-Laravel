@@ -21,6 +21,7 @@
         <thead>
         <tr>
             <th class="border-2">#</th>
+            <th class="border-2">name</th>
             <th class="border-2">status</th>
             <th class="border-2">Bills (Relation)</th>
         </tr>
@@ -29,7 +30,8 @@
         @foreach($resTables as $resTable)
             <tr>
                 <td class="border-2 p-0.5"><a href="{{route("resTables.edit",['resTable'=>$resTable->id])}}">{{$resTable->id}}</a></td>
-                <td class="border-2 p-0.5"><a href="{{route("menu.choose.index",['tableId'=>$resTable->id])}}">{{$resTable->status}} (กดไปสั่งเมนู)</a></td>
+                <td class="border-2 p-0.5"><a href="{{route("menu.choose.index",['tableId'=>$resTable->id])}}">{{$resTable->name}} (กดไปสั่งเมนู)</a></td>
+                <td class="border-2 p-0.5">{{$resTable->status}}</td>
                 <td class="border-2 p-0.5">
                     @foreach($resTable->bills as $bill)
                         <div>

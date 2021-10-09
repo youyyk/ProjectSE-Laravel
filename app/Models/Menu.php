@@ -9,11 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Menu extends Model
 {
     use HasFactory,SoftDeletes;
+
     public function department(){
         return $this->belongsTo(Department::class);
     }
 
     public function bills(){
         return $this->belongsToMany(Bill::class)->withTimestamps()->withPivot('amount','status');
+    }
+
+    public function carts(){
+        return $this->belongsToMany(Cart::class)->withTimestamps()->withPivot('total');
     }
 }
