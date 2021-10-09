@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $admin->type = "Admin";
         $admin->save();
 
-        for ($i=0; $i<5; $i++){
+        for ($i=1; $i<=5; $i++){
             User::factory(1)->create([
                 'email' => "worker{$i}@res.com"
             ]);

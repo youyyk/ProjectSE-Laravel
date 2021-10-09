@@ -58,7 +58,12 @@
                    role="button" style="margin-right: 5px;">-</a>
             </div>
         @endforeach
-        <a href="#" class="btn btn-success" style="width: 100%">ยืนยัน</a>
+        @if(Auth::check())
+        <a href="{{route('bill.create.manual',
+                   ['cart'=>$cart,
+                    'user_id'=>Auth::user()->id])}}"
+           class="btn btn-success" style="width: 100%">ยืนยัน</a>
+        @endif
     </div>
 
     <div class="content">

@@ -38,3 +38,5 @@ Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartControll
 
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
     ->name('backWorker');
+Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::class, 'createBill'])
+    ->name('bill.create.manual');

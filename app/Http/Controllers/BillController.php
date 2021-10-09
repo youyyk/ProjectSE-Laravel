@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use App\Models\Cart;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -42,7 +43,6 @@ class BillController extends Controller
         $bill->restable_id = $request->input('restable_id');
         $bill->user_id = $request->input('user_id');
         $bill->total = $request->input('total');
-        $bill->status = true;
         $bill->save();
 
         $menus = trim($request->input('menus_id'));
@@ -125,10 +125,30 @@ class BillController extends Controller
         return redirect()->route('bills.index');
     }
 
+    // Not default method
     public function indexBackWorker() {
         $bills = Bill::get();
         return view('bills.backWorker',[
             'bills' => $bills
         ]);
+    }
+
+    public function createBill(Cart $cart, $user_id) {
+        $restable_id = $cart->restable_id;
+        $menus = $cart->menus;
+        $total = 0;
+        $bill = new Bill();
+        $bill->restable_id = $restable_id;
+        $bill->user_id = $user_id;
+        $bill->total = $total;
+        $bill->save();
+        foreach ($menus as $menu){
+            $amount = $menu->pivot->total;
+            $bill->menus()->attach($menu->id,array('amount'=>$amount));
+            $total += ($menu->price*$amount);
+        }
+        $bill->total = $total;
+        $bill->save();
+        return $this->index();
     }
 }
