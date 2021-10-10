@@ -39,6 +39,13 @@ class MenuController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request -> validate([
+            'name' => ['required',], 
+            'price' => ['required',],
+            'processTime' => ['required',],
+            'category' => ['required',],
+            'department_id'=> ['required',],
+        ]);
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');
@@ -84,6 +91,13 @@ class MenuController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request -> validate([
+            'name' => ['required',], 
+            'price' => ['required',],
+            'processTime' => ['required',],
+            'category' => ['required',],
+            'department_id'=> ['required',],
+        ]);
         $menu = Menu::findOrFail($id);
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');

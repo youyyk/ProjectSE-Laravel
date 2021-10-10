@@ -38,6 +38,9 @@ class DepartmentController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request -> validate([
+            'name' => ['required',], 
+        ]);
         $department = new Department();
         $department->name = $request->input('name');
 
@@ -83,6 +86,9 @@ class DepartmentController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request -> validate([
+            'name' => ['required',], 
+        ]);
         $department = Department::findOrFail($id);
         $department->name = $request->input('name');
 

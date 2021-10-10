@@ -9,7 +9,12 @@
         <div class="mb-3 form-group row">
             <label class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-2">
-                <input name="status" type="text" class="form-control text-center" value="{{$resTable->status}}">
+                <input name="status" type="text" class="form-control text-center @error('status') border border-danger @enderror" value="{{$resTable->status}}">
+            </div>
+            <div class = "col-sm-3">
+                @error('status')
+                    <p class = "text-danger">{{$message}}</p>
+                @enderror
             </div>
         </div>
 

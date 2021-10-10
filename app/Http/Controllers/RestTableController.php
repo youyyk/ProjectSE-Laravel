@@ -80,6 +80,9 @@ class RestTableController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request -> validate([
+            'status' => ['required',], 
+        ]);
         $resTable = resTable::findOrFail($id);
         $resTable->status = $request->input('status');
 

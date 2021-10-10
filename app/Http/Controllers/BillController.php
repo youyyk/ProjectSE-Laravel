@@ -38,6 +38,12 @@ class BillController extends Controller
      */
     public function store(Request $request)
     {
+        $validated = $request -> validate([
+            'restable_id' => ['required',],
+            'user_id' => ['required',], 
+            'total' => ['required',], 
+            'menus_id' => ['required',],  
+        ]);
         $bill = new Bill();
         $bill->restable_id = $request->input('restable_id');
         $bill->user_id = $request->input('user_id');
@@ -85,6 +91,7 @@ class BillController extends Controller
      */
     public function edit($id)
     {
+       
         $bill = Bill::findOrFail($id);
         return view('bills.edit',['bill' => $bill]);
     }
@@ -98,6 +105,12 @@ class BillController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $validated = $request -> validate([
+            'restable_id' => ['required',],
+            'user_id' => ['required',], 
+            'total' => ['required',], 
+            'menus_id' => ['required',],  
+        ]);
        $bill = Bill::findOrFail($id);
        $bill->restable_id = $request->input('restable_id');
        $bill->user_id = $request->input('user_id');

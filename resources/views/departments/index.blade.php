@@ -8,7 +8,7 @@
             <form action="{{ route('departments.store') }}" method="POST">
                 @csrf
                 <div class="input-group">
-                  <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -">
+                  <input type="type" name="name" class="form-control mt-lg-2 text-center @error('name') border border-danger @enderror" placeholder="- - - เพิ่มแผนก - - -">
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
                   </div>
