@@ -6,14 +6,22 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('menus.store') }}" method="POST">
+                <form action="{{ route('menus.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    {{--   Menu's Image   --}}
+                    <div class="mb-3 form-group row">
+                        <label class="col-sm-4 col-form-label">เลือกรูปภาพ</label>
+                        <div class="col-sm-5">
+                            <input name="image" type="file">
+                        </div>
+                    </div>
 
                     {{--   Menu's Name   --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ชื่อเมนู</label>
                         <div class="col-sm-5">
-                            <input name="name" type="text" class="form-control" autocomplete="off">
+                            <input name="name" type="text" class="form-control text-center" autocomplete="off">
                         </div>
                     </div>
                     {{--    Menu's Price    --}}

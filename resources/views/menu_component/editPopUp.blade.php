@@ -6,9 +6,17 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('menus.update', ['menu' => $menu->id]) }}" method="POST">
+                <form action="{{ route('menus.update', ['menu' => $menu->id]) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+
+                    {{--   Menu's Image   --}}
+                    <div class="mb-3 form-group row">
+                        <label class="col-sm-4 col-form-label">เลือกรูปภาพ</label>
+                        <div class="col-sm-5">
+                            <input name="image" type="file">
+                        </div>
+                    </div>
                     {{--   Menu's Name   --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ชื่อเมนู</label>

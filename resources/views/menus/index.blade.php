@@ -16,13 +16,14 @@
             </span>
         </h1>
 
-
     {{-- Create Menu --}}
         @include('menu_component.createPopUp')
-        {{-- filter --}}
+
+        {{-- ---------------------------------------- filter ---------------------------------------- --}}
         <span class="mb-3 float-end">
             <form class="form-inline" >
                 <span class="col-1">filter : </span>
+                {{-- filter by category --}}
                 <select class="h-100 text-center bg rounded-1" name="selected_cat" id="selected_cat">
                     <option value="">เลือกประเภท</option>
                     @foreach($categories as $cat)
@@ -31,6 +32,7 @@
                             </option>
                     @endforeach
                 </select>
+                {{-- filter by department --}}
                 <span class="col-sm-1">
                 <select class="h-100 text-center bg rounded-1" name="selected_depart" id="selected_depart">
                     <option value="">เลือกแผนก</option>
@@ -41,9 +43,10 @@
                     @endforeach
                 </select>
             </span>
-                <span><input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อเมนู - - - -" value="{{$search_name}}"></span>
-                    <button class="btn btn-primary" formaction="{{route('menu.filter')}}">search</button>
-                    <button class="btn btn-warning" formaction="{{route('menus.index')}}">clear</button>
+                {{-- search by name --}}
+                <input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อเมนู - - - -" value="{{$search_name}}">
+                <button class="btn btn-primary" formaction="{{route('menu.filter')}}">search</button>
+                <button class="btn btn-warning" formaction="{{route('menus.index')}}">clear</button>
             </form>
         </span>
 
@@ -53,7 +56,7 @@
             @foreach($menus as $menu)
                 <div class="col-sm-3 mb-3">
                     <div class="card">
-                        <img class="card-img-top" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" alt="Card image cap">
+                        <img class="card-img-top m-3" style="width: 250px;height: 250px" src="{{url(\Str::replace('public/','storage/',$menu->path))}}" alt="{{$menu->name}}">
                         <div class="card-body">
                             <table>
                                 <tbody>

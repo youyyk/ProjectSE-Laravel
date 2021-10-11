@@ -89,6 +89,11 @@ class MenuController extends Controller
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');
         $menu->department_id = $request->input('department_id');
+        if ($request->has('image')){
+            $imageFile = $request->file('image');
+            $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+            $menu->path = $path;
+        }
 
         $menu->save();
 
@@ -134,6 +139,11 @@ class MenuController extends Controller
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');
         $menu->department_id = $request->input('department_id');
+        if ($request->has('image')){
+            $imageFile = $request->file('image');
+            $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+            $menu->path = $path;
+        }
 
         $menu->save();
 
