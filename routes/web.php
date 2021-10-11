@@ -29,7 +29,8 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 
-
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
+    ->name('menu.filter');
 Route::get('/menu/choose', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])

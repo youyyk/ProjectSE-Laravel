@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Menu;
 use Illuminate\Http\Request;
 use Phattarachai\LineNotify\Facade\Line;
@@ -16,16 +17,48 @@ class MenuController extends Controller
     public function index()
     {
         $menus = Menu::latest('updated_at')->get();
-        $keep = Menu::first();
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
         return view('menus.index',[
             'menus' => $menus,
-            'keep'=>$keep
+            'categories'=>$categories,
+            'departments'=>$departments,
         ]);
     }
-    public static function popUpMenu($id,$keep){
-        return $keep = Menu::findOrFail($id);
+    public function filterCard(Request $request)
+    {
+        if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search ==""){
+            $menus = Menu::latest('updated_at')->get();
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search ==""){
+            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get();
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search ==""){
+            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart !="" & $request->search ==""){
+            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get();
+        }
+        else{
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+        }
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        return view('menus.index',[
+            'menus' => $menus,
+            'categories'=>$categories,
+            'departments'=>$departments,
+        ]);
     }
-
     /**
      * Show the form for creating a new resource.
      *
