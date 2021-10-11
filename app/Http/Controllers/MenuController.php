@@ -23,6 +23,9 @@ class MenuController extends Controller
             'menus' => $menus,
             'categories'=>$categories,
             'departments'=>$departments,
+            'search_name' => '',
+            'select_c' =>'เลือกประเภท',
+            'select_d' => 0
         ]);
     }
     public function filterCard(Request $request)
@@ -57,6 +60,9 @@ class MenuController extends Controller
             'menus' => $menus,
             'categories'=>$categories,
             'departments'=>$departments,
+            'search_name' => $request->search,
+            'select_c' =>$request->selected_cat,
+            'select_d' =>$request->selected_depart
         ]);
     }
     /**
