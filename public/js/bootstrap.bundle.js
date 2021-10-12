@@ -725,7 +725,7 @@
 
   /**
    * --------------------------------------------------------------------------
-   * Bootstrap (v5.0.2): base-component.js
+   * Bootstrap (v5.0.2): base-menu_component.js
    * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
    * --------------------------------------------------------------------------
    */
@@ -776,7 +776,7 @@
     }
 
     static get NAME() {
-      throw new Error('You have to implement the static method "NAME", for each component!');
+      throw new Error('You have to implement the static method "NAME", for each menu_component!');
     }
 
     static get DATA_KEY() {

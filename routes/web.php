@@ -28,15 +28,19 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 Route::resource('carts',\App\Http\Controllers\CartController::class);
-
-Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
-    ->name('menu.choose.index');
+// Menu Admin View
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
+    ->name('menu.filter');
+// ChooseMenu View
+Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"]);
+->name('menu.choose.index');
 Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenu"])
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
     ->name('cart.value');
-
-Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
-    ->name('backWorker');
 Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::class, 'createBill'])
     ->name('bill.create.manual');
+// Bill BackWorker View
+Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
+    ->name('backWorker');
+

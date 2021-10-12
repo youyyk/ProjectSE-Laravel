@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->integer('price');
             $table->integer('processTime');
             $table->enum('category',['Dish','Dessert']);
+            $table->string('path')->default("-");
             $table->timestamps();
             $table->softDeletes();
         });
