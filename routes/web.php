@@ -43,4 +43,5 @@ Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::clas
 // Bill BackWorker View
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
     ->name('backWorker');
-
+Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])
+    ->name('bill.menu.update.status');

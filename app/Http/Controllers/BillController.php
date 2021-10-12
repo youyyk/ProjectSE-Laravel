@@ -151,4 +151,20 @@ class BillController extends Controller
         $bill->save();
         return $this->index();
     }
+
+    public function updateStatus(Bill $bill, $menuId) {
+        foreach($bill->menus as $menu){
+            if($menu->id == $menuId){
+                $status = $menu->pivot->status;
+                break;
+            }
+        }
+        if($status == 'notStarted') {
+            $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProgress']);
+        }
+        elseif($status == 'inProgress') {
+            $bill->menus()->updateExistingPivot($menuId, ['status'=>'finish']);
+        }
+        return $this->indexBackWorker();
+    }
 }
