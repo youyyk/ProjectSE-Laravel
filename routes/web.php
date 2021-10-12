@@ -32,8 +32,8 @@ Route::resource('carts',\App\Http\Controllers\CartController::class);
 Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
     ->name('menu.filter');
 // ChooseMenu View
-Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"]);
-->name('menu.choose.index');
+Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
+    ->name('menu.choose.index');
 Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenu"])
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
