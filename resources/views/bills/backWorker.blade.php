@@ -16,7 +16,6 @@
                                 <tr>
                                     <td>{{ $menu->name }}</td>
                                     <td>{{ $menu->pivot->amount }}</td>
-{{--                                    <td>{{ $menu->pivot->status }}</td>--}}
                                     <td>
                                         @if($menu->pivot->status == 'notStarted')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"

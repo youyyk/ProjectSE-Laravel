@@ -127,7 +127,7 @@ class BillController extends Controller
 
     // Not default method
     public function indexBackWorker() {
-        $bills = Bill::get();
+        $bills = Bill::where('status', true)->get();
         return view('bills.backWorker',[
             'bills' => $bills
         ]);
@@ -153,17 +153,23 @@ class BillController extends Controller
     }
 
     public function updateStatus(Bill $bill, $menuId) {
+        $numMenu = $bill->menus->count();
+        $countFinish = 0;
         foreach($bill->menus as $menu){
             if($menu->id == $menuId){
                 $status = $menu->pivot->status;
-                break;
             }
+            if($menu->pivot->status == 'finish') $countFinish++;
         }
         if($status == 'notStarted') {
             $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProgress']);
         }
         elseif($status == 'inProgress') {
             $bill->menus()->updateExistingPivot($menuId, ['status'=>'finish']);
+            if($numMenu == $countFinish+1){
+                $bill->status = false;
+                $bill->save();
+            }
         }
         return $this->indexBackWorker();
     }
