@@ -37,17 +37,26 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type' => ['required', 'string'],
+
         ]);
+
+
+//        $imageFile = $request->file('path');
+//        $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'type' => $request->type,
+            'path' => $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName()),
         ]);
 
         event(new Registered($user));
 
-        Auth::login($user);
+//        Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
     }
