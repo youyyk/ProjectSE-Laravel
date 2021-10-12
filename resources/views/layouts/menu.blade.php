@@ -55,12 +55,12 @@
                         </button>
                     </form>
 
-                    <form action="{{ route('register') }}" class="px-2">
-                        @csrf
-                        <button class="btn btn-outline-primary " type="submit">
-                            Register
-                        </button>
-                    </form>
+{{--                    <form action="{{ route('register') }}" class="px-2">--}}
+{{--                        @csrf--}}
+{{--                        <button class="btn btn-outline-primary " type="submit">--}}
+{{--                            Register--}}
+{{--                        </button>--}}
+{{--                    </form>--}}
                 @endif
         </div>
     </div>
