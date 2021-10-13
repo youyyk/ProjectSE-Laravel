@@ -123,8 +123,6 @@ class RestTableController extends Controller
             $resTable = resTable::findOrFail($id);
             $resTable->delete();
         }
-
-        return redirect()->route('resTables.index');
     }
 
     // Not default method

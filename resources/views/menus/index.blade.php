@@ -16,7 +16,7 @@
             </span>
         </h1>
         {{-- Create Menu --}}
-        @include('menu_component.createPopUp')
+        @include('menus.menu_component.createPopUp')
 
         {{-- ---------------------------------------- filter ---------------------------------------- --}}
         <span class="mb-3 float-end">
@@ -77,10 +77,10 @@
                             </table>
 
                             {{-- Edit Menu --}}
-                            @include('menu_component.editPopUp',['menu'=>$menu])
+                            @include('menus.menu_component.editPopUp',['menu'=>$menu])
 
                             {{-- Delete Menu --}}
-                            @include('menu_component.deletePopUp',['menu'=>$menu])
+                            @include('menus.menu_component.deletePopUp',['menu'=>$menu])
 
                         </div>
                     </div>

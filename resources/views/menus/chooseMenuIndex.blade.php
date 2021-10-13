@@ -63,6 +63,9 @@
                    ['cart'=>$cart,
                     'user_id'=>Auth::user()->id])}}"
            class="btn btn-success" style="width: 100%">ยืนยัน</a>
+        <a href="{{route('bill.show.table',
+                   ['resTable'=>$resTable])}}"
+           class="btn btn-warning" style="width: 100%; margin-top: 10px">บิลทั้งหมด</a>
         @endif
     </div>
 
