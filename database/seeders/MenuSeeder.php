@@ -17,7 +17,7 @@ class MenuSeeder extends Seeder
     {
         $departments = Department::get();
         foreach ($departments as $department){
-            Menu::factory(1)->create([
+            Menu::factory(5)->create([
                 'department_id' => $department->id
             ]);
         }

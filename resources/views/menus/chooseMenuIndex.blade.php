@@ -72,7 +72,10 @@
     <div class="content">
         <div class="row container-fluid">
             <div style="margin-top: 20px;">
-                {{$menus->links()}}
+{{--                {{$menus->links()}}--}}
+
+                @include('menus.menu_component.filterMenu',['menus'=>$menus,'filterMenu'=>$filterMenu,'user_role'=>'frontWorker','resTables'=>$resTable])
+{{--                @include('menus.menu_component.filterMenu',['menus'=>$menus,'filter'=>$filter,'user_role'=>'admin'])--}}
             </div>  <!-- Set in boot Laravel -->
             @foreach($menus as $menu)
                 <div class="col-sm-2 mb-3"> <!-- Size Card -->
@@ -85,9 +88,9 @@
                                 <table>
                                     <tbody>
                                     <h4 class="card-title text-dark">{{$menu->name}}</h4>
-                                    <p class="card-text">Price : {{$menu->price}} ฿</p>
-                                    <p class="card-text">Cooking Time : {{$menu->processTime}} minutes</p>
-                                    <p class="card-text"># {{$menu->category}}</p>
+                                    <p class="card-text">ราคา : {{$menu->price}} ฿</p>
+                                    <p class="card-text">ระยะเวลาการทำ : {{$menu->processTime}} นาที</p>
+                                    <p class="card-text">ประเภท : {{$menu->category}}</p>
                                     </tbody>
                                 </table>
                             </div>

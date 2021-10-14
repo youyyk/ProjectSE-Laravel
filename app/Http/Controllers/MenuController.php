@@ -23,13 +23,12 @@ class MenuController extends Controller
         $menus = Menu::latest('updated_at')->get();
         $categories = Menu::get()->unique('category');
         $departments = Department::get();
+        $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
         return view('menus.index',[
             'menus' => $menus,
             'categories'=>$categories,
             'departments'=>$departments,
-            'search_name' => '',
-            'select_c' =>'เลือกประเภท',
-            'select_d' => 0
+            'filterMenu' => $filterMenu
         ]);
     }
     public function filterCard(Request $request)
@@ -56,19 +55,43 @@ class MenuController extends Controller
             $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get();
         }
         else{
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)
+                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
         }
+        return $menus;
+
+    }
+    public function filterAdmin(Request $request){
+        $menus = $this->filterCard($request);
         $categories = Menu::get()->unique('category');
         $departments = Department::get();
+        $filterMenu=array('search_name' => $request->search, 'select_c' =>$request->selected_cat, 'select_d' => $request->selected_depart);
         return view('menus.index',[
+            'menus' => $menus,
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'filterMenu' => $filterMenu
+        ]);
+    }
+    public function filterFrontWorker(Request $request,$tableId){
+        $resTable = $this->resTable_controller->getInfoTableById($tableId);
+        $menus = $this->filterCard($request);
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => $request->search, 'select_c' =>$request->selected_cat, 'select_d' => $request->selected_depart);
+        return view('menus.chooseMenuIndex',[
             'menus' => $menus,
             'categories'=>$categories,
             'departments'=>$departments,
             'search_name' => $request->search,
             'select_c' =>$request->selected_cat,
-            'select_d' =>$request->selected_depart
+            'select_d' =>$request->selected_depart,
+            'resTable' => $resTable,
+            'cart' => $resTable->cart,
+            'filterMenu' => $filterMenu
         ]);
     }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -172,11 +195,17 @@ class MenuController extends Controller
     public function chooseMenuIndex($tableId)
     {
         $resTable = $this->resTable_controller->getInfoTableById($tableId);
-        $menus = Menu::paginate(12);
+        $menus = Menu::latest('updated_at')->get();
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
         return view('menus.chooseMenuIndex',[
             'menus' => $menus,
             'resTable' => $resTable,
             'cart' => $resTable->cart,
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'filterMenu' => $filterMenu
         ]);
     }
 
