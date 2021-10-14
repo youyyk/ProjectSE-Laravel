@@ -4,6 +4,11 @@
             <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                 <li class="nav-item active">
                     <a class="nav-link
+                              @if(\Request::routeIs('charts.*')) bg-dark text-white rounded-3 @endif"
+                       href="{{route("charts.index")}}">Chart</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link
                               @if(\Request::routeIs('users.*')) bg-dark text-white rounded-3 @endif"
                        href="{{route("users.index")}}">Users</a>
                 </li>

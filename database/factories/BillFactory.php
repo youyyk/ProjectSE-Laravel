@@ -22,7 +22,7 @@ class BillFactory extends Factory
     public function definition()
     {
         return [
-            'total' => $this->faker->numberBetween(100,1000),
+            'total' => $this->faker->numberBetween(100,500),
             'status' => $this->faker->boolean(),
         ];
     }
