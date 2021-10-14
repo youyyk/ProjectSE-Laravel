@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\Cart;
+use App\Models\Restable;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -133,6 +134,25 @@ class BillController extends Controller
         ]);
     }
 
+    public function showAllBills(Restable $resTable) {
+        $bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->get();
+        return view('bills.showAllBills',[
+            'bills' => $bills
+        ]);
+    }
+
+    public function cancelMenuInBill(Bill $bill, $menuId) {
+        $bill->menus()->detach($menuId);
+        if (count($bill->menus) == 0){
+            $this->destroy($bill->id); // delete bill when not have menu
+        }
+        return $this->showAllBills($bill->restable);
+    }
+
+    public function payBills(Restable $resTable) {
+        return $resTable;
+    }
+
     public function createBill(Cart $cart, $user_id) {
         $restable_id = $cart->restable_id;
         $menus = $cart->menus;
@@ -149,6 +169,7 @@ class BillController extends Controller
         }
         $bill->total = $total;
         $bill->save();
+        $cart->menus()->sync([]); // Clear cart this table
         return $this->index();
     }
 
