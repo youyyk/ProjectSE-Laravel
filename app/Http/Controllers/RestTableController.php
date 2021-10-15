@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -9,6 +10,12 @@ use Illuminate\Validation\Rule;
 
 class RestTableController extends Controller
 {
+    private $cart_controller;
+
+    public function __construct()
+    {
+        $this->cart_controller = new CartController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,11 +57,7 @@ class RestTableController extends Controller
         $resTable = new resTable();
         $resTable->name = $request->input('name');
         $resTable->save();
-
-//         if ($resTable->id == 1) {
-//             $resTable->name = "home";
-//             $resTable->save();
-//         }
+        $this->cart_controller->create($resTable->id);
 
         return redirect()->route('resTables.index');
     }
@@ -123,8 +126,6 @@ class RestTableController extends Controller
             $resTable = resTable::findOrFail($id);
             $resTable->delete();
         }
-
-        return redirect()->route('resTables.index');
     }
 
     // Not default method

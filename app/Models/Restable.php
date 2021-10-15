@@ -10,6 +10,10 @@ class Restable extends Model
 {
     use HasFactory,SoftDeletes;
 
+    /**
+     * @var mixed
+     */
+
     public function bills(){
         return $this->hasMany(Bill::class);
     }

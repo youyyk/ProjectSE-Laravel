@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\Cart;
+use App\Models\Restable;
 use Illuminate\Http\Request;
 
 class BillController extends Controller
@@ -11,7 +12,7 @@ class BillController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
@@ -24,7 +25,7 @@ class BillController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -69,7 +70,7 @@ class BillController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -115,7 +116,7 @@ class BillController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
@@ -133,23 +134,66 @@ class BillController extends Controller
         ]);
     }
 
+    public function showAllBills(Restable $resTable) {
+        $bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->get();
+        $total_all_bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->sum('total');
+        return view('bills.showAllBills',[
+            'bills' => $bills,
+            'resTable' => $resTable,
+            'total_all_bills_or_receive' => array('total_all_bills'=>$total_all_bills,'receive'=>0,'exchange'=>0),
+            'paid' => $total_all_bills==0?1:0,
+        ]);
+    }
+
+    public function cancelMenuInBill(Bill $bill, $menuId) {
+        $bill->menus()->detach($menuId);
+        if (count($bill->menus) == 0){
+            $this->destroy($bill->id); // delete bill when not have menu
+        }
+        return redirect()->back();
+    }
+
+    public function payBills(Request $request, Restable $resTable) {
+        $bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->get();
+        $total_all_bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->sum('total');
+        $receive = $request->input('receiveMoney');
+        foreach ($bills as $bill){
+            $bill->paid = 0;
+            $bill->save();
+        }
+        $resTable->status = 1;
+        $resTable->save();
+        return view('bills.showAllBills',[
+            'bills' => Bill::whereRestable_id($resTable->id)->wherePaid(1)->get(),
+            'resTable' => $resTable,
+            'total_all_bills_or_receive' =>
+                array('total_all_bills'=>$total_all_bills,
+                      'receive'=>$receive,
+                      'exchange'=>$receive-$total_all_bills),
+            'paid' => 1,
+        ]);
+    }
+
     public function createBill(Cart $cart, $user_id) {
         $restable_id = $cart->restable_id;
         $menus = $cart->menus;
-        $total = 0;
+        $total_bill = 0;
         $bill = new Bill();
         $bill->restable_id = $restable_id;
         $bill->user_id = $user_id;
-        $bill->total = $total;
+        $bill->total = 0;
         $bill->save();
         foreach ($menus as $menu){
             $amount = $menu->pivot->total;
             $bill->menus()->attach($menu->id,array('amount'=>$amount));
-            $total += ($menu->price*$amount);
+            $total_bill += ($menu->price*$amount);
         }
-        $bill->total = $total;
+        $bill->total = $total_bill;
         $bill->save();
-        return $this->index();
+        $cart->menus()->sync([]); // Clear cart this table
+        return redirect()->route('bill.show.table',[
+            'resTable' => $restable_id
+        ]);
     }
 
     public function updateStatus(Bill $bill, $menuId) {
