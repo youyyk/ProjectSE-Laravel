@@ -54,7 +54,7 @@
                         <td class="border-2" style="width: 25%; font-size: 20px">
                             @if($menu->pivot->status==="notStarted")
                                 <span class="badge alert-secondary" style="width: 50%">ยังไม่เริ่ม</span>
-                            @elseif($menu->pivot->status==="inProcess")
+                            @elseif($menu->pivot->status==="inProgress")
                                 <span class="badge alert-primary" style="width: 50%">กำลังทำ</span>
                             @elseif($menu->pivot->status==="finish")
                                 <span class="badge alert-success" style="width: 50%">เสร็จสิ้น</span>

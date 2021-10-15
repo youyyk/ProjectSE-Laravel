@@ -134,6 +134,18 @@ class RestTableController extends Controller
         return $resTable;
     }
 
+    public function setToEmpty($id){
+        $resTable = resTable::findOrFail($id);
+        $resTable->status = 1;
+        $resTable->save();
+    }
+
+    public function setToNotEmpty($id){
+        $resTable = resTable::findOrFail($id);
+        $resTable->status = 0;
+        $resTable->save();
+    }
+
     public function showAllResTable() {
         $resTables = restable::get();
         return view('resTables.adminResTables',[

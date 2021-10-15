@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+    private $resTable_controller;
+
+    public function __construct()
+    {
+        $this->resTable_controller = new RestTableController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -161,8 +167,7 @@ class BillController extends Controller
             $bill->paid = 0;
             $bill->save();
         }
-        $resTable->status = 1;
-        $resTable->save();
+        $this->resTable_controller->setToEmpty($resTable->id);
         return view('bills.showAllBills',[
             'bills' => Bill::whereRestable_id($resTable->id)->wherePaid(1)->get(),
             'resTable' => $resTable,
@@ -191,6 +196,7 @@ class BillController extends Controller
         $bill->total = $total_bill;
         $bill->save();
         $cart->menus()->sync([]); // Clear cart this table
+        $this->resTable_controller->setToNotEmpty($restable_id); // Set Table to Not empty
         return redirect()->route('bill.show.table',[
             'resTable' => $restable_id
         ]);

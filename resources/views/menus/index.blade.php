@@ -1,5 +1,11 @@
 @extends('welcome')
-@inject('menuController', 'App\Http\Controllers\MenuController')
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        z-index:1000
+    }
+</style>
 @section('content')
 
     <div class="m-5">
@@ -29,7 +35,10 @@
             @foreach($menus as $menu)
                 <div class="col-sm-2 mb-3">
                     <div class="card">
-                        <img class="card-img-top m-3" style="width: 250px;height: 250px" src="{{url(\Str::replace('public/','storage/',$menu->path))}}" alt="{{$menu->name}}">
+                        <img class="card-img-top"
+                             style="height: 250px"
+                             src="{{url(\Str::replace('public/','storage/',$menu->path))}}"
+                             alt="{{$menu->name}}">
                         <div class="card-body">
                             <table>
                                 <tbody>
