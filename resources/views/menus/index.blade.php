@@ -2,7 +2,7 @@
 @inject('menuController', 'App\Http\Controllers\MenuController')
 @section('content')
 
-    <div class="container">
+    <div class="m-5">
         <h1 class="mt-3">
             รายการอาหาร
             <span class="float-end">
@@ -18,42 +18,16 @@
         {{-- Create Menu --}}
         @include('menus.menu_component.createPopUp')
 
-        {{-- ---------------------------------------- filter ---------------------------------------- --}}
-        <span class="mb-3 float-end">
-            <form class="form-inline" >
-                <span class="col-1">filter : </span>
-                {{-- filter by category --}}
-                <select class="h-100 text-center bg rounded-1" name="selected_cat" id="selected_cat">
-                    <option value="">เลือกประเภท</option>
-                    @foreach($categories as $cat)
-                            <option value="{{ $cat->category }}" {{$select_c === $cat->category ? "selected" : ""}}>
-                            {{ $cat->category }}
-                            </option>
-                    @endforeach
-                </select>
-                {{-- filter by department --}}
-                <span class="col-sm-1">
-                <select class="h-100 text-center bg rounded-1" name="selected_depart" id="selected_depart">
-                    <option value="">เลือกแผนก</option>
-                    @foreach($departments as $depart)
-                        <option value="{{ $depart->id }}" {{$select_d == $depart->id ? "selected" : ""}}>
-                            {{ $depart->name }}
-                        </option>
-                    @endforeach
-                </select>
-            </span>
-                {{-- search by name --}}
-                <input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อเมนู - - - -" value="{{$search_name}}">
-                <button class="btn btn-primary" formaction="{{route('menu.filter')}}">search</button>
-                <button class="btn btn-warning" formaction="{{route('menus.index')}}">clear</button>
-            </form>
-        </span>
+        {{-- filter  --}}
+
+        @include('menus.menu_component.filterMenu',['menus'=>$menus,'filterMenu'=>$filterMenu,'user_role'=>'admin'])
+
 
 
         {{-- ----------------------------------------Menu Card----------------------------------------- --}}
         <div class="row container-fluid">
             @foreach($menus as $menu)
-                <div class="col-sm-3 mb-3">
+                <div class="col-sm-2 mb-3">
                     <div class="card">
                         <img class="card-img-top m-3" style="width: 250px;height: 250px" src="{{url(\Str::replace('public/','storage/',$menu->path))}}" alt="{{$menu->name}}">
                         <div class="card-body">

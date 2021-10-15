@@ -28,9 +28,13 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 Route::resource('carts',\App\Http\Controllers\CartController::class);
-// Menu Admin View
-Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
+
+// filter menu
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterAdmin"])
     ->name('menu.filter');
+Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
+    ->name('menu.filter.chooseMenu');
+
 // ChooseMenu View
 Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
