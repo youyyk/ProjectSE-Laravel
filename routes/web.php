@@ -30,7 +30,12 @@ Route::resource('bills',\App\Http\Controllers\BillController::class);
 Route::resource('carts',\App\Http\Controllers\CartController::class);
 
 // filter menu
-Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterAdmin"])
+Route::resource('charts',\App\Http\Controllers\ChartController::class);
+// User Admin View
+Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])
+    ->name('user.filter');
+// Menu Admin View
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
     ->name('menu.filter');
 Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
     ->name('menu.filter.chooseMenu');
@@ -56,3 +61,7 @@ Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBa
     ->name('backWorker');
 Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])
     ->name('bill.menu.update.status');
+// Chart Bill
+// Res Table for Admin
+Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
+    ->name('showAllResTable');

@@ -59,7 +59,7 @@ class RestTableController extends Controller
         $resTable->save();
         $this->cart_controller->create($resTable->id);
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -78,7 +78,7 @@ class RestTableController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -107,11 +107,9 @@ class RestTableController extends Controller
 
         $resTable = resTable::findOrFail($id);
         $resTable->name = $request->input('name');
-        $resTable->status = $request->input('status');
-
         $resTable->save();
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -126,6 +124,8 @@ class RestTableController extends Controller
             $resTable = resTable::findOrFail($id);
             $resTable->delete();
         }
+
+        return redirect()->route('showAllResTable');
     }
 
     // Not default method
@@ -133,4 +133,12 @@ class RestTableController extends Controller
         $resTable = resTable::findOrFail($id);
         return $resTable;
     }
+
+    public function showAllResTable() {
+        $resTables = restable::get();
+        return view('resTables.adminResTables',[
+            'resTables' => $resTables
+        ]);
+    }
+
 }
