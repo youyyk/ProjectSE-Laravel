@@ -14,6 +14,11 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
+                              @if(\Request::routeIs('showAllResTable')) bg-dark text-white rounded-3 @endif"
+                       href="{{route("showAllResTable")}}">All ResTable</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link
                               @if(\Request::routeIs('menus.*')) bg-dark text-white rounded-3 @endif"
                               href="{{route("menus.index")}}">Menu</a>
                 </li>

@@ -1,5 +1,5 @@
 @extends('welcome')
-
+@inject('userController', 'App\Http\Controllers\UserController')
 @section('content')
 <div class="container">
     <h1 class="mt-3">
@@ -17,6 +17,15 @@
         <span class="float-end"> </span>
     </h1>
     <hr>
+    <span class="mb-3 float-end">
+            <form class="form-inline" >
+                <span class="col-1"></span>
+                {{-- search by name --}}
+                <input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อผู้ใช้งาน - - - -" value="{{$search_name}}">
+                <button class="btn btn-primary" formaction="{{route('user.filter')}}">search</button>
+                <button class="btn btn-warning" formaction="{{route('users.index')}}">clear</button>
+            </form>
+        </span>
     {{-- ---------------------------------------- card -------------------------------------------}}
 
     <div class="row container-fluid">

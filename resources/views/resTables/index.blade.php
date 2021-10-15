@@ -5,18 +5,18 @@
 <div class="container">
     <h1 class="mt-3">
         รายการโต๊ะ
-        <span class="float-end">
-            <form action="{{ route('resTables.store') }}" method="POST">
-                @csrf
+{{--        <span class="float-end">--}}
+{{--            <form action="{{ route('resTables.store') }}" method="POST">--}}
+{{--                @csrf--}}
 
-                <div class="input-group">
-                    <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มโต๊ะ - - -">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>
-                    </div>
-                </div>
-            </form>
-        </span>
+{{--                <div class="input-group">--}}
+{{--                    <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มโต๊ะ - - -">--}}
+{{--                    <div class="input-group-append">--}}
+{{--                        <button class="btn btn-primary" type="submit">+ เพิ่มโต๊ะใหม่</button>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </form>--}}
+{{--        </span>--}}
     </h1>
     <table class="table border-2">
         <thead>
