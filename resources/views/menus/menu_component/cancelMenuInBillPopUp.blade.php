@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-body text-center m-3">
-                <h5 class="mb-4">คุณต้องการลบ <b>{{$menu->name}}</b> ออกจากบิล <b>#{{$menu->id}}</b></h5>
+                <h5 class="mb-4">คุณต้องการลบ <b>{{$menu->name}}</b> ออกจากบิล <b>#{{$bill->id}}</b></h5>
                 <h5 class="mb-4">ใช่หรือไม่?</h5>
                 <div class="mt-lg-3 row">
                     <div class="col">

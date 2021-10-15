@@ -51,18 +51,19 @@
             </div>
             <div class="btn-group" role="group" aria-label="Basic example" style="margin-bottom: 10px; width: 100%">
                 <a class="btn btn-secondary"
-                   href="{{route('cart.value',['action'=>"increase",'cart'=>$cart, 'menuId'=>$menu->id])}}"
-                   role="button" style="margin-right: 5px;">+</a>
-                <a class="btn btn-secondary"
                    href="{{route('cart.value',['action'=>"decrease",'cart'=>$cart, 'menuId'=>$menu->id])}}"
                    role="button" style="margin-right: 5px;">-</a>
+                <a class="btn btn-secondary"
+                   href="{{route('cart.value',['action'=>"increase",'cart'=>$cart, 'menuId'=>$menu->id])}}"
+                   role="button" style="">+</a>
             </div>
         @endforeach
         @if(Auth::check())
         <a href="{{route('bill.create.manual',
                    ['cart'=>$cart,
                     'user_id'=>Auth::user()->id])}}"
-           class="btn btn-success" style="width: 100%">ยืนยัน</a>
+           class="btn btn-success {{count($cart->menus)==0?"disabled":""}}"
+           style="width: 100%">ยืนยัน</a>
         <a href="{{route('bill.show.table',
                    ['resTable'=>$resTable])}}"
            class="btn btn-warning" style="width: 100%; margin-top: 10px">บิลทั้งหมด</a>
@@ -85,9 +86,9 @@
                                 <table>
                                     <tbody>
                                     <h4 class="card-title text-dark">{{$menu->name}}</h4>
-                                    <p class="card-text">Price : {{$menu->price}} ฿</p>
-                                    <p class="card-text">Cooking Time : {{$menu->processTime}} minutes</p>
-                                    <p class="card-text"># {{$menu->category}}</p>
+                                    <p class="card-text">ราคา : {{$menu->price}} ฿</p>
+                                    <p class="card-text">เวลาในการทำ : {{$menu->processTime}} minutes</p>
+                                    <p class="card-text">ประเภท {{$menu->category}}</p>
                                     </tbody>
                                 </table>
                             </div>

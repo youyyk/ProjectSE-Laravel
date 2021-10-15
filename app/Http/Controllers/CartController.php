@@ -4,17 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart;
 use App\Models\Menu;
+use App\Models\Restable;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
 {
-    private $menu_controller;
-    private $resTable_controller;
-
     public function __construct()
     {
-        $this->menu_controller = new MenuController();
-        $this->resTable_controller = new RestTableController();
     }
     /**
      * Display a listing of the resource.
@@ -32,9 +28,9 @@ class CartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($tableId)
     {
-        //
+        $this->store($tableId);
     }
 
     /**
@@ -43,9 +39,11 @@ class CartController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store($tableId)
     {
-        //
+        $cart = new Cart();
+        $cart->restable_id = $tableId;
+        $cart->save();
     }
 
     /**
@@ -96,19 +94,17 @@ class CartController extends Controller
     // Not default method
     public function addMenu(Cart $cart, $menuId)
     {
-        $cart->menus()->syncWithoutDetaching($menuId); // Not attach if attached
-        return $this->menu_controller->chooseMenuIndex($cart->restable_id);
+        $same = $cart->menus()->syncWithoutDetaching($menuId); // Not attach if attached
+        if ($same["attached"]==[]){ // mean this round not have new menu
+            $oldTotal = $this->findTotalMenuInCart($cart, $menuId);
+            $cart->menus()->updateExistingPivot($menuId, ['total'=> ++$oldTotal]);
+        }
+        return redirect()->back();
     }
 
     public function addMenuTotal($action, Cart $cart, $menuId)
     {
-        $new_total=0;
-        foreach($cart->menus as $menu){
-            if($menu->id == $menuId){
-                $new_total = $menu->pivot->total;
-                break;
-            }
-        }
+        $new_total = $this->findTotalMenuInCart($cart, $menuId);
         if ($action == "increase"){
             $new_total++;
         }
@@ -116,6 +112,15 @@ class CartController extends Controller
             if (--$new_total<=0){$cart->menus()->detach($menuId);}
         }
         $cart->menus()->updateExistingPivot($menuId, ['total'=>$new_total]);
-        return $this->menu_controller->chooseMenuIndex($cart->restable_id);
+        return redirect()->back();
+    }
+
+    public function findTotalMenuInCart(Cart $cart, $menuId){
+        foreach($cart->menus as $menu){
+            if($menu->id == $menuId){
+                return $menu->pivot->total;
+            }
+        }
+        return null;
     }
 }
