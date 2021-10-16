@@ -19,9 +19,11 @@
                         name="selected_depart" id="selected_depart">
                     <option value="">เลือกแผนก</option>
                     @foreach($departments as $depart)
+                        @if(($user_role=='frontWorker' && $depart->id !== 1) || $user_role=='admin')
                         <option value="{{ $depart->id }}" {{$filterMenu['select_d'] == $depart->id ? "selected" : ""}}>
                             {{ $depart->name }}
                         </option>
+                        @endif
                     @endforeach
                 </select>
             </span>

@@ -100,6 +100,10 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         $department = Department::findOrFail($id);
+        foreach ($department->menus as $menu){
+            $menu->department_id = 1;
+            $menu->save();
+        }
         $department->delete();
 
         return redirect()->route('departments.index');
