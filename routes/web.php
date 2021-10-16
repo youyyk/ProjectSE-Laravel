@@ -68,3 +68,5 @@ Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "
 // Bill Take Away View
 Route::get('/takeAway', [\App\Http\Controllers\BillController::class, 'showTakeAwayBills'])
     ->name('bill.show.takeaway');
+Route::get('bill/pay/takeAway/{bill}', [\App\Http\Controllers\BillController::class, 'payBill'])
+    ->name('bill.pay.takeaway');

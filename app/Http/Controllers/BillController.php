@@ -206,9 +206,9 @@ class BillController extends Controller
             if($menu->pivot->status == 'finish') $countFinish++;
         }
         if($status == 'notStarted') {
-            $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProgress']);
+            $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProcess']);
         }
-        elseif($status == 'inProgress') {
+        elseif($status == 'inProcess') {
             $bill->menus()->updateExistingPivot($menuId, ['status'=>'finish']);
             if($numMenu == $countFinish+1){
                 $bill->status = false;
@@ -222,6 +222,17 @@ class BillController extends Controller
         $bills = Bill::whereRestable_id(1)->wherePaid(1)->get();
         return view('bills.takeAway',[
             'bills' => $bills
+        ]);
+    }
+
+    public function payBill(Request $request, Bill $bill) {
+        $receive = $request->input('receiveMoney');
+        $bill->paid = 0;
+        $bill->save();
+        return view('bills.paid',[
+            'bill' => $bill,
+            'receive'=>$receive,
+            'exchange'=>$receive-$bill->total
         ]);
     }
 }

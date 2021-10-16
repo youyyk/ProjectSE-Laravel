@@ -8,6 +8,13 @@
             <div class="card mb-3">
                 <div class="card-header">
                     Bill {{ $bill->id }}
+                    <button class="btn btn-warning"
+                            style="float:right; width: 200px; margin-right: 10px;"
+                            data-bs-toggle="modal"
+                            data-bs-target="#paidPopUpTakeAway{{$bill->id}}">
+                        ชำระเงิน
+                    </button>
+                    @include('bills.bill_component.paidPopUpTakeAway',['bill'=>$bill])
                 </div>
                 <div class="card-body">
                     <table class="table border-2 mt-3">
