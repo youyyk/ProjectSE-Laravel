@@ -28,17 +28,28 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 Route::resource('carts',\App\Http\Controllers\CartController::class);
-
-// filter menu
 Route::resource('charts',\App\Http\Controllers\ChartController::class);
-// User Admin View
+
+//Admin View
+// #filter user
 Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])
     ->name('user.filter');
-// Menu Admin View
+// #filter menu
 Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
     ->name('menu.filter');
 Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
     ->name('menu.filter.chooseMenu');
+// #ResTable for Admin
+Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
+    ->name('showAllResTable');
+
+// Charts
+Route::get('/dayLine', [\App\Http\Controllers\ChartController::class, "dayLine"])
+    ->name('day.line');
+Route::get('/monthLine', [\App\Http\Controllers\ChartController::class, "monthLine"])
+    ->name('month.line');
+Route::get('/yearLine', [\App\Http\Controllers\ChartController::class, "yearLine"])
+    ->name('year.line');
 
 // ChooseMenu View
 Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
@@ -62,6 +73,3 @@ Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBa
 Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])
     ->name('bill.menu.update.status');
 // Chart Bill
-// Res Table for Admin
-Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
-    ->name('showAllResTable');

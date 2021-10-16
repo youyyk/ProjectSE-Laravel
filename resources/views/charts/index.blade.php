@@ -4,91 +4,60 @@
 
 
 <div class="container">
-{{--    <h1 class="mt-3">--}}
-{{--        กราฟสรุปยอดบิล--}}
-{{--    </h1>--}}
-{{--    <hr>--}}
-{{--</div>--}}
-{{--<script src="https://code.highcharts.com/highcharts.js"></script>--}}
-{{--<script src="https://code.highcharts.com/modules/exporting.js"></script>--}}
-{{--<script src="https://code.highcharts.com/modules/export-data.js"></script>--}}
-{{--<script src="https://code.highcharts.com/modules/accessibility.js"></script>--}}
+    <h1 class="mt-3 ">
+        สรุปยอดบิลทั้งหมด
+        <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
+{{--            <span class="float-start fs-6">กราฟประจำ : </span>--}}
+            <h6><span class="badge rounded-pill bg-primary">กราฟ</span></h6>
+            <span class="btn-group me-2 px-2" role="group" aria-label="Second group">
+{{--                <button type="button" class="btn btn-dark ">--}}
+{{--                    กราฟ--}}
+{{--                </button>--}}
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-light">
+                วัน</a>
+                </button>
+                <button type="button" class="btn btn-secondary ">
+                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-light">
+                เดือน</a>
+                </button>
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-light">
+                ปี</a>
+                </button>
 
-{{--<figure class="highcharts-figure">--}}
-{{--    <div id="container"></div>--}}
-{{--    <p class="highcharts-description">--}}
-{{--        This chart shows how data labels can be added to the data series. This--}}
-{{--        can increase readability and comprehension for small datasets.--}}
-{{--    </p>--}}
-{{--</figure>--}}
+{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>--}}
+{{--            <label class="btn btn-outline-info" for="btnradio1">--}}
+{{--                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-dark">--}}
+{{--                วัน</a>--}}
+{{--            </label>--}}
 
-{{--<script type="text/javascript">--}}
-{{--    var bill_total =  <?php echo json_encode($bill_total) ?>;--}}
+{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">--}}
+{{--            <label class="btn btn-outline-info" for="btnradio2">--}}
+{{--                <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">--}}
+{{--                เดือน</a>--}}
+{{--            </label>--}}
 
-{{--    Highcharts.chart('container', {--}}
-{{--        chart: {--}}
-{{--            type: 'line'--}}
-{{--        },--}}
-{{--        title: {--}}
-{{--            text: 'กราฟสรุปจำนวนยอดแต่ละเดือน'--}}
-{{--        },--}}
-{{--        subtitle: {--}}
-{{--            text: 'ประจำปี 2564'--}}
-{{--        },--}}
-{{--        xAxis: {--}}
-{{--            // categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']--}}
-{{--            categories: ['Oct', 'Nov', 'Dec','Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']--}}
-{{--            // categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20','21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']--}}
-{{--        },--}}
-{{--        yAxis: {--}}
-{{--            title: {--}}
-{{--                text: 'จำนวนยอดบิลทั้งหมด (บาท)'--}}
-{{--            }--}}
-{{--        },--}}
-{{--        legend: {--}}
-{{--            layout: 'vertical',--}}
-{{--            align: 'right',--}}
-{{--            verticalAlign: 'middle'--}}
-{{--        },--}}
-{{--        plotOptions: {--}}
-{{--            series: {--}}
-{{--                allowPointSelect: true--}}
-{{--            }--}}
-{{--        },--}}
-{{--        // plotOptions: {--}}
-{{--        //     line: {--}}
-{{--        //         dataLabels: {--}}
-{{--        //             enabled: true--}}
-{{--        //         },--}}
-{{--        //         enableMouseTracking: false--}}
-{{--        //     }--}}
-{{--        // },--}}
-{{--        series: [{--}}
-{{--            name: 'ยอดทั้งหมดที่ได้รับ',--}}
-{{--            // data: [--}}
-{{--            //     12598--}}
-{{--            // ]--}}
-{{--            data: bill_total--}}
-{{--        }],--}}
-{{--        responsive: {--}}
-{{--            rules: [{--}}
-{{--                condition: {--}}
-{{--                    maxWidth: 500--}}
-{{--                },--}}
-{{--                chartOptions: {--}}
-{{--                    legend: {--}}
-{{--                        layout: 'horizontal',--}}
-{{--                        align: 'center',--}}
-{{--                        verticalAlign: 'bottom'--}}
-{{--                    }--}}
-{{--                }--}}
-{{--            }]--}}
-{{--        }--}}
-{{--    });--}}
-{{--</script>--}}
+{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">--}}
+{{--            <label class="btn btn-outline-info" for="btnradio3">--}}
+{{--                <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">--}}
+{{--                ปี</a>--}}
+{{--            </label>--}}
+
+            <button class="btn btn-outline-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown button
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+            </span>
+        </span>
+    </h1>
 
     <hr>
-    <h1 class="mt-3">
+    <h3 class="mt-3 text-center">
         รายการบิล
         <span class="float-end">
             <a href="{{route("bills.create")}}">
@@ -97,8 +66,8 @@
                 </button>
             </a>
         </span>
-    </h1>
-    <hr>
+    </h3>
+
     <table class="table border-2 mt-3">
         <thead>
         <tr>

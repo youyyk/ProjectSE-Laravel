@@ -24,6 +24,7 @@ class BillFactory extends Factory
         return [
             'total' => $this->faker->numberBetween(100,1000),
             'status' => $this->faker->boolean(),
+            'created_at'=> $this->faker->dateTimeThisYear(),
         ];
     }
 }
