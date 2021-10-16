@@ -65,3 +65,6 @@ Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillCon
 // Res Table for Admin
 Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
     ->name('showAllResTable');
+// Bill Take Away View
+Route::get('/takeAway', [\App\Http\Controllers\BillController::class, 'showTakeAwayBills'])
+    ->name('bill.show.takeaway');

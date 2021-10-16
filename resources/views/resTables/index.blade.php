@@ -5,9 +5,23 @@
 <div class="container">
     <h1 class="mt-3">
         รายการโต๊ะ
+        <span class="float-end">
+            <a href="{{ route("menu.choose.index",['tableId'=>1]) }}">
+                <button type="button" class="btn btn-success">
+                    สั่งกลับบ้าน
+                </button>
+            </a>
+        </span>
+        <span class="float-end">
+            <a href="{{ route("bill.show.takeaway") }}">
+                <button type="button" class="btn btn-primary">
+                    บิลกลับบ้านทั้งหมด
+                </button>
+            </a>
+        </span>
     </h1>
 {{--    ICON of resTable    --}}
-        @foreach($resTables as $resTable)
+        @foreach($resTables->skip(1) as $resTable)
                 {{-- 1 ว่าง 0 ไม่ว่าง--}}
                 @if($resTable->status == 1)
                 <a href="{{ route("menu.choose.index",['tableId'=>$resTable->id]) }}" style="text-decoration:none">

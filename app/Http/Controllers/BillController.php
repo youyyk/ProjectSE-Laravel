@@ -217,4 +217,11 @@ class BillController extends Controller
         }
         return $this->indexBackWorker();
     }
+
+    public function showTakeAwayBills() {
+        $bills = Bill::whereRestable_id(1)->wherePaid(1)->get();
+        return view('bills.takeAway',[
+            'bills' => $bills
+        ]);
+    }
 }
