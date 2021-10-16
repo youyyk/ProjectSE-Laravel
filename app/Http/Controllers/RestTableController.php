@@ -82,10 +82,10 @@ class RestTableController extends Controller
      */
     public function edit($id)
     {
-        $resTable = restable::findOrFail($id);
-        return view('resTables.edit',[
-            'resTable' => $resTable
-        ]);
+//        $resTable = restable::findOrFail($id);
+//        return view('resTables.edit',[
+//            'resTable' => $resTable
+//        ]);
     }
 
     /**

@@ -10,9 +10,9 @@
                 @csrf
 
                 <div class="input-group">
-                    <input type="text" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มโต๊ะ - - -" autocomplete="off">
-                    <div class="input-group-append">
-                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
+                    <input type="text" name="name" class="form-control mt-lg-2 text-center" placeholder="เพิ่มโต๊ะ" autocomplete="off">
+                    <div class="input-group-append px-2">
+                        <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
                     </div>
                 </div>
             </form>
@@ -20,14 +20,11 @@
         </h1>
         <hr>
 
-{{--        --}}{{-- Create ResTable --}}
-{{--        @include('resTables.resTable_component.createPopUp')--}}
-
-        <table class="table border-2">
+        <table class="table border-2 text-center">
             <thead>
             <tr>
                 <th class="border-2">ชื่อโต๊ะ</th>
-                <th class="border-2">สถานะ ( 0=ว่าง, 1=ไม่ว่าง )</th>
+                <th class="border-2">สถานะ</th>
                 <th class="border-2">การทำงาน</th>
             </tr>
             </thead>
@@ -35,22 +32,19 @@
             @foreach($resTables as $resTable)
                 <tr>
                     <td class="border-2 p-0.5">{{$resTable->name}}</a></td>
-                    <td class="border-2 p-0.5">{{$resTable->status}}</td>
-                    <td class="border-2 p-0.5">
-{{--                        <form action="{{ route('resTables.destroy', ['resTable' => $resTable->id]) }}" method="POST">--}}
-{{--                            @method('DELETE')--}}
-{{--                            @csrf--}}
-{{--                            <button type="submit" class="btn btn-danger">--}}
-{{--                                ลบ--}}
-{{--                            </button>--}}
-
-{{--                            <a href="{{route("resTables.edit",['resTable'=>$resTable->id])}}">--}}
-{{--                                <button type="button" class="btn btn-primary" >--}}
-{{--                                    แก้ไข--}}
-{{--                                </button>--}}
-{{--                            </a>--}}
-
-{{--                        </form>--}}
+                    <td class="border-2 p-0.5 ">
+                        @if($resTable->status==1)
+                        <span class="badge rounded-pill bg-success">
+                            {{"ว่าง"}}
+{{--                            {{$resTable->status==1?"ว่าง":"ไม่ว่าง"}}--}}
+                        </span>
+                        @else
+                            <span class="badge rounded-pill bg-danger">
+                            {{"ไม่ว่าง"}}
+                        </span>
+                        @endif
+                    </td>
+                    <td class="border-2 p-0.5 ">
 
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTableModal{{$resTable->id}}">
                             แก้ไข

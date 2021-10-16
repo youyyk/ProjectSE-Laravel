@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -83,21 +85,48 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('users')->ignore($id),
+                // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
+                // Rule ต้อง use Illuminate\Validation\Rule;
+            ],
+//            'email' => [
+//                Rule::unique('users')->ignore($id),
+//                // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
+//                // Rule ต้อง use Illuminate\Validation\Rule;
+//            ],
+        ])->validate();
+
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+//        $user->email = $request->input('email');
+        $user->type = $request->input('type');
+        if ($request->has('image')){
+            $imageFile = $request->file('image');
+            $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+            $user->path = $path;
+        }
+
+        $user->save();
+
+        return redirect()->route('users.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->route('users.index');
     }
 }

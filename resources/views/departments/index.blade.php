@@ -30,13 +30,11 @@
                     </form>
                         <p class="card-text">จำนวนเมนู : {{$department->menus->count()}}</p>
                     <span class="float-end">
-                            <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal{{$department->id}}">
-                                ลบ
-                            </button>
-                    </span>
-                    <span class="float-end">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editDepartmentModal{{$department->id}}">
                             แก้ไข
+                        </button>
+                        <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal{{$department->id}}">
+                                ลบ
                         </button>
                     </span>
 
