@@ -28,9 +28,18 @@ Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
 Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
 Route::resource('bills',\App\Http\Controllers\BillController::class);
 Route::resource('carts',\App\Http\Controllers\CartController::class);
+
+// filter menu
+Route::resource('charts',\App\Http\Controllers\ChartController::class);
+// User Admin View
+Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])
+    ->name('user.filter');
 // Menu Admin View
 Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
     ->name('menu.filter');
+Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
+    ->name('menu.filter.chooseMenu');
+
 // ChooseMenu View
 Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
     ->name('menu.choose.index');
@@ -43,12 +52,16 @@ Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::clas
 // All Bills this Table
 Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])
     ->name('bill.show.table');
-Route::get('/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])
+Route::get('/bill/cancel/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])
     ->name('bill.cancel.menu');
-Route::get('/bill/pay/{resTable}', [\App\Http\Controllers\BillController::class, 'payBills'])
+Route::get('/bill/pay/{resTable}/all', [\App\Http\Controllers\BillController::class, 'payBills'])
     ->name('bill.pay.table');
 // Bill BackWorker View
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
     ->name('backWorker');
 Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])
     ->name('bill.menu.update.status');
+// Chart Bill
+// Res Table for Admin
+Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
+    ->name('showAllResTable');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -9,6 +10,12 @@ use Illuminate\Validation\Rule;
 
 class RestTableController extends Controller
 {
+    private $cart_controller;
+
+    public function __construct()
+    {
+        $this->cart_controller = new CartController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,13 +57,9 @@ class RestTableController extends Controller
         $resTable = new resTable();
         $resTable->name = $request->input('name');
         $resTable->save();
+        $this->cart_controller->create($resTable->id);
 
-//         if ($resTable->id == 1) {
-//             $resTable->name = "home";
-//             $resTable->save();
-//         }
-
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -75,7 +78,7 @@ class RestTableController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -104,11 +107,9 @@ class RestTableController extends Controller
 
         $resTable = resTable::findOrFail($id);
         $resTable->name = $request->input('name');
-        $resTable->status = $request->input('status');
-
         $resTable->save();
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -123,6 +124,8 @@ class RestTableController extends Controller
             $resTable = resTable::findOrFail($id);
             $resTable->delete();
         }
+
+        return redirect()->route('showAllResTable');
     }
 
     // Not default method
@@ -130,4 +133,12 @@ class RestTableController extends Controller
         $resTable = resTable::findOrFail($id);
         return $resTable;
     }
+
+    public function showAllResTable() {
+        $resTables = restable::get();
+        return view('resTables.adminResTables',[
+            'resTables' => $resTables
+        ]);
+    }
+
 }

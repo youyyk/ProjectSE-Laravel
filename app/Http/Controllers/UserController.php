@@ -10,13 +10,28 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
         $users = User::get();
         return view('users.index',[
-           'users' => $users
+            'users' => $users,
+            'search_name' => '',
+        ]);
+    }
+
+    public function searchCard(Request $request)
+    {
+        if ($request->search ==""){
+            $users = User::latest('updated_at')->get();
+        }
+
+        else $users = User::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+
+        return view('users.index',[
+            'users' => $users,
+            'search_name' => $request->search,
         ]);
     }
 

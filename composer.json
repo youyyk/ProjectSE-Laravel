@@ -13,7 +13,8 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.6",
-        "phattarachai/line-notify": "^1.1"
+        "phattarachai/line-notify": "^1.1",
+      "ext-json": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

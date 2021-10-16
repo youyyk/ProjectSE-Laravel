@@ -1,18 +1,47 @@
 <div class="modal fade" id="paidPopUp" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
+        <div class="modal-content" style="200px">
             <div class="modal-body text-center m-3">
-                <h5 class="mb-4">ชำระเงินของโต๊ะ {{$resTable->name}}</b></h5>
-                <div class="mt-lg-3 row">
-                    <div class="col">
-                        <a class="btn btn-danger col-lg-5"
-                           href="{{ route('bill.pay.table', ['resTable'=>$resTable]) }}"
-                           role="button" style="margin-right: 5px;">ชำระเงิน</a>
+                <h5 class="mb-4">ชำระเงินของโต๊ะ{{$resTable->name}}</h5>
+                <h5 class="mb-4">ยอดชำระ {{$total_all_bills_or_receive['total_all_bills']}} บาท</h5>
+                <form action="{{ route('bill.pay.table', ['resTable' => $resTable]) }}" method="GET" enctype="multipart/form-data">
+                    @csrf
+                    <div class="mb-3 form-group row">
+                        <div style="margin-top: 10px">
+                            <table class="table border-2">
+                                <thead>
+                                <tr class="text-center">
+                                    <th class=""></th>
+                                    <th class=""></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr class="something text-center align-middle">
+                                    <td class="border-2" style="width: 50%">
+                                        รับเงินมา
+                                    </td>
+                                    <td class="border-2" style="width: 50%">
+                                        <input name="receiveMoney" type="number" class="form-control text-center" autocomplete="off">
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="mt-lg-3 row">
+                            <div class="col">
+                                <button type="submit" class="btn btn-warning col-lg-5"
+                                        style="margin-right: 5px;">
+                                    ยืนยัน
+                                </button>
+                            </div>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary col-lg-5" data-bs-dismiss="modal">ยกเลิก</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col">
-                        <button type="button" class="btn btn-secondary col-lg-5" data-bs-dismiss="modal">ยกเลิก</button>
-                    </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </div>

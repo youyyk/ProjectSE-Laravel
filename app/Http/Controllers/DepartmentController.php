@@ -88,7 +88,7 @@ class DepartmentController extends Controller
 
         $department->save();
 
-        return redirect()->route('departments.show', ['department' => $department->id]);
+        return redirect()->route('departments.index');
     }
 
     /**
