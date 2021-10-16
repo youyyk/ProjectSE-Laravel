@@ -11,7 +11,7 @@
                 </button>
             </a>
         </span>
-        <span class="float-end">
+        <span class="float-end" style="margin-right: 5px">
             <a href="{{ route("bill.show.takeaway") }}">
                 <button type="button" class="btn btn-primary">
                     บิลกลับบ้านทั้งหมด

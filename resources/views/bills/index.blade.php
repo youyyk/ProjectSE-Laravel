@@ -4,13 +4,6 @@
 <div class="container">
     <h1 class="mt-3">
         รายการบิล
-        <span class="float-end">
-            <a href="{{route("bills.create")}}">
-                <button type="button" class="btn btn-primary">
-                    + เพิ่มบิล
-                </button>
-            </a>
-        </span>
     </h1>
     <table class="table border-2 mt-3">
         <thead>

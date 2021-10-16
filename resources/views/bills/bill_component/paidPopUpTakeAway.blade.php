@@ -2,7 +2,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="200px">
             <div class="modal-body text-center m-3">
-                <h5 class="mb-4">ชำระเงินของบิล{{$bill->name}}</h5>
+                <h5 class="mb-4">ชำระเงินของบิล #{{$bill->id}}</h5>
                 <h5 class="mb-4">ยอดชำระ {{$bill->total}} บาท</h5>
                 <form action="{{ route('bill.pay.takeaway', ['bill' => $bill]) }}" method="GET" enctype="multipart/form-data">
                     @csrf

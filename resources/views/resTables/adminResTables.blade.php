@@ -27,7 +27,7 @@
             <thead>
             <tr class="text-center">
                 <th class="border-2">ชื่อโต๊ะ</th>
-                <th class="border-2">สถานะ ( 0=ว่าง, 1=ไม่ว่าง )</th>
+                <th class="border-2">สถานะ</th>
                 <th class="border-2">การทำงาน</th>
             </tr>
             </thead>
@@ -45,7 +45,8 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTableModal{{$resTable->id}}">
                             แก้ไข
                         </button>
-                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteTableModal{{$resTable->id}}">
+                        <button type="button" class="btn {{$resTable->status==0?"btn-secondary":"btn-danger"}}" data-bs-toggle="modal" data-bs-target="#deleteTableModal{{$resTable->id}}"
+                                {{$resTable->status==0?"disabled":""}}>
                             ลบ
                         </button>
                     </td>

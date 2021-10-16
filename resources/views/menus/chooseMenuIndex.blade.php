@@ -48,8 +48,8 @@
 </style>
 @section('content')
     <div class="sidebar">
-        <h3 style="text-align: center; margin-top: 20px"> โต๊ะ {{$resTable->name}} </h3>
-        <h5 style="text-align: center; margin-top: 10px">รายการอาหาร</h5>
+            <h3 style="text-align: center; margin-top: 20px"> {{$resTable->name != "Take Away"?"โต๊ะ $resTable->name":"กลับบ้าน"}}  </h3>
+            <h5 style="text-align: center; margin-top: 10px">รายการอาหาร</h5>
         @foreach($cart->menus as $menu)
             <div style="display: flex; justify-content: normal; margin-bottom: 0px;">
                 <p style="flex-basis: 50%; margin-bottom: 0px;">{{$menu->name}}</p>
@@ -89,7 +89,6 @@
         <div class="row container-fluid">
             <div style="margin-top: 20px;">
 {{--                {{$menus->links()}}--}}
-
                 @include('menus.menu_component.filterMenu',['menus'=>$menus,'filterMenu'=>$filterMenu,'user_role'=>'frontWorker','resTables'=>$resTable])
 {{--                @include('menus.menu_component.filterMenu',['menus'=>$menus,'filter'=>$filter,'user_role'=>'admin'])--}}
             </div>  <!-- Set in boot Laravel -->

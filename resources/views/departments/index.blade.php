@@ -49,10 +49,6 @@
                         </button>
                     </span>
                     {{-- Edit Menu --}}
-                    @include('departments.department_component.editDepartmentPopUp',['department'=>$department])
-
-                    {{-- Delete Menu --}}
-                    @include('departments.department_component.deleteDepartmentPopUp',['department'=>$department])
                     @else
                         <div class="float-end rounded-2 p-2" style="background-color: #ECECEC;">
                             ไม่สามารถลบได้
@@ -60,6 +56,9 @@
                     @endif
                 </div>
             </div>
+            @include('departments.department_component.editDepartmentPopUp',['department'=>$department])
+            {{-- Delete Menu --}}
+            @include('departments.department_component.deleteDepartmentPopUp',['department'=>$department])
         </div>
         {{-- Edit Menu --}}
         @include('departments.department_component.editDepartmentPopUp',['department'=>$department])

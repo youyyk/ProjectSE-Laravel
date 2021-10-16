@@ -4,37 +4,29 @@
     <div class="container">
         <div>
             <h3 class="text-center" style="margin-top: 20px;">
-                {{$paid==1?"ชำระเงินเรียบร้อย โต๊ะ":"บิลทั้งหมดของ โต๊ะ"}} {{$resTable->name}}
+                บิลทั้งหมดของ {{$resTable->name}}
             </h3>
-            @if($paid == 0)
-                <a class="btn btn-secondary"
-                   href="{{route("menu.choose.index",['tableId'=>$resTable->id])}}"
-                   role="button" style="float:right; width: 100px">กลับ</a>
-            @endif
+            <a class="btn btn-secondary"
+               href="{{route("menu.choose.index",['tableId'=>$resTable->id])}}"
+               role="button" style="float:right; width: 100px">กลับ</a>
         </div>
-        @if($paid == 1)
-            <div class="card" style="width: 18rem;">
-                <div class="card-header text-center">
-                    การชำระเงิน
-                </div>
-                <ul class="list-group list-group-flush text-center">
-                    <li class="list-group-item">ยอดชำระ {{$total_all_bills_or_receive['total_all_bills']}}</li>
-                    <li class="list-group-item">รับเงินมา {{$total_all_bills_or_receive['receive']}}</li>
-                    <li class="list-group-item">ทอนเงิน {{$total_all_bills_or_receive['exchange']}}</li>
-                </ul>
-            </div>
-        @elseif($paid == 0)
-            <button class="btn btn-warning"
-                    style="float:right; width: 200px; margin-right: 10px;"
-                    data-bs-toggle="modal"
-                    data-bs-target="#paidPopUp">
-                ชำระเงิน
-            </button>
-            @include('bills.bill_component.paidPopUp',['bills'=>$bills, 'resTable'=>$resTable, 'total_all_bills_or_receive' => $total_all_bills_or_receive])
-        @endif
+        <button class="btn btn-warning"
+                {{$have_bill==0?"disabled":""}}
+                style="float:right; width: 200px; margin-right: 10px;"
+                data-bs-toggle="modal"
+                data-bs-target="#paidPopUp">
+            ชำระเงิน
+        </button>
+        @include('bills.bill_component.paidPopUp',['bills'=>$bills, 'resTable'=>$resTable, 'total_all_bills_or_receive' => $total_all_bills_or_receive])
+
         @foreach($bills as $bill)
             <h5>#{{$bill->id}} โดย {{$bill->user->name}}</h5>
-            <h5>Total: {{$bill->total}}</h5>
+            <h5>
+                Total: {{$bill->total}}
+                <b class="badge alert-secondary" style="font-size: 16px; color: black">
+                    ({{ $bill->type=="EatIn"?" ร้าน ":" กลับบ้าน " }})
+                </b>
+            </h5>
             <table class="table border-2 mt-3">
                 <thead>
                 <tr class="text-center">
@@ -54,7 +46,7 @@
                         <td class="border-2" style="width: 25%; font-size: 20px">
                             @if($menu->pivot->status==="notStarted")
                                 <span class="badge alert-secondary" style="width: 50%">ยังไม่เริ่ม</span>
-                            @elseif($menu->pivot->status==="inProgress")
+                            @elseif($menu->pivot->status==="inProcess")
                                 <span class="badge alert-primary" style="width: 50%">กำลังทำ</span>
                             @elseif($menu->pivot->status==="finish")
                                 <span class="badge alert-success" style="width: 50%">เสร็จสิ้น</span>

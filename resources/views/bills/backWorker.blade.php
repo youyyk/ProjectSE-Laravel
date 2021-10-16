@@ -15,10 +15,14 @@
                     <div class="card-header" style="font-size: 18px">
                         <b sty>Bill #{{ $bill->id }}</b>
                         <b class="badge alert-secondary" style="float:right; font-size: 16px; color: black">
-                            โต๊ะ {{ $bill->resTable->name }} ({{ $bill->type }})
+                            @if($bill->resTable->name=="Take Away")
+                                หน้าร้าน
+                            @else
+                                {{ $bill->resTable->name}} ({{ $bill->type=="EatIn"?" ร้าน ":" กลับบ้าน " }})
+                            @endif
                         </b>
                     </div>
-                    <div class="card-body" style="height: 250px; overflow-y: auto;" :hover >
+                    <div class="card-body" style="height: 250px; overflow-y: auto;" >
                         <table class="table">
                             <tbody>
                             @foreach($bill->menus as $menu)

@@ -2,21 +2,34 @@
 
 @section('content')
 <div class="container">
-    <h3>Take Away Bill</h3>
+    <div>
+        <h3 class="text-center" style="margin-top: 20px;">
+            บิลกลับบ้านทั้งหมด
+        </h3>
+        <a class="btn btn-secondary"
+           href="{{route("resTables.index")}}"
+           role="button" style="float:right; width: 100px">กลับ</a>
+    </div>
     <div class="row">
         @foreach($bills as $bill)
-            <div class="card mb-3">
+            <div class="card mb-3" style="margin-top: 15px;">
                 <div class="card-header">
-                    Bill {{ $bill->id }}
+                    <h5>#{{$bill->id}} โดย {{$bill->user->name}}</h5>
+                    <h5 style="display: inline">
+                        Total: {{$bill->total}}
+                        <b class="badge alert-secondary" style="font-size: 16px; color: black">
+                            ( กลับบ้าน )
+                        </b>
+                    </h5>
                     <button class="btn btn-warning"
-                            style="float:right; width: 200px; margin-right: 10px;"
+                            style="float:right; width: 200px; margin-right: 10px; margin-top: -10px"
                             data-bs-toggle="modal"
                             data-bs-target="#paidPopUpTakeAway{{$bill->id}}">
                         ชำระเงิน
                     </button>
                     @include('bills.bill_component.paidPopUpTakeAway',['bill'=>$bill])
                 </div>
-                <div class="card-body">
+                <div class="card-body" style="margin-top: -15px; margin-bottom: -15px;">
                     <table class="table border-2 mt-3">
                         <thead>
                         <tr class="text-center">

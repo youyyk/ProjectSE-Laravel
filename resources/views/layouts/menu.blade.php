@@ -44,14 +44,12 @@
                 </li>
             </ul>
                 @if(Auth::check())
-                    <li class="navbar-nav nav-item active">
-                        <a class="nav-link"
-                           href="#">
-                            {{ Auth::user()->name }}
-                        </a>
+                    <li class="navbar-nav nav-item"
+                        style="font-size: 18px; margin-right: 20px; color: black">
+                            <b>{{ Auth::user()->name }}</b>
                     </li>
 
-                    <form action="{{ route('logout') }}" method="post">
+                    <form class="navbar-nav nav-item active" action="{{ route('logout') }}" method="post">
                         @csrf
                         <button class="btn btn-outline-danger " type="submit">
                             LOGOUT

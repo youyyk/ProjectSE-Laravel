@@ -47,14 +47,14 @@ Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::c
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
     ->name('cart.value');
-Route::get('/bill/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])
+Route::get('/bill/order/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])
     ->name('bill.create.manual');
 // All Bills this Table
 Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])
     ->name('bill.show.table');
 Route::get('/bill/cancel/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])
     ->name('bill.cancel.menu');
-Route::get('/bill/pay/{resTable}/all', [\App\Http\Controllers\BillController::class, 'payBills'])
+Route::get('/bill/pay/{resTable}/allBill', [\App\Http\Controllers\BillController::class, 'payBills'])
     ->name('bill.pay.table');
 // Bill BackWorker View
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])

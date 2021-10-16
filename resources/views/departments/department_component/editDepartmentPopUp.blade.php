@@ -18,9 +18,9 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="text-center">
                         <a href="{{route("departments.index")}}" >
-                            <button type="submit" class="btn btn-primary w-25 float-lg-end">
+                            <button type="submit" class="btn btn-primary w-25">
                                 แก้ไข
                             </button>
                         </a>
