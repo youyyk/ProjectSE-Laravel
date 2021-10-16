@@ -20,7 +20,7 @@
                                         @if($menu->pivot->status == 'notStarted')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เริ่ม</a>
-                                        @elseif($menu->pivot->status == 'inProgress')
+                                        @elseif($menu->pivot->status == 'inProcess')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เสร็จ</a>
                                         @else

@@ -191,6 +191,9 @@ class BillController extends Controller
         $bill->total = $total_bill;
         $bill->save();
         $cart->menus()->sync([]); // Clear cart this table
+        if($restable_id == 1) {
+            return redirect()->route('bill.show.takeaway');
+        }
         return redirect()->route('bill.show.table',[
             'resTable' => $restable_id
         ]);
