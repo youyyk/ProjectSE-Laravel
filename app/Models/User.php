@@ -49,4 +49,24 @@ class User extends Authenticatable
     public function bills(){
         return $this->hasMany(Bill::class);
     }
+
+    public function isType($type){
+        return $this->type === $type;
+    }
+
+    public function isAdmin(){
+        return $this->isType('Admin');
+    }
+
+    public function isFrontWorker(){
+        return $this->isType('FrontWorker');
+    }
+
+    public function isBackWorker()
+    {
+        return $this->isType('BackWorker');
+    }
+
+
+
 }

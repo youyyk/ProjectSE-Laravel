@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
@@ -22,46 +23,48 @@ Route::get('/', function () {
 
 require __DIR__.'/auth.php';
 
-Route::resource('users',\App\Http\Controllers\UserController::class);
-Route::resource('menus',\App\Http\Controllers\MenuController::class);
-Route::resource('resTables',\App\Http\Controllers\RestTableController::class);
-Route::resource('departments',\App\Http\Controllers\DepartmentController::class);
-Route::resource('bills',\App\Http\Controllers\BillController::class);
-Route::resource('carts',\App\Http\Controllers\CartController::class);
+
+Route::resource('users', \App\Http\Controllers\UserController::class)->middleware(['auth','admin']);
+Route::resource('menus', \App\Http\Controllers\MenuController::class)->middleware(['auth','admin']);
+Route::resource('resTables', \App\Http\Controllers\RestTableController::class)->middleware(['auth','admin']);
+Route::resource('departments', \App\Http\Controllers\DepartmentController::class)->middleware(['auth','admin']);
+
+Route::resource('bills',\App\Http\Controllers\BillController::class)->middleware(['auth','frontWorker']);
+Route::resource('carts',\App\Http\Controllers\CartController::class)->middleware(['auth','frontWorker']);
 
 // filter menu
-Route::resource('charts',\App\Http\Controllers\ChartController::class);
+Route::resource('charts',\App\Http\Controllers\ChartController::class)->middleware(['auth','admin']);
 // User Admin View
-Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])
+Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])->middleware(['auth','admin'])
     ->name('user.filter');
 // Menu Admin View
-Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterAdmin"])
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterAdmin"])->middleware(['auth','admin'])
     ->name('menu.filter');
-Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
+Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])->middleware(['auth','frontWorker'])
     ->name('menu.filter.chooseMenu');
 
 // ChooseMenu View
-Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])
+Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])->middleware(['auth','frontWorker'])
     ->name('menu.choose.index');
-Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenu"])
+Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenu"])->middleware(['auth','frontWorker'])
     ->name('cart.add');
-Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
+Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])->middleware(['auth','frontWorker'])
     ->name('cart.value');
-Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::class, 'createBill'])
+Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::class, 'createBill'])->middleware(['auth','frontWorker'])
     ->name('bill.create.manual');
 // All Bills this Table
-Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])
+Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])->middleware(['auth','frontWorker'])
     ->name('bill.show.table');
-Route::get('/bill/cancel/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])
+Route::get('/bill/cancel/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])->middleware(['auth','frontWorker'])
     ->name('bill.cancel.menu');
-Route::get('/bill/pay/{resTable}/all', [\App\Http\Controllers\BillController::class, 'payBills'])
+Route::get('/bill/pay/{resTable}/all', [\App\Http\Controllers\BillController::class, 'payBills'])->middleware(['auth','frontWorker'])
     ->name('bill.pay.table');
 // Bill BackWorker View
-Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])
+Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])->middleware(['auth','backWorker'])
     ->name('backWorker');
-Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])
+Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillController::class, 'updateStatus'])->middleware(['auth','backWorker'])
     ->name('bill.menu.update.status');
 // Chart Bill
 // Res Table for Admin
-Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
+Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])->middleware(['auth','admin'])
     ->name('showAllResTable');
