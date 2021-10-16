@@ -47,7 +47,7 @@ Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::c
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
     ->name('cart.value');
-Route::get('/bill/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])
+Route::get('/bill/order/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])
     ->name('bill.create.manual');
 // All Bills this Table
 Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])
