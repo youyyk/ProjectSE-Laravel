@@ -65,11 +65,20 @@
             </div>
         @endforeach
         @if(Auth::check())
+            @if($resTable->id != 1)
+                <a href="{{route('bill.create.manual',
+                           ['cart'=>$cart,
+                            'user_id'=>Auth::user()->id,
+                            'type'=>"EatIn"])}}"
+                   class="btn btn-success {{count($cart->menus)==0?"disabled":""}}"
+                   style="width: 100%; margin-bottom: 10px">ทานที่ร้าน</a>
+            @endif
         <a href="{{route('bill.create.manual',
-                   ['cart'=>$cart,
-                    'user_id'=>Auth::user()->id])}}"
+               ['cart'=>$cart,
+                'user_id'=>Auth::user()->id,
+                'type'=>"TakeAway"])}}"
            class="btn btn-success {{count($cart->menus)==0?"disabled":""}}"
-           style="width: 100%">ยืนยัน</a>
+           style="width: 100%">สั่งกลับบ้าน</a>
         <a href="{{route('bill.show.table',
                    ['resTable'=>$resTable])}}"
            class="btn btn-warning" style="width: 100%; margin-top: 10px">บิลทั้งหมด</a>

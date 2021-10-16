@@ -47,7 +47,7 @@ Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::c
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])
     ->name('cart.value');
-Route::get('/bill/{cart}/{user_id}', [\App\Http\Controllers\BillController::class, 'createBill'])
+Route::get('/bill/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])
     ->name('bill.create.manual');
 // All Bills this Table
 Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'showAllBills'])
@@ -65,3 +65,8 @@ Route::get('/bill/{bill}/{menuId}/update/status', [\App\Http\Controllers\BillCon
 // Res Table for Admin
 Route::get('/showAllTable', [\App\Http\Controllers\RestTableController::class, "showAllResTable"])
     ->name('showAllResTable');
+// Bill Take Away View
+Route::get('/takeAway', [\App\Http\Controllers\BillController::class, 'showTakeAwayBills'])
+    ->name('bill.show.takeaway');
+Route::get('bill/pay/takeAway/{bill}', [\App\Http\Controllers\BillController::class, 'payBill'])
+    ->name('bill.pay.takeaway');

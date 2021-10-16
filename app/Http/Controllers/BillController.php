@@ -179,13 +179,14 @@ class BillController extends Controller
         ]);
     }
 
-    public function createBill(Cart $cart, $user_id) {
+    public function createBill(Cart $cart, $user_id, $type) {
         $restable_id = $cart->restable_id;
         $menus = $cart->menus;
         $total_bill = 0;
         $bill = new Bill();
         $bill->restable_id = $restable_id;
         $bill->user_id = $user_id;
+        $bill->type = $type;
         $bill->total = 0;
         $bill->save();
         foreach ($menus as $menu){
@@ -197,6 +198,9 @@ class BillController extends Controller
         $bill->save();
         $cart->menus()->sync([]); // Clear cart this table
         $this->resTable_controller->setToNotEmpty($restable_id); // Set Table to Not empty
+        if($restable_id == 1) {
+            return redirect()->route('bill.show.takeaway');
+        }
         return redirect()->route('bill.show.table',[
             'resTable' => $restable_id
         ]);
@@ -212,15 +216,33 @@ class BillController extends Controller
             if($menu->pivot->status == 'finish') $countFinish++;
         }
         if($status == 'notStarted') {
-            $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProgress']);
+            $bill->menus()->updateExistingPivot($menuId, ['status'=>'inProcess']);
         }
-        elseif($status == 'inProgress') {
+        elseif($status == 'inProcess') {
             $bill->menus()->updateExistingPivot($menuId, ['status'=>'finish']);
             if($numMenu == $countFinish+1){
                 $bill->status = false;
                 $bill->save();
             }
         }
-        return $this->indexBackWorker();
+        return redirect()->back();
+    }
+
+    public function showTakeAwayBills() {
+        $bills = Bill::whereRestable_id(1)->wherePaid(1)->get();
+        return view('bills.takeAway',[
+            'bills' => $bills
+        ]);
+    }
+
+    public function payBill(Request $request, Bill $bill) {
+        $receive = $request->input('receiveMoney');
+        $bill->paid = 0;
+        $bill->save();
+        return view('bills.paid',[
+            'bill' => $bill,
+            'receive'=>$receive,
+            'exchange'=>$receive-$bill->total
+        ]);
     }
 }

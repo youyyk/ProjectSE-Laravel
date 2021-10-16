@@ -15,7 +15,7 @@
                     <div class="card-header" style="font-size: 18px">
                         <b sty>Bill #{{ $bill->id }}</b>
                         <b class="badge alert-secondary" style="float:right; font-size: 16px; color: black">
-                            โต๊ะ {{ $bill->resTable->name }}
+                            โต๊ะ {{ $bill->resTable->name }} ({{ $bill->type }})
                         </b>
                     </div>
                     <div class="card-body" style="height: 250px; overflow-y: auto;" :hover >
@@ -29,7 +29,7 @@
                                         @if($menu->pivot->status == 'notStarted')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เริ่ม</a>
-                                        @elseif($menu->pivot->status == 'inProgress')
+                                        @elseif($menu->pivot->status == 'inProcess')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เสร็จ</a>
                                         @else
