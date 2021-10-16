@@ -35,7 +35,7 @@ Route::resource('charts',\App\Http\Controllers\ChartController::class);
 Route::get('/user/filter', [\App\Http\Controllers\UserController::class, "searchCard"])
     ->name('user.filter');
 // Menu Admin View
-Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterCard"])
+Route::get('/menu/filter', [\App\Http\Controllers\MenuController::class,"filterAdmin"])
     ->name('menu.filter');
 Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuController::class,"filterFrontWorker"])
     ->name('menu.filter.chooseMenu');

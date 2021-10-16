@@ -14,6 +14,9 @@ class DepartmentSeeder extends Seeder
      */
     public function run()
     {
+        $department = new Department();
+        $department->name = "ไม่มีแผนก";
+        $department->save();
         Department::factory(5)->create();
     }
 }

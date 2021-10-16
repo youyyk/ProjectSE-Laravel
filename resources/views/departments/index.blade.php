@@ -29,6 +29,7 @@
                         <button type="submit" style="border-style: none;background-color: Transparent;"><h3 class="card-title">{{$department->name}}</h3></button>
                     </form>
                         <p class="card-text">จำนวนเมนู : {{$department->menus->count()}}</p>
+                    @if($department->id != 1)
                     <span class="float-end">
                             <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal{{$department->id}}">
                                 ลบ
@@ -45,6 +46,11 @@
 
                     {{-- Delete Menu --}}
                     @include('departments.department_component.deleteDepartmentPopUp',['department'=>$department])
+                    @else
+                        <div class="float-end rounded-2 p-2" style="background-color: #ECECEC;">
+                            ไม่สามารถลบได้
+                        </div>
+                    @endif
 
 
                 </div>
