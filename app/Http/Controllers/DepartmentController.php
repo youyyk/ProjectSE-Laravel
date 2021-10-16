@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\DepartmentRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 class DepartmentController extends Controller
 {
     /**
@@ -33,11 +37,16 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DepartmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('departments'),
+            ],
+        ])->validate();
         $department = new Department();
         $department->name = $request->input('name');
 
@@ -77,12 +86,17 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DepartmentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentRequest $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('departments')->ignore($id),
+            ],
+        ])->validate();
         $department = Department::findOrFail($id);
         $department->name = $request->input('name');
 
