@@ -62,7 +62,7 @@
                         </td>
                         <td class="border-2" style="width: 15%">
                             <button class="btn
-                                           {{$menu->pivot->status == "notStarted"?"btn-danger":"btn-secondary"}}"
+                                    {{$menu->pivot->status == "notStarted"?"btn-danger":"btn-secondary"}}"
                                     {{$menu->pivot->status != "notStarted"?"disabled":""}}
                                     data-bs-toggle="modal"
                                     data-bs-target="#cancelMenuInBillPopUp{{$bill->id}}-{{$menu->id}}">

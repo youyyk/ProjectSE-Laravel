@@ -18,17 +18,12 @@
                 </button>
             </a>
             </span>
-            <span class="float-end">
-            </span>
         </h1>
         {{-- Create Menu --}}
         @include('menus.menu_component.createPopUp')
-
+        <hr>
         {{-- filter  --}}
-
         @include('menus.menu_component.filterMenu',['menus'=>$menus,'filterMenu'=>$filterMenu,'user_role'=>'admin'])
-
-
 
         {{-- ----------------------------------------Menu Card----------------------------------------- --}}
         <div class="row container-fluid">
@@ -47,27 +42,24 @@
                                 <p class="card-text">ระยะเวลาการทำ : {{$menu->processTime}} นาที</p>
                                 <p class="card-text">ประเภท : {{$menu->category}}</p>
                                 <span class="float-end">
-                                        <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}">
-                                            ลบ
-                                        </button>
+                                    <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}">
+                                        ลบ
+                                    </button>
                                 </span>
-                                <span class="float-end">
+                                <span class="float-end" style="margin-right: 5px">
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal{{$menu->id}}">
                                         แก้ไข
                                     </button>
                                 </span>
                                 </tbody>
                             </table>
-
-                            {{-- Edit Menu --}}
-                            @include('menus.menu_component.editPopUp',['menu'=>$menu])
-
-                            {{-- Delete Menu --}}
-                            @include('menus.menu_component.deletePopUp',['menu'=>$menu])
-
                         </div>
                     </div>
                 </div>
+                    {{--                    Edit Menu--}}
+                    @include('menus.menu_component.editPopUp',['menu'=>$menu])
+                    {{--                    Delete Menu--}}
+                    @include('menus.menu_component.deletePopUp',['menu'=>$menu])
             @endforeach
         </div>
     </div>

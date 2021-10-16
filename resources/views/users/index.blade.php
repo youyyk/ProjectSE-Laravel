@@ -27,11 +27,15 @@
             <form class="form-inline" >
                 <span class="col-1"></span>
                 {{-- search by name --}}
-                <input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อผู้ใช้งาน - - - -" value="{{$search_name}}">
+                <input type="text" class="rounded-2 text-center"
+                       style="padding: 0.25rem 0rem;"
+                       name="search" id="search" autocomplete="off"
+                       placeholder="- - - - ชื่อผู้ใช้งาน - - - -"
+                       value="{{$search_name}}">
                 <button class="btn btn-primary" formaction="{{route('user.filter')}}">search</button>
                 <button class="btn btn-warning" formaction="{{route('users.index')}}">clear</button>
             </form>
-        </span>
+    </span>
     {{-- ---------------------------------------- card -------------------------------------------}}
 
     <div class="row container-fluid">

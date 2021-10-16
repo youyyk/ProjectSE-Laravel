@@ -8,17 +8,19 @@
 </style>
 @section('content')
 <div class="container">
-    <h1 class="mt-3 mb-4">
+    <h1 class="mt-3">
         แผนกครัว
         <span class="float-end">
-            <form action="{{ route('departments.store') }}" method="POST">
+            <form class="form-inline"
+                  action="{{ route('departments.store') }}"
+                  method="POST">
                 @csrf
-                <div class="input-group">
-                  <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -" autocomplete="off">
-                  <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
-                  </div>
-                </div>
+                <input type="type" name="name"
+                       style="padding: 0.25rem 0rem; font-size: 18px"
+                       class="rounded-2 text-center"
+                       placeholder="- - - เพิ่มแผนก - - -"
+                       autocomplete="off">
+                <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
             </form>
         </span>
     </h1>
@@ -40,22 +42,19 @@
                                 ลบ
                             </button>
                     </span>
-                    <span class="float-end">
+                    <span class="float-end" style="margin-right: 5px">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editDepartmentModal{{$department->id}}">
                             แก้ไข
                         </button>
                     </span>
-
-                    {{-- Edit Menu --}}
-                    @include('departments.department_component.editDepartmentPopUp',['department'=>$department])
-
-                    {{-- Delete Menu --}}
-                    @include('departments.department_component.deleteDepartmentPopUp',['department'=>$department])
-
-
                 </div>
             </div>
         </div>
+        {{-- Edit Menu --}}
+        @include('departments.department_component.editDepartmentPopUp',['department'=>$department])
+
+        {{-- Delete Menu --}}
+        @include('departments.department_component.deleteDepartmentPopUp',['department'=>$department])
     @endforeach
 </div>
 
