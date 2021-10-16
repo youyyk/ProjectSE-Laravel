@@ -174,13 +174,14 @@ class BillController extends Controller
         ]);
     }
 
-    public function createBill(Cart $cart, $user_id) {
+    public function createBill(Cart $cart, $user_id, $type) {
         $restable_id = $cart->restable_id;
         $menus = $cart->menus;
         $total_bill = 0;
         $bill = new Bill();
         $bill->restable_id = $restable_id;
         $bill->user_id = $user_id;
+        $bill->type = $type;
         $bill->total = 0;
         $bill->save();
         foreach ($menus as $menu){
@@ -218,7 +219,7 @@ class BillController extends Controller
                 $bill->save();
             }
         }
-        return $this->indexBackWorker();
+        return redirect()->back();
     }
 
     public function showTakeAwayBills() {

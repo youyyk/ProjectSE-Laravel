@@ -7,7 +7,7 @@
             <div class="col-sm-6" style="width: 16rem;">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Bill {{ $bill->id }} โต๊ะ {{ $bill->resTable->name }}
+                        Bill {{ $bill->id }} โต๊ะ {{ $bill->resTable->name }} ({{ $bill->type }})
                     </div>
                     <div class="card-body">
                         <table class="table">
