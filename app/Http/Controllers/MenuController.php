@@ -25,7 +25,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::latest('updated_at')->get();
+        $menus = Menu::latest('updated_at')->get()->sortByDesc('id');
         $categories = Menu::get()->unique('category');
         $departments = Department::get();
         $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
@@ -39,29 +39,29 @@ class MenuController extends Controller
     public function filterCard(Request $request)
     {
         if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search ==""){
-            $menus = Menu::latest('updated_at')->get();
+            $menus = Menu::latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search ==""){
-            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get();
+            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search ==""){
-            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart !="" & $request->search ==""){
-            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get();
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('id');
         }
         else{
             $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)
-                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
+                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
         }
         return $menus;
     }
@@ -84,7 +84,7 @@ class MenuController extends Controller
         $departments = Department::get();
         $filterMenu=array('search_name' => $request->search, 'select_c' =>$request->selected_cat, 'select_d' => $request->selected_depart);
         return view('menus.chooseMenuIndex',[
-            'menus' => $menus,
+            'menus' => $menus->where('department_id','>',1),
             'categories'=>$categories,
             'departments'=>$departments,
             'search_name' => $request->search,
@@ -200,7 +200,8 @@ class MenuController extends Controller
     public function destroy($id)
     {
         $menu = Menu::findOrFail($id);
-        $menu->delete();
+        $menu->department_id = 1;
+            $menu->save();
 
         return redirect()->route('menus.index');
     }
@@ -209,7 +210,7 @@ class MenuController extends Controller
     public function chooseMenuIndex($tableId)
     {
         $resTable = $this->resTable_controller->getInfoTableById($tableId);
-        $menus = Menu::latest('updated_at')->get();
+        $menus = Menu::where('department_id','>',1)->latest('updated_at')->get();
         $categories = Menu::get()->unique('category');
         $departments = Department::get();
         $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);

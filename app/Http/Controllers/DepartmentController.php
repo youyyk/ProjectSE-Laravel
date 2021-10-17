@@ -18,7 +18,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
+        $departments = Department::latest('updated_at')->get()->sortByDesc('id');
         return view('departments.index',[
             'departments' => $departments
         ]);
