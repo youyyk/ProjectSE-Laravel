@@ -22,19 +22,15 @@
                 </button>
 
                 <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown button
+                    ประเภทกราฟ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    <a class="dropdown-item" href="{{route("month.bar")}}">Bar</a>
+{{--                    <a class="dropdown-item" href="{{route("month.pie")}}">Pie</a>--}}
                 </div>
             </span>
         </span>
         </h1>
-        <div class="dropdown">
-
-        </div>
         <hr>
     </div>
     <script src="https://code.highcharts.com/highcharts.js"></script>

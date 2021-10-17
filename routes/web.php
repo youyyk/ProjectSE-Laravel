@@ -50,6 +50,12 @@ Route::get('/monthLine', [\App\Http\Controllers\ChartController::class, "monthLi
     ->name('month.line');
 Route::get('/yearLine', [\App\Http\Controllers\ChartController::class, "yearLine"])
     ->name('year.line');
+Route::get('/dayBar', [\App\Http\Controllers\ChartController::class, "dayBar"])
+    ->name('day.bar');
+Route::get('/monthBar', [\App\Http\Controllers\ChartController::class, "monthBar"])
+    ->name('month.bar');
+Route::get('/yearBar', [\App\Http\Controllers\ChartController::class, "yearBar"])
+    ->name('year.bar');
 
 // ChooseMenu View
 Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])

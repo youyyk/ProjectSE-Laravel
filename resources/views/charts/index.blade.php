@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="mt-3 ">
         สรุปยอดบิลทั้งหมด
-        <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
+        <span class="float-end btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
 {{--            <span class="float-start fs-6">กราฟประจำ : </span>--}}
             <h6><span class="badge rounded-pill bg-primary">กราฟ</span></h6>
             <span class="btn-group me-2 px-2" role="group" aria-label="Second group">
@@ -44,14 +44,13 @@
 {{--                ปี</a>--}}
 {{--            </label>--}}
 
-            <button class="btn btn-outline-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+{{--            <button class="btn btn-outline-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
+{{--                ประเภทกราฟ--}}
+{{--            </button>--}}
+{{--            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
+{{--                <a class="dropdown-item" href="{{route("month.bar")}}">Bar</a>--}}
+{{--                <a class="dropdown-item" href="#">Another action</a>--}}
+{{--            </div>--}}
             </span>
         </span>
     </h1>

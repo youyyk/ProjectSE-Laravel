@@ -22,11 +22,10 @@
                 </button>
 
             <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown button
+                ประเภทกราฟ
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="{{route("day.bar")}}">Bar</a>
                 <a class="dropdown-item" href="#">Something else here</a>
             </div>
             </span>
