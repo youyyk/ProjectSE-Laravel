@@ -10,7 +10,6 @@
                     @csrf
                     @method('PUT')
 
-                        resTable's name
                     <div class="mb-3 form-group row">
                         <label class="col-sm-2 col-form-label">ชื่อโต๊ะ</label>
                         <div class="col-sm-3">

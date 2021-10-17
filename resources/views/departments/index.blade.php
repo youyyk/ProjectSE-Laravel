@@ -10,12 +10,12 @@
                 <div class="input-group">
                     <div class="col-sm">
                       <input type="type" name="name"
-                             class="form-control mt-lg-2 text-center @error('name') border border-danger rounded @enderror"
+                             class="form-control mt-lg-2 text-center @error('name') border border-danger rounded is-invalid @enderror"
                              placeholder="- - - เพิ่มแผนก - - -" autocomplete="off">
                         @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger m-2 fs-5">
+                            <span class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
-                            </p>
+                            </span>
                         @enderror
                     </div>
                   <div class="input-group-append">
@@ -40,13 +40,11 @@
                         <p class="card-text">จำนวนเมนู : {{$department->menus->count()}}</p>
                     @if($department->id != 1)
                     <span class="float-end">
-                            <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal{{$department->id}}">
-                                ลบ
-                            </button>
-                    </span>
-                    <span class="float-end">
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editDepartmentModal{{$department->id}}">
                             แก้ไข
+                        </button>
+                        <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteDepartmentModal{{$department->id}}">
+                                ลบ
                         </button>
                     </span>
 

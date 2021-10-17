@@ -25,6 +25,7 @@ class BillFactory extends Factory
             'type' => $this->faker->randomElement(['EatIn','TakeAway']),
             'total' => $this->faker->numberBetween(100,1000),
             'status' => $this->faker->boolean(),
+            'created_at'=> $this->faker->dateTimeThisYear(),
         ];
     }
 }

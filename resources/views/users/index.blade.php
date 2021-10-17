@@ -19,11 +19,12 @@
     <hr>
     <span class="mb-3 float-end">
             <form class="form-inline" >
-                <span class="col-1"></span>
+                <span class="float-start px-2">
+                    <input type="text" class="form-control form-control-sm rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="ชื่อผู้ใช้งาน" value="{{$search_name}}">
+                </span>
                 {{-- search by name --}}
-                <input type="text" class="rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="- - - - ชื่อผู้ใช้งาน - - - -" value="{{$search_name}}">
-                <button class="btn btn-primary" formaction="{{route('user.filter')}}">search</button>
-                <button class="btn btn-warning" formaction="{{route('users.index')}}">clear</button>
+                <button class="btn btn-primary btn-sm" formaction="{{route('user.filter')}}">search</button>
+                <button class="btn btn-warning btn-sm" formaction="{{route('users.index')}}">clear</button>
             </form>
         </span>
     {{-- ---------------------------------------- card -------------------------------------------}}
@@ -40,19 +41,21 @@
                             <p class="card-text">อีเมล : {{$user->email}}</p>
                             <p class="card-text">ประเภท : {{$user->type}}</p>
                             <p class="card-text">เข้าสู่ระบบล่าสุด : {{$user->last_login}}</p>
-{{--                            <span class="float-end">--}}
-{{--                                        <button class=" btn btn-danger" data-bs-toggle="modal" >--}}
-{{--                                            ลบ--}}
-{{--                                        </button>--}}
-{{--                            </span>--}}
+                            <span class="float-end">
+                                <button class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal{{$user->id}}">
+                                        แก้ไข
+                                </button>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{$user->id}}">
+                                    ลบ
+                                </button>
+                            </span>
+                            {{--                         Edit Menu --}}
+                            @include('users.user_component.editPopUp',['user'=>$user])
+
+                            {{--                         Delete Menu --}}
+                            @include('users.user_component.deletePopUp',['user'=>$user])
                             </tbody>
                         </table>
-
-{{--                        --}}{{-- Edit Menu --}}
-{{--                        @include('menu_component.editPopUp',['menu'=>$menu])--}}
-
-{{--                        --}}{{-- Delete Menu --}}
-{{--                        @include('menu_component.deletePopUp',['menu'=>$menu])--}}
 
                     </div>
                 </div>

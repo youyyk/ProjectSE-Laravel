@@ -38,13 +38,11 @@
                                 <p class="card-text">ระยะเวลาการทำ : {{$menu->processTime}} นาที</p>
                                 <p class="card-text">ประเภท : {{$menu->category}}</p>
                                 <span class="float-end">
-                                        <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}">
-                                            ลบ
-                                        </button>
-                                </span>
-                                <span class="float-end">
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal{{$menu->id}}">
                                         แก้ไข
+                                    </button>
+                                    <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}">
+                                        ลบ
                                     </button>
                                 </span>
                                 </tbody>

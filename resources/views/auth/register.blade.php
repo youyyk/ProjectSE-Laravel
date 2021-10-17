@@ -69,9 +69,14 @@
                             <div class="col-md-6">
                                 <select class="w-100 h-100 text-center bg rounded-1" name="type" id="type" required focus>
 
+{{--                                    @foreach($users as $user)--}}
+{{--                                        <option value="{{ $user->type }}">--}}
+{{--                                            {{ $user->type }}--}}
+{{--                                        </option>--}}
+{{--                                    @endforeach--}}
                                     <option value="Admin">Admin</option>
-                                    <option value="Admin">FrontWorker</option>
-                                    <option value="Admin">BackWorker</option>
+                                    <option value="FrontWorker">FrontWorker</option>
+                                    <option value="BackWorker">BackWorker</option>
 
                                 </select>
                             </div>
