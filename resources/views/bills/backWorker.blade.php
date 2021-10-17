@@ -16,7 +16,7 @@
                         <b sty>Bill #{{ $bill->id }}</b>
                         <b class="badge alert-secondary" style="float:right; font-size: 16px; color: black">
                             @if($bill->resTable->name=="Take Away")
-                                หน้าร้าน
+                                สั่งกลับบ้าน
                             @else
                                 {{ $bill->resTable->name}} ({{ $bill->type=="EatIn"?" ร้าน ":" กลับบ้าน " }})
                             @endif

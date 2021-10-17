@@ -10,7 +10,7 @@
     <title>@yield('title','Restaurant')</title>
 </head>
 {{--background-image: url({{asset('/storage/images/lightColor.jpg')}})--}}
-<body class="" style="background-attachment: fixed;">
+<body class="" style="">
 
     @include('layouts.menu')
     <div>

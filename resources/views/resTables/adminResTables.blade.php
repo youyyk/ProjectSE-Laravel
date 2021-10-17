@@ -37,7 +37,7 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($resTables as $resTable)
+            @foreach($resTables->skip(1) as $resTable)
                 <tr class="something text-center align-middle">
                     <td class="border-2 p-0.5" style="width: 40%; font-size: 18px">{{$resTable->name}}</a></td>
                     <td class="border-2 p-0.5" style="width: 40%;">
@@ -47,7 +47,8 @@
                         </span>
                     </td>
                     <td class="border-2 p-0.5" style="width: 20%;">
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editTableModal{{$resTable->id}}">
+                        <button type="button" class="btn {{$resTable->status==0?"btn-secondary":"btn-primary"}}" data-bs-toggle="modal" data-bs-target="#editTableModal{{$resTable->id}}"
+                            {{$resTable->status==0?"disabled":""}}>
                             แก้ไข
                         </button>
                         <button type="button" class="btn {{$resTable->status==0?"btn-secondary":"btn-danger"}}" data-bs-toggle="modal" data-bs-target="#deleteTableModal{{$resTable->id}}"

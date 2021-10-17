@@ -63,13 +63,13 @@
                             LOGOUT
                         </button>
                     </form>
-                @else
-                    <form action="{{ route('login') }}">
-                        @csrf
-                        <button class="btn btn-outline-success" type="submit">
-                            Login
-                        </button>
-                    </form>
+{{--                @else--}}
+{{--                    <form action="{{ route('login') }}">--}}
+{{--                        @csrf--}}
+{{--                        <button class="btn btn-outline-success" type="submit">--}}
+{{--                            Login--}}
+{{--                        </button>--}}
+{{--                    </form>--}}
 
 {{--                    <form action="{{ route('register') }}" class="px-2">--}}
 {{--                        @csrf--}}

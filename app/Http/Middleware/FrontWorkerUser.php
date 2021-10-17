@@ -21,6 +21,6 @@ class FrontWorkerUser
             return $next($request);
         }
 
-        return abort(404);
+        return abort(401);
     }
 }
