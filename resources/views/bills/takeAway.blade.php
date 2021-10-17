@@ -22,6 +22,7 @@
                         </b>
                     </h5>
                     <button class="btn btn-warning"
+                            {{$bill->status==1?"disabled":""}}
                             style="float:right; width: 200px; margin-right: 10px; margin-top: -10px"
                             data-bs-toggle="modal"
                             data-bs-target="#paidPopUpTakeAway{{$bill->id}}">
