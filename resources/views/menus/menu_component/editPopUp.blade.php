@@ -14,7 +14,13 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">เลือกรูปภาพ</label>
                         <div class="col-sm-5">
-                            <input name="image" type="file">
+                            <input name="image" type="file"
+                            class="@error('image') @enderror">
+                            @error('image') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--   Menu's Name   --}}
@@ -67,7 +73,8 @@
                                     style="width: 150px;"
                                     name="category" id="category">
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->category }}"{{$menu->category == $cat->category ? "selected" : ""}}>
+                                    <option value="{{ $cat->category }}"
+                                        {{ $menu->category  == $cat->category ? "selected" : ""}}>
                                         {{ $cat->category }}
                                     </option>
                                 @endforeach
@@ -90,8 +97,7 @@
                                     name="department_id" id="department_id">
                                 @foreach($departments as $depart)
                                     <option value="{{ $depart->id }}"
-                                        {{$menu->department_id == $depart->id ? "selected" : ""}}
-                                    >
+                                        {{ $menu->department_id == $depart->id ? "selected" : ""}}>
                                         {{ $depart->name }}
                                     </option>
                                 @endforeach
