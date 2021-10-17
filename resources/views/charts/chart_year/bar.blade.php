@@ -6,25 +6,17 @@
             กราฟรายปี
             <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
-                วัน</a>
-                </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
-                เดือน</a>
-                </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
-                ปี</a>
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
+                        ย้อนกลับ</a>
                 </button>
 
                 <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ประเภทกราฟ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("year.bar")}}">Bar</a>
-                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="{{route("year.line")}}">กราฟเส้น</a>
+                    <a class="dropdown-item" href="{{route("year.bar")}}">กราฟแท่ง</a>
                 </div>
             </span>
         </span>
@@ -45,10 +37,10 @@
     <script>
         var bill_total =  <?php echo json_encode($bill_total) ?>;
         var barChartData = {
-            labels: ['2019', '2020', '2021', '2022'],
+            labels: ['2021', '2022',],
             datasets: [{
                 label: 'จำนวนยอดบิลทั้งหมด (บาท)',
-                backgroundColor: "#FFB085",
+                backgroundColor: "#FFBCBC",
                 data: bill_total
             }]
         };

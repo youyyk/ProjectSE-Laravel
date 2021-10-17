@@ -7,50 +7,23 @@
     <h1 class="mt-3 ">
         สรุปยอดบิลทั้งหมด
         <span class="float-end btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
-{{--            <span class="float-start fs-6">กราฟประจำ : </span>--}}
-            <h6><span class="badge rounded-pill bg-primary">กราฟ</span></h6>
+
+            <h6><span class="badge rounded-pill alert-primary">กราฟ</span></h6>
             <span class="btn-group me-2 px-2" role="group" aria-label="Second group">
-{{--                <button type="button" class="btn btn-dark ">--}}
-{{--                    กราฟ--}}
-{{--                </button>--}}
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-light">
+
+                <button type="button" class="btn btn-outline-light border border-dark">
+                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
                 วัน</a>
                 </button>
-                <button type="button" class="btn btn-secondary ">
-                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-light">
+                <button type="button" class="btn btn-outline-light border border-dark ">
+                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
                 เดือน</a>
                 </button>
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-light">
+                <button type="button" class="btn btn-outline-light border border-dark ">
+                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
                 ปี</a>
                 </button>
 
-{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" checked>--}}
-{{--            <label class="btn btn-outline-info" for="btnradio1">--}}
-{{--                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-dark">--}}
-{{--                วัน</a>--}}
-{{--            </label>--}}
-
-{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off">--}}
-{{--            <label class="btn btn-outline-info" for="btnradio2">--}}
-{{--                <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">--}}
-{{--                เดือน</a>--}}
-{{--            </label>--}}
-
-{{--            <input type="radio" class="btn-check" name="btnradio" id="btnradio3" autocomplete="off">--}}
-{{--            <label class="btn btn-outline-info" for="btnradio3">--}}
-{{--                <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">--}}
-{{--                ปี</a>--}}
-{{--            </label>--}}
-
-{{--            <button class="btn btn-outline-secondary dropdown-toggle " type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-{{--                ประเภทกราฟ--}}
-{{--            </button>--}}
-{{--            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--}}
-{{--                <a class="dropdown-item" href="{{route("month.bar")}}">Bar</a>--}}
-{{--                <a class="dropdown-item" href="#">Another action</a>--}}
-{{--            </div>--}}
             </span>
         </span>
     </h1>
@@ -58,13 +31,6 @@
     <hr>
     <h3 class="mt-3 text-center">
         รายการบิล
-        <span class="float-end">
-            <a href="{{route("bills.create")}}">
-                <button type="button" class="btn btn-primary">
-                    + เพิ่มบิล
-                </button>
-            </a>
-        </span>
     </h3>
 
     <table class="table border-2 mt-3">
@@ -89,12 +55,11 @@
                 <td class="border-2 p-0.5">{{$bill->total}}</td>
                 <td class="border-2 p-0.5">
                     @if($bill->status==1)
-                        <span class="badge rounded-pill bg-success">
+                        <span class="badge rounded-pill alert-success">
                             {{"ว่าง"}}
-                            {{--{{$resTable->status==1?"ว่าง":"ไม่ว่าง"}}--}}
                         </span>
                     @else
-                        <span class="badge rounded-pill bg-danger">
+                        <span class="badge rounded-pill alert-danger">
                             {{"ไม่ว่าง"}}
                         </span>
                     @endif

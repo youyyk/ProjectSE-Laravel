@@ -21,7 +21,9 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label" >ประเภท</label>
                         <div class="col-sm-6">
-                            <select class="w-100 h-100 text-center bg rounded-1" name="type" id="type">
+                            <select class="text-center bg rounded-1 form-select"
+                                    style="width: 150px; display: inline;"
+                                    name="type" id="type">
 {{--                                @foreach($categories as $cat)--}}
 {{--                                    <option value="{{ $cat->category }}"{{$menu->category == $cat->category ? "selected" : ""}}>--}}
 {{--                                        {{ $cat->category }}--}}

@@ -41,21 +41,15 @@ class RegisteredUserController extends Controller
 
         ]);
 
-//        $imageFile = $request->file('path');
-//        $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
-
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => $request->type,
-//            'path' => $path,
             'path' => $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName()),
         ]);
 
         event(new Registered($user));
-
-//        Auth::login($user);
 
         return redirect()->route("users.index");
     }

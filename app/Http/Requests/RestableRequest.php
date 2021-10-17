@@ -31,7 +31,7 @@ class RestableRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => 'โปรดกรอกชื่อแผนก',
+            'name.required' => 'โปรดกรอกชื่อโต๊ะ',
 
         ];
     }
