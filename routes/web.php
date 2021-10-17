@@ -45,17 +45,17 @@ Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuContr
     ->name('menu.filter.chooseMenu');
 
 // Charts
-Route::get('/dayLine', [\App\Http\Controllers\ChartController::class, "dayLine"])
+Route::get('/dayLine', [\App\Http\Controllers\ChartController::class, "dayLine"])->middleware(['auth','admin'])
     ->name('day.line');
-Route::get('/monthLine', [\App\Http\Controllers\ChartController::class, "monthLine"])
+Route::get('/monthLine', [\App\Http\Controllers\ChartController::class, "monthLine"])->middleware(['auth','admin'])
     ->name('month.line');
-Route::get('/yearLine', [\App\Http\Controllers\ChartController::class, "yearLine"])
+Route::get('/yearLine', [\App\Http\Controllers\ChartController::class, "yearLine"])->middleware(['auth','admin'])
     ->name('year.line');
-Route::get('/dayBar', [\App\Http\Controllers\ChartController::class, "dayBar"])
+Route::get('/dayBar', [\App\Http\Controllers\ChartController::class, "dayBar"])->middleware(['auth','admin'])
     ->name('day.bar');
-Route::get('/monthBar', [\App\Http\Controllers\ChartController::class, "monthBar"])
+Route::get('/monthBar', [\App\Http\Controllers\ChartController::class, "monthBar"])->middleware(['auth','admin'])
     ->name('month.bar');
-Route::get('/yearBar', [\App\Http\Controllers\ChartController::class, "yearBar"])
+Route::get('/yearBar', [\App\Http\Controllers\ChartController::class, "yearBar"])->middleware(['auth','admin'])
     ->name('year.bar');
 
 // ChooseMenu View
@@ -65,7 +65,6 @@ Route::get('/cart/add/{cart}/{menuId}', [\App\Http\Controllers\CartController::c
     ->name('cart.add');
 Route::get('/cart/{action}/{cart}/{menuId}', [\App\Http\Controllers\CartController::class,"addMenuTotal"])->middleware(['auth','frontWorker'])
     ->name('cart.value');
-
 Route::get('/bill/order/{cart}/{user_id}/{type}', [\App\Http\Controllers\BillController::class, 'createBill'])->middleware(['auth','frontWorker'])
     ->name('bill.create.manual');
 // All Bills this Table
@@ -73,7 +72,7 @@ Route::get('/bill/{resTable}', [\App\Http\Controllers\BillController::class, 'sh
     ->name('bill.show.table');
 Route::get('/bill/cancel/{bill}/{menuId}', [\App\Http\Controllers\BillController::class, 'cancelMenuInBill'])->middleware(['auth','frontWorker'])
     ->name('bill.cancel.menu');
-Route::get('/bill/pay/{resTable}/all', [\App\Http\Controllers\BillController::class, 'payBills'])->middleware(['auth','frontWorker'])
+Route::get('/bill/pay/{resTable}/allBill', [\App\Http\Controllers\BillController::class, 'payBills'])->middleware(['auth','frontWorker'])
     ->name('bill.pay.table');
 // Bill BackWorker View
 Route::get('/backWorker', [\App\Http\Controllers\BillController::class, 'indexBackWorker'])->middleware(['auth','backWorker'])

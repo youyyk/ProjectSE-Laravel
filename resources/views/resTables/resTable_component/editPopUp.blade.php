@@ -10,17 +10,18 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="mb-3 form-group row">
-                        <label class="col-sm-2 col-form-label">ชื่อโต๊ะ</label>
-                        <div class="col-sm-3">
+
+                    <div class="mb-3 form-group row text-center">
+                        <label class="col-sm-4 col-form-label">ชื่อโต๊ะ</label>
+                        <div class="col-sm-5">
                             <input name="name" type="text" class="form-control text-center" value="{{ $resTable->name }}">
                         </div>
                     </div>
 
 
-                    <div>
-                        <a href="{{route("showAllResTable")}}" >
-                            <button type="submit" class="btn btn-primary w-100 mt-lg-3">
+                    <div class="text-center">
+                        <a href="{{route("showAllResTable")}}">
+                            <button type="submit" class="btn btn-primary w-25">
                                 แก้ไข
                             </button>
                         </a>

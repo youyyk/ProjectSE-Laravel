@@ -64,7 +64,6 @@ class MenuController extends Controller
                 ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get();
         }
         return $menus;
-
     }
     public function filterAdmin(Request $request){
         $menus = $this->filterCard($request);

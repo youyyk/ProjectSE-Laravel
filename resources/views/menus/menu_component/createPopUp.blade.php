@@ -5,7 +5,7 @@
                 <h5 class="modal-title" ><b>เพิ่มเมนู</b></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="margin: auto">
                 <form action="{{ route('menus.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
 
@@ -69,8 +69,9 @@
                         {{--  Dropdown later  --}}
                         <label class="col-sm-4 col-form-label" >ประเภท</label>
                         <div class="col-sm-5">
-                            <select class="w-100 h-100 text-center bg rounded-1 @error('category') border border-danger rounded @enderror"
-                                    name="category" id="category" value="{{ old('category') }}">
+                            <select class="text-center bg rounded-1 form-select"
+                                    style="width: 150px;"
+                                    name="category" id="category">
                                 @foreach($categories as $cat)
                                     <option value="{{ $cat->category }}"  {{ old('cat') === $cat->category ? "selected": "" }}>
                                         {{ $cat->category }}
@@ -85,10 +86,11 @@
                         </div>
                     </div>
                     {{--    Department's name    --}}
-                    <div class="mb-5 form-group row">
+                    <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">แผนก</label>
                         <div class="col-sm-5">
-                            <select class="w-100 h-100 text-center bg rounded-1 @error('department_id') border border-danger rounded @enderror"
+                            <select class="text-center bg rounded-1 form-select @error('department_id') border border-danger rounded @enderror"
+                                    style="width: 150px;"
                                     name="department_id" id="department_id">
                                 @foreach($departments as $depart)
                                     <option value="{{ $depart->id }}" {{ old('depart') === $depart->id ? "selected": "" }}>
@@ -114,4 +116,4 @@
         </div>
     </div>
 </div>
-<hr>
+

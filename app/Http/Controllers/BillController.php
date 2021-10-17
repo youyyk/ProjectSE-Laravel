@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 
 class BillController extends Controller
 {
+    private $resTable_controller;
+
+    public function __construct()
+    {
+        $this->resTable_controller = new RestTableController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -141,7 +147,7 @@ class BillController extends Controller
             'bills' => $bills,
             'resTable' => $resTable,
             'total_all_bills_or_receive' => array('total_all_bills'=>$total_all_bills,'receive'=>0,'exchange'=>0),
-            'paid' => $total_all_bills==0?1:0,
+            'have_bill' => count($bills),
         ]);
     }
 
@@ -161,16 +167,26 @@ class BillController extends Controller
             $bill->paid = 0;
             $bill->save();
         }
-        $resTable->status = 1;
-        $resTable->save();
-        return view('bills.showAllBills',[
-            'bills' => Bill::whereRestable_id($resTable->id)->wherePaid(1)->get(),
-            'resTable' => $resTable,
-            'total_all_bills_or_receive' =>
-                array('total_all_bills'=>$total_all_bills,
-                      'receive'=>$receive,
-                      'exchange'=>$receive-$total_all_bills),
-            'paid' => 1,
+        $this->resTable_controller->setToEmpty($resTable->id);
+        return view('bills.paid',[
+            'id' => $resTable->name,
+            'total' => $total_all_bills,
+            'receive'=>$receive,
+            'exchange'=>$receive-$total_all_bills,
+            'paid' => 'all',
+        ]);
+    }
+
+    public function payBill(Request $request, Bill $bill) {
+        $receive = $request->input('receiveMoney');
+        $bill->paid = 0;
+        $bill->save();
+        return view('bills.paid',[
+            'id' => $bill->id,
+            'total' => $bill->total,
+            'receive'=>$receive,
+            'exchange'=>$receive-$bill->total,
+            'paid' => 'one',
         ]);
     }
 
@@ -192,6 +208,7 @@ class BillController extends Controller
         $bill->total = $total_bill;
         $bill->save();
         $cart->menus()->sync([]); // Clear cart this table
+        $this->resTable_controller->setToNotEmpty($restable_id); // Set Table to Not empty
         if($restable_id == 1) {
             return redirect()->route('bill.show.takeaway');
         }
@@ -226,17 +243,6 @@ class BillController extends Controller
         $bills = Bill::whereRestable_id(1)->wherePaid(1)->get();
         return view('bills.takeAway',[
             'bills' => $bills
-        ]);
-    }
-
-    public function payBill(Request $request, Bill $bill) {
-        $receive = $request->input('receiveMoney');
-        $bill->paid = 0;
-        $bill->save();
-        return view('bills.paid',[
-            'bill' => $bill,
-            'receive'=>$receive,
-            'exchange'=>$receive-$bill->total
         ]);
     }
 }

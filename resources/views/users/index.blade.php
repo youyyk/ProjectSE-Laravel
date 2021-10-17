@@ -1,5 +1,11 @@
 @extends('welcome')
-@inject('userController', 'App\Http\Controllers\UserController')
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        z-index:1000
+    }
+</style>
 @section('content')
 <div class="container">
     <h1 class="mt-3">
@@ -18,15 +24,16 @@
     </h1>
     <hr>
     <span class="mb-3 float-end">
-            <form class="form-inline" >
-                <span class="float-start px-2">
-                    <input type="text" class="form-control form-control-sm rounded-2 text-center" name="search" id="search" autocomplete="off" placeholder="ชื่อผู้ใช้งาน" value="{{$search_name}}">
-                </span>
-                {{-- search by name --}}
-                <button class="btn btn-primary btn-sm" formaction="{{route('user.filter')}}">search</button>
-                <button class="btn btn-warning btn-sm" formaction="{{route('users.index')}}">clear</button>
-            </form>
-        </span>
+        <form class="form-inline" >
+            <input type="text" class="rounded-2 text-center"
+                   style="padding: 0.25rem 0rem;"
+                   name="search" id="search" autocomplete="off"
+                   placeholder="- - - - ชื่อผู้ใช้งาน - - - -"
+                   value="{{$search_name}}">
+            <button class="btn btn-primary" formaction="{{route('user.filter')}}">search</button>
+            <button class="btn btn-warning" formaction="{{route('users.index')}}">clear</button>
+        </form>
+    </span>
     {{-- ---------------------------------------- card -------------------------------------------}}
 
     <div class="row container-fluid">
