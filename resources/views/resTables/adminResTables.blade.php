@@ -10,15 +10,23 @@
                 @csrf
 
                 <div class="input-group">
-                    <input type="text" name="name" class="form-control mt-lg-2 text-center" placeholder="เพิ่มโต๊ะ" autocomplete="off">
+                    <input type="text" name="name"
+                           class="form-control mt-lg-2 text-center @error('name') border border-danger rounded  @enderror"
+                           placeholder="เพิ่มโต๊ะ" autocomplete="off">
                     <div class="input-group-append px-2">
                         <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
                     </div>
                 </div>
+                @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                                    <p class=" text-danger m-2 fs-6">
+                                        {{ $message }}
+                                    </p>
+                            @enderror
             </form>
         </span>
         </h1>
-        <hr>
+
+            <hr>
 
         <table class="table border-2 text-center">
             <thead>

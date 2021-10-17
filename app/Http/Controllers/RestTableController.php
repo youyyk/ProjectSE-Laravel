@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RestableRequest;
 use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Http\Request;
@@ -42,10 +43,11 @@ class RestTableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RestableRequest $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RestableRequest $request)
     {
         $validator = Validator::make($request->all(), [
             'name' => [
@@ -95,7 +97,7 @@ class RestTableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RestableRequest $request, $id)
     {
         $validator = Validator::make($request->all(), [
             'name' => [

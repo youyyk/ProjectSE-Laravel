@@ -10,12 +10,12 @@
                 <div class="input-group">
                     <div class="col-sm">
                       <input type="type" name="name"
-                             class="form-control mt-lg-2 text-center @error('name') border border-danger rounded @enderror"
+                             class="form-control mt-lg-2 text-center @error('name') border border-danger rounded is-invalid @enderror"
                              placeholder="- - - เพิ่มแผนก - - -" autocomplete="off">
                         @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger m-2 fs-5">
+                            <span class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
-                            </p>
+                            </span>
                         @enderror
                     </div>
                   <div class="input-group-append">
