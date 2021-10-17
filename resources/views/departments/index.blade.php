@@ -21,12 +21,12 @@
                        class="rounded-2 text-center @error('name') border border-danger rounded is-invalid @enderror"
                        placeholder="- - - เพิ่มแผนก - - -"
                        autocomplete="off">
+                <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
                 @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
                         <span class="invalid-feedback m-2 fs-6" role="alert">
                             {{ $message }}
                         </span>
                 @enderror
-                <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
 
             </form>
         </span>
