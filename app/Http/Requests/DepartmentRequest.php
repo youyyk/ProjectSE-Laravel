@@ -32,7 +32,7 @@ class DepartmentRequest extends FormRequest
     {
         return [
             'name.required' => 'โปรดกรอกชื่อแผนก',
-
+            'name.min' => 'ต้องการชื่ออย่างน้อย 3 ตัวอักษร',
         ];
     }
 }

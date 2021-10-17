@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RestableRequest extends FormRequest
+class BillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,14 @@ class RestableRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'min:2', ],
+            'receiveMoney' => ['required',],
         ];
     }
 
-    public function messages()
+     public function messages()
     {
         return [
-            'name.required' => 'โปรดกรอกชื่อโต๊ะ',
-            'name.min' => 'ต้องการชื่ออย่างน้อย 2 ตัวอักษร',
+            'receiveMoney.required' => 'โปรดกรอกยอดชำระ',
         ];
     }
 }

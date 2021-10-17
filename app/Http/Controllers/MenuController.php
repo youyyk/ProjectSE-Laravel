@@ -115,12 +115,13 @@ class MenuController extends Controller
     public function store(MenuRequest $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => [
-                Rule::unique('departments'),
-            ],
+                'name' => [
+                    Rule::unique('menus'),
+                ],
         ])->validate();
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
+
         $menu->price = $request->input('price');
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');

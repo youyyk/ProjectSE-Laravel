@@ -1,6 +1,6 @@
 <div class="modal fade" id="paidPopUp" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content" style="200px">
+        <div class="modal-content">
             <div class="modal-body text-center m-3">
                 <h5 class="mb-4">ชำระเงินของโต๊ะ{{$resTable->name}}</h5>
                 <h5 class="mb-4">ยอดชำระ {{$total_all_bills_or_receive['total_all_bills']}} บาท</h5>
@@ -21,7 +21,14 @@
                                         รับเงินมา
                                     </td>
                                     <td class="border-2" style="width: 50%">
-                                        <input name="receiveMoney" type="number" class="form-control text-center" autocomplete="off">
+                                        <input name="receiveMoney" type="number" min="1"
+                                               class="form-control text-center @error('receiveMoney') border border-danger rounded is-invalid @enderror"
+                                               autocomplete="off">
+                                        @error('receiveMoney') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                                            <span class="invalid-feedback m-2 fs-6" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </td>
                                 </tr>
                                 </tbody>
