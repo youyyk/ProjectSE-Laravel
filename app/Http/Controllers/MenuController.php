@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use App\Models\Menu;
 use Illuminate\Http\Request;
+
+use App\Http\Requests\MenuRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 class MenuController extends Controller
 {
     private $resTable_controller;
@@ -106,10 +111,15 @@ class MenuController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('departments'),
+            ],
+        ])->validate();
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');
@@ -154,12 +164,17 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MenuRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(MenuRequest $request, $id)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('menus')->ignore($id),
+            ],
+        ])->validate();
         $menu = Menu::findOrFail($id);
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');

@@ -21,21 +21,42 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ชื่อเมนู</label>
                         <div class="col-sm-5">
-                            <input name="name" type="text" class="form-control text-center" value="{{$menu->name}}">
+                            <input name="name" type="text"
+                                   class="form-control text-center @error('name') border border-danger rounded @enderror"
+                                   value="{{$menu->name}}">
+                            @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Menu's Price    --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ราคา</label>
                         <div class="col-sm-5">
-                            <input name="price" type="number" class="form-control text-center" value="{{$menu->price}}">
+                            <input name="price" type="number"
+                                   class="form-control text-center @error('price') border border-danger rounded @enderror"
+                                   value="{{$menu->price}}">
+                            @error('price') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Cooking Time    --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ระยะเวลาการทำ</label>
                         <div class="col-sm-5">
-                            <input name="processTime" type="number" class="form-control text-center" value="{{$menu->processTime}}">
+                            <input name="processTime" type="number"
+                                   class="form-control text-center @error('processTime') border border-danger rounded @enderror"
+                                   value="{{$menu->processTime}}">
+                            @error('processTime') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Category    --}}
@@ -49,13 +70,18 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('category') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
 
                     {{--Department's ID--}}
                     <div class="mb-5 form-group row">
                         {{--Connect to department's name later--}}
-                        <label class="col-sm-4 col-form-label">Department's id</label>
+                        <label class="col-sm-4 col-form-label">แผนก</label>
                         <div class="col-sm-5">
                             <select class="w-100 h-100 text-center bg rounded-1" name="department_id" id="department_id">
                                 @foreach($departments as $depart)
@@ -66,6 +92,11 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @error('department_id') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     <div>

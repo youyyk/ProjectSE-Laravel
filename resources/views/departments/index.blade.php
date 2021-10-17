@@ -8,7 +8,16 @@
             <form action="{{ route('departments.store') }}" method="POST">
                 @csrf
                 <div class="input-group">
-                  <input type="type" name="name" class="form-control mt-lg-2 text-center" placeholder="- - - เพิ่มแผนก - - -" autocomplete="off">
+                    <div class="col-sm">
+                      <input type="type" name="name"
+                             class="form-control mt-lg-2 text-center @error('name') border border-danger rounded @enderror"
+                             placeholder="- - - เพิ่มแผนก - - -" autocomplete="off">
+                        @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger m-2 fs-5">
+                                {{ $message }}
+                            </p>
+                        @enderror
+                    </div>
                   <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
                   </div>

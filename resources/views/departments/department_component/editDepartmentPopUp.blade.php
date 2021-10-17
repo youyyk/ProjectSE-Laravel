@@ -14,7 +14,14 @@
                     <div class="m-3 form-group row text-center">
                         <label class="col-sm-4 col-form-label">ชื่อแผนก</label>
                         <div class="col-sm-5">
-                            <input name="name" type="text" class="form-control text-center" value="{{$department->name}}" autocomplete="off">
+                            <input name="name" type="text"
+                                   class="form-control text-center @error('name') border border-danger rounded @enderror" 
+                                   value="{{$department->name}}" autocomplete="off">
+                            @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger m-2 fs-5">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
 
