@@ -13,7 +13,12 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">เลือกรูปภาพ</label>
                         <div class="col-sm-5">
-                            <input name="image" type="file">
+                            <input name="image" type="file" class="@error('image') @enderror">
+                            @error('image') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
 
@@ -21,21 +26,42 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ชื่อเมนู</label>
                         <div class="col-sm-5">
-                            <input name="name" type="text" class="form-control text-center" autocomplete="off">
+                            <input name="name" type="text" value="{{ old('name') }}"
+                                   class="form-control text-center @error('name') border border-danger rounded @enderror"
+                                   autocomplete="off">
+                            @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Menu's Price    --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ราคา</label>
                         <div class="col-sm-5">
-                            <input name="price" type="number" class="form-control text-center" placeholder="- - -  บาท - - -">
+                            <input name="price" type="number" min="1" value="{{ old('price') }}"
+                                   class="form-control text-center @error('price') border border-danger rounded @enderror"
+                                   placeholder="- - -  บาท - - -">
+                            @error('price') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Cooking Time    --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ระยะเวลาการทำ</label>
                         <div class="col-sm-5">
-                            <input name="processTime" type="number" class="form-control text-center" placeholder="- - -  นาที - - -">
+                            <input name="processTime" type="number" min="1" value="{{ old('processTime') }}"
+                                   class="form-control text-center @error('processTime') border border-danger rounded @enderror"
+                                   placeholder="- - -  นาที - - -">
+                            @error('processTime') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Category    --}}
@@ -43,26 +69,38 @@
                         {{--  Dropdown later  --}}
                         <label class="col-sm-4 col-form-label" >ประเภท</label>
                         <div class="col-sm-5">
-                            <select class="w-100 h-100 text-center bg rounded-1" name="category" id="category">
+                            <select class="w-100 h-100 text-center bg rounded-1 @error('category') border border-danger rounded @enderror"
+                                    name="category" id="category" value="{{ old('category') }}">
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->category }}">
+                                    <option value="{{ $cat->category }}"  {{ old('cat') === $cat->category ? "selected": "" }}>
                                         {{ $cat->category }}
                                     </option>
                                 @endforeach
                             </select>
+                            @error('category') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     {{--    Department's name    --}}
                     <div class="mb-5 form-group row">
                         <label class="col-sm-4 col-form-label">แผนก</label>
                         <div class="col-sm-5">
-                            <select class="w-100 h-100 text-center bg rounded-1" name="department_id" id="department_id">
+                            <select class="w-100 h-100 text-center bg rounded-1 @error('department_id') border border-danger rounded @enderror"
+                                    name="department_id" id="department_id">
                                 @foreach($departments as $depart)
-                                    <option value="{{ $depart->id }}">
+                                    <option value="{{ $depart->id }}" {{ old('depart') === $depart->id ? "selected": "" }}>
                                         {{ $depart->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @error('department_id') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <p class="text-danger">
+                                {{ $message }}
+                            </p>
+                            @enderror
                         </div>
                     </div>
                     <a href="{{route("menus.index")}}">
