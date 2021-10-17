@@ -22,6 +22,7 @@ class BillFactory extends Factory
     public function definition()
     {
         return [
+            'type' => $this->faker->randomElement(['EatIn','TakeAway']),
             'total' => $this->faker->numberBetween(100,1000),
             'status' => $this->faker->boolean(),
         ];

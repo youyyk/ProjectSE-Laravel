@@ -7,7 +7,7 @@
             <div class="col-sm-6" style="width: 16rem;">
                 <div class="card mb-3">
                     <div class="card-header">
-                        Bill {{ $bill->id }} โต๊ะ {{ $bill->resTable->name }}
+                        Bill {{ $bill->id }} โต๊ะ {{ $bill->resTable->name }} ({{ $bill->type }})
                     </div>
                     <div class="card-body">
                         <table class="table">
@@ -20,7 +20,7 @@
                                         @if($menu->pivot->status == 'notStarted')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เริ่ม</a>
-                                        @elseif($menu->pivot->status == 'inProgress')
+                                        @elseif($menu->pivot->status == 'inProcess')
                                             <a href="{{route('bill.menu.update.status',['bill'=>$bill,'menuId'=>$menu->id])}}"
                                                class="btn btn-success">เสร็จ</a>
                                         @else
