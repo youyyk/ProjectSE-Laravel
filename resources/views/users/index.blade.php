@@ -56,16 +56,15 @@
                                     ลบ
                                 </button>
                             </span>
-                            {{--                         Edit Menu --}}
-                            @include('users.user_component.editPopUp',['user'=>$user])
-
-                            {{--                         Delete Menu --}}
-                            @include('users.user_component.deletePopUp',['user'=>$user])
                             </tbody>
                         </table>
-
                     </div>
                 </div>
+                {{--                         Edit Menu --}}
+                @include('users.user_component.editPopUp',['user'=>$user])
+
+                {{--                         Delete Menu --}}
+                @include('users.user_component.deletePopUp',['user'=>$user])
             </div>
         @endforeach
     </div>
