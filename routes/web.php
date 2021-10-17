@@ -26,7 +26,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('users', \App\Http\Controllers\UserController::class)->middleware(['auth','admin']);
 Route::resource('menus', \App\Http\Controllers\MenuController::class)->middleware(['auth','admin']);
-Route::resource('resTables', \App\Http\Controllers\RestTableController::class)->middleware(['auth','admin']);
+Route::resource('resTables', \App\Http\Controllers\RestTableController::class)->middleware(['auth','frontWorker']);
 Route::resource('departments', \App\Http\Controllers\DepartmentController::class)->middleware(['auth','admin']);
 
 Route::resource('bills',\App\Http\Controllers\BillController::class)->middleware(['auth','frontWorker']);
