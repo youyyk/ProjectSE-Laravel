@@ -5,17 +5,17 @@
         <h1 class="mt-3">
             กราฟรายปี
             <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
-            <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
+            <span class="btn-group me-2 " role="group" aria-label="Second group">
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("day.bar")}}" style="text-decoration:none" class="link-light">
                 วัน</a>
                 </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("month.bar")}}" style="text-decoration:none" class="link-light">
                 เดือน</a>
                 </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("year.bar")}}" style="text-decoration:none" class="link-light">
                 ปี</a>
                 </button>
 

@@ -22,7 +22,7 @@
                            placeholder="- - - เพิ่มแผนก - - -"
                            autocomplete="off">
                 </span>
-                    <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
+                    <button class="btn btn-dark" type="submit">+ เพิ่ม</button>
                     @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
                             <span class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
