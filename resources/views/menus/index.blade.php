@@ -1,46 +1,67 @@
 @extends('welcome')
-
+<style>
+    .card:hover {
+        cursor: pointer;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+        z-index:1000
+    }
+</style>
 @section('content')
-    <div class="container">
+
+    <div class="m-5">
         <h1 class="mt-3">
             รายการอาหาร
-            <span class="float-end">
-            <a href="{{route("menus.create")}}">
-                <button type="button" class="btn btn-primary">
+            <span class="float-end mt-3">
+            <a>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createMenuModal">
                     + เพิ่มเมนู
                 </button>
             </a>
             </span>
-            <span class="float-end">
-            <a href="{{route("menu.choose.index")}}">
-                <button class="btn btn-primary">
-                    Go to choose Menu
-                </button>
-            </a>
-            </span>
         </h1>
+        {{-- Create Menu --}}
+        @include('menus.menu_component.createPopUp')
         <hr>
+        {{-- filter  --}}
+        @include('menus.menu_component.filterMenu',['menus'=>$menus,'filterMenu'=>$filterMenu,'user_role'=>'admin'])
 
-        <div class="row">
+        {{-- ----------------------------------------Menu Card----------------------------------------- --}}
+        <div class="row container-fluid">
             @foreach($menus as $menu)
-                <div class="col-sm-3 mb-4">
-                    <div class="card">
-                        <img class="card-img-top" src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" alt="Card image cap">
+                <div class="col-sm-2 mb-3">
+                    <div class="card" style="{{$menu->department_id==1?"opacity:60%":""}}">
+                        <img class="card-img-top"
+                             style="height: 250px"
+                             src="{{url(\Str::replace('public/','storage/',$menu->path))}}"
+                             alt="{{$menu->name}}">
                         <div class="card-body">
                             <table>
                                 <tbody>
-                                <a href="{{route('menus.show',['menu'=>$menu->id])}}"><h4 class="card-title text-dark">{{$menu->name}}</h4></a>
+                                <h4 class="card-title text-dark">{{$menu->name}}</h4>
                                 <p class="card-text">ราคา : {{$menu->price}} ฿</p>
                                 <p class="card-text">ระยะเวลาการทำ : {{$menu->processTime}} นาที</p>
-                                <p class="card-text"># {{$menu->category}}</p>
-                                <a href="{{route('menus.edit',['menu'=>$menu->id])}}" class="btn btn-primary float-end">แก้ไข</a>
+                                <p class="card-text">ประเภท : {{$menu->category}}</p>
+                                <span class="float-end" style="margin-right: 5px">
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal{{$menu->id}}">
+                                        แก้ไข
+                                    </button>
+                                    <button class=" btn {{$menu->department_id==1?"btn-secondary":"btn-danger"}}" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}"
+                                        {{$menu->department_id==1?"disabled":""}}>
+                                        ลบ
+                                    </button>
+                                </span>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                    {{--                    Edit Menu--}}
+                    @include('menus.menu_component.editPopUp',['menu'=>$menu])
+                    {{--                    Delete Menu--}}
+                    @include('menus.menu_component.deletePopUp',['menu'=>$menu])
             @endforeach
         </div>
     </div>
 
 @endsection
+

@@ -9,7 +9,8 @@
     <!-- Title -->
     <title>@yield('title','Restaurant')</title>
 </head>
-<body class="bg-green-50">
+{{--background-image: url({{asset('/storage/images/lightColor.jpg')}})--}}
+<body class="" style="background-image: linear-gradient(0deg, #fdfcfb 0%, #e2d1c3 100%);background-repeat: no-repeat;background-attachment: fixed">
 
     @include('layouts.menu')
     <div>

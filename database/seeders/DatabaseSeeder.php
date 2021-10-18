@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(UserSeeder::class);
         $this->call(RestableSeeder::class);
         $this->call(BillSeeder::class);
+        $this->call(CartSeeder::class);
 
         $Bill = \App\Models\Bill::find(1);
         $Bill->menus()->attach(1);
@@ -32,5 +33,12 @@ class DatabaseSeeder extends Seeder
         $menu->bills()->attach(1);
         $menu->bills()->attach(3);
 
+        $menu = \App\Models\Menu::find(1);
+        $menu->carts()->attach(1);
+        $menu->carts()->attach(3);
+
+        $menu = \App\Models\Menu::find(2);
+        $menu->carts()->attach(1);
+        $menu->carts()->attach(3);
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -37,4 +38,17 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+//    function authenticated(Request $request, $user)
+//    {
+//        $user->update([
+//            'last_login' => Carbon::now(),
+//        ]);
+//        $user->save();
+//    }
+//    function authenticated(Request $request, $user)
+//    {
+//        $user->last_login = Carbon::now();
+//        $user->save();
+//    }
 }

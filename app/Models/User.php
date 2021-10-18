@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'type',
+        'path',
+        'last_login'
+
     ];
 
     /**
@@ -46,4 +50,34 @@ class User extends Authenticatable
     public function bills(){
         return $this->hasMany(Bill::class);
     }
+
+    public function isType($type){
+        return $this->type === $type;
+    }
+
+    public function isAdmin(){
+        return $this->isType('Admin');
+    }
+
+    public function isFrontWorker(){
+        return $this->isType('FrontWorker');
+    }
+
+    public function isBackWorker()
+    {
+        return $this->isType('BackWorker');
+    }
+
+//    /**
+//     * The user has been authenticated.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  mixed  $user
+//     * @return mixed
+//     */
+//    protected function authenticated(Request $request, $user)
+//    {
+//        //
+//    }
+
 }

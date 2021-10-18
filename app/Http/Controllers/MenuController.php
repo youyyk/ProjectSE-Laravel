@@ -2,12 +2,22 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Menu;
 use Illuminate\Http\Request;
-use Phattarachai\LineNotify\Facade\Line;
+
+use App\Http\Requests\MenuRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class MenuController extends Controller
 {
+    private $resTable_controller;
+
+    public function __construct()
+    {
+        $this->resTable_controller = new RestTableController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,16 +25,81 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::latest('updated_at')->get();
+        $menus = Menu::latest('updated_at')->get()->sortByDesc('department_id');
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
         return view('menus.index',[
-            'menus' => $menus
+            'menus' => $menus,
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'filterMenu' => $filterMenu
+        ]);
+    }
+    public function filterCard(Request $request)
+    {
+        if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search ==""){
+            $menus = Menu::latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search ==""){
+            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search ==""){
+            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart !="" & $request->search ==""){
+            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search !=""){
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        else{
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)
+                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
+        }
+        return $menus;
+    }
+    public function filterAdmin(Request $request){
+        $menus = $this->filterCard($request);
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => $request->search, 'select_c' =>$request->selected_cat, 'select_d' => $request->selected_depart);
+        return view('menus.index',[
+            'menus' => $menus,
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'filterMenu' => $filterMenu
+        ]);
+    }
+    public function filterFrontWorker(Request $request,$tableId){
+        $resTable = $this->resTable_controller->getInfoTableById($tableId);
+        $menus = $this->filterCard($request);
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => $request->search, 'select_c' =>$request->selected_cat, 'select_d' => $request->selected_depart);
+        return view('menus.chooseMenuIndex',[
+            'menus' => $menus->where('department_id','>',1),
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'search_name' => $request->search,
+            'select_c' =>$request->selected_cat,
+            'select_d' =>$request->selected_depart,
+            'resTable' => $resTable,
+            'cart' => $resTable->cart,
+            'filterMenu' => $filterMenu
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
@@ -37,8 +112,9 @@ class MenuController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MenuRequest $request)
     {
+<<<<<<< HEAD
         $validated = $request -> validate([
             'name' => ['required',], 
             'price' => ['required',],
@@ -46,12 +122,27 @@ class MenuController extends Controller
             'category' => ['required',],
             'department_id'=> ['required',],
         ]);
+=======
+//         $validator = Validator::make($request->all(), [
+//             'name' => [
+//                 Rule::unique('menus'),
+//             ],
+//         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
+
         $menu->price = $request->input('price');
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');
         $menu->department_id = $request->input('department_id');
+        if ($request->has('image')){
+            $imageFile = $request->file('image');
+            $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+            $menu->path = $path;
+        } else {
+            $menu->path = "public/images/noImage.jpg";
+        }
 
         $menu->save();
 
@@ -62,7 +153,7 @@ class MenuController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
@@ -74,7 +165,7 @@ class MenuController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
@@ -85,12 +176,13 @@ class MenuController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  MenuRequest  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(MenuRequest $request, $id)
     {
+<<<<<<< HEAD
         $validated = $request -> validate([
             'name' => ['required',], 
             'price' => ['required',],
@@ -98,12 +190,24 @@ class MenuController extends Controller
             'category' => ['required',],
             'department_id'=> ['required',],
         ]);
+=======
+//         $validator = Validator::make($request->all(), [
+//                 'name' => [
+//                     Rule::unique('menus')->ignore($id),
+//                 ],
+//         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $menu = Menu::findOrFail($id);
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');
         $menu->department_id = $request->input('department_id');
+        if ($request->has('image')){
+            $imageFile = $request->file('image');
+            $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
+            $menu->path = $path;
+        }
 
         $menu->save();
 
@@ -114,23 +218,37 @@ class MenuController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
         $menu = Menu::findOrFail($id);
-        $menu->delete();
+        $menu->department_id = 1;
+            $menu->save();
 
         return redirect()->route('menus.index');
     }
 
     // Not default method
-    public function chooseMenuIndex()
+    public function chooseMenuIndex($tableId)
     {
-        $menus = Menu::paginate(12);
-        Line::send("Test");
+        $resTable = $this->resTable_controller->getInfoTableById($tableId);
+        $menus = Menu::where('department_id','>',1)->latest('updated_at')->get();
+        $categories = Menu::get()->unique('category');
+        $departments = Department::get();
+        $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
         return view('menus.chooseMenuIndex',[
-            'menus' => $menus
+            'menus' => $menus,
+            'resTable' => $resTable,
+            'cart' => $resTable->cart,
+            'categories'=>$categories,
+            'departments'=>$departments,
+            'filterMenu' => $filterMenu
         ]);
+    }
+
+    public function getInfoMenuById($id){
+        $menu = Menu::findOrFail($id);
+        return $menu;
     }
 }

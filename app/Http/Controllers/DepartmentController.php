@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Department;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\DepartmentRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
 class DepartmentController extends Controller
 {
     /**
@@ -14,7 +18,7 @@ class DepartmentController extends Controller
      */
     public function index()
     {
-        $departments = Department::get();
+        $departments = Department::latest('updated_at')->get()->sortByDesc('id');
         return view('departments.index',[
             'departments' => $departments
         ]);
@@ -33,14 +37,22 @@ class DepartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DepartmentRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(DepartmentRequest $request)
     {
+<<<<<<< HEAD
         $validated = $request -> validate([
             'name' => ['required',], 
         ]);
+=======
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('departments'),
+            ],
+        ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $department = new Department();
         $department->name = $request->input('name');
 
@@ -80,21 +92,29 @@ class DepartmentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  DepartmentRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(DepartmentRequest $request, $id)
     {
+<<<<<<< HEAD
         $validated = $request -> validate([
             'name' => ['required',], 
         ]);
+=======
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('departments')->ignore($id),
+            ],
+        ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $department = Department::findOrFail($id);
         $department->name = $request->input('name');
 
         $department->save();
 
-        return redirect()->route('departments.show', ['department' => $department->id]);
+        return redirect()->route('departments.index');
     }
 
     /**
@@ -106,6 +126,10 @@ class DepartmentController extends Controller
     public function destroy($id)
     {
         $department = Department::findOrFail($id);
+        foreach ($department->menus as $menu){
+            $menu->department_id = 1;
+            $menu->save();
+        }
         $department->delete();
 
         return redirect()->route('departments.index');

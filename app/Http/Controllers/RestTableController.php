@@ -2,11 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RestableRequest;
+use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 
 class RestTableController extends Controller
 {
+    private $cart_controller;
+
+    public function __construct()
+    {
+        $this->cart_controller = new CartController();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +24,7 @@ class RestTableController extends Controller
      */
     public function index()
     {
-        $resTables = Restable::get();
+        $resTables = restable::get();
         return view('resTables.index',[
             'resTables' => $resTables
         ]);
@@ -33,16 +43,25 @@ class RestTableController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param RestableRequest $request
      * @return \Illuminate\Http\Response
+     * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(RestableRequest $request)
     {
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('resTables'), // unique ไม่ซ้ำกับในตาราง
+                // Rule ต้อง use Illuminate\Validation\Rule;
+            ],
+        ])->validate();
+
         $resTable = new resTable();
-
+        $resTable->name = $request->input('name');
         $resTable->save();
+        $this->cart_controller->create($resTable->id);
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -53,7 +72,7 @@ class RestTableController extends Controller
      */
     public function show($id)
     {
-        $resTable = Menu::findOrFail($id);
+        $resTable = resTable::findOrFail($id);
         return view('resTables.show',['resTable' => $resTable]);
     }
 
@@ -61,14 +80,14 @@ class RestTableController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $resTable = Restable::findOrFail($id);
-        return view('resTables.edit',[
-            'resTable' => $resTable
-        ]);
+//        $resTable = restable::findOrFail($id);
+//        return view('resTables.edit',[
+//            'resTable' => $resTable
+//        ]);
     }
 
     /**
@@ -78,17 +97,29 @@ class RestTableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RestableRequest $request, $id)
     {
+<<<<<<< HEAD
         $validated = $request -> validate([
             'status' => ['required',], 
         ]);
         $resTable = resTable::findOrFail($id);
         $resTable->status = $request->input('status');
+=======
+        $validator = Validator::make($request->all(), [
+            'name' => [
+                Rule::unique('resTables')->ignore($id),
+                // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
+                // Rule ต้อง use Illuminate\Validation\Rule;
+            ],
+        ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
 
+        $resTable = resTable::findOrFail($id);
+        $resTable->name = $request->input('name');
         $resTable->save();
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
 
     /**
@@ -99,9 +130,37 @@ class RestTableController extends Controller
      */
     public function destroy($id)
     {
-        $resTable = resTable::findOrFail($id);
-        $resTable->delete();
+        if($id != 1) {
+            $resTable = resTable::findOrFail($id);
+            $resTable->delete();
+        }
 
-        return redirect()->route('resTables.index');
+        return redirect()->route('showAllResTable');
     }
+
+    // Not default method
+    public function getInfoTableById($id){
+        $resTable = resTable::findOrFail($id);
+        return $resTable;
+    }
+
+    public function setToEmpty($id){
+        $resTable = resTable::findOrFail($id);
+        $resTable->status = 1;
+        $resTable->save();
+    }
+
+    public function setToNotEmpty($id){
+        $resTable = resTable::findOrFail($id);
+        $resTable->status = 0;
+        $resTable->save();
+    }
+
+    public function showAllResTable() {
+        $resTables = restable::get();
+        return view('resTables.adminResTables',[
+            'resTables' => $resTables
+        ]);
+    }
+
 }

@@ -18,7 +18,9 @@ class CreateBillsTable extends Migration
             $table->foreignIdFor(\App\Models\Restable::class);
             $table->foreignIdFor(\App\Models\User::class);
             $table->integer('total');
-            $table->boolean('status')->default(false);
+            $table->enum('type',['EatIn','TakeAway']);
+            $table->boolean('status')->default(true);
+            $table->boolean('paid')->default(true);
             $table->timestamps();
             $table->softDeletes();
         });

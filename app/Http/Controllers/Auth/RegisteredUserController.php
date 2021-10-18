@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Phattarachai\LineNotify\Facade\Line;
 
 class RegisteredUserController extends Controller
 {
@@ -37,18 +38,30 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'type' => ['required', 'string'],
+
         ]);
+
+        if ($request->has('path')){
+            $path = $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName());
+        } else {
+            $path = "public/images/noImage.jpg";
+        }
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'type' => $request->type,
+            'path' => $path,
         ]);
 
         event(new Registered($user));
+//        Auth::login($user);
 
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+        $text_line="\nมีการเพิ่ม user ใหม่\nประเภท ".$user->type."\nโดย ".Auth::user()->name;
+        $image_line = $request->file('path');
+        Line::imagePath($image_line)->send($text_line);
+        return redirect()->route('users.index');
     }
 }

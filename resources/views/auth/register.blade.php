@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+            <div class="card" style="margin-top: 20px">
+                <div class="card-header text-center fs-4">{{ __('เพิ่มผู้ใช้งาน') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+                        <div class="mb-3 form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('ชื่อผู้ใช้งาน') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -26,8 +26,8 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="mb-3 form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('ที่อยู่อีเมล') }}</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
@@ -40,8 +40,8 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="mb-3 form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('รหัสผ่าน') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
@@ -55,23 +55,41 @@
                         </div>
 
 
-                        <div class="form-group row">
-                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                        <div class="mb-3 form-group row">
+                            <label for="password_confirmation" class="col-md-4 col-form-label text-md-right">{{ __('ยืนยันรหัสผ่าน') }}</label>
 
                             <div class="col-md-6">
                                 <input id="password_confirmation" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
 
+                        <div class="mb-3 form-group row">
+                            {{--  Dropdown later  --}}
+                            <label class="col-md-4 col-form-label text-md-right" >{{ __('ชนิด') }}</label>
+                            <div class="col-md-6">
 
-                        <div class="form-group row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
-                                </button>
+                                <select class="text-center bg rounded-1 form-select w-100 h-100"
+                                        name="type" id="type" required focus>
+                                    <option value="Admin">แอดมิน</option>
+                                    <option value="FrontWorker">พนักงานหน้าร้าน</option>
+                                    <option value="BackWorker">พนักงานหลังร้าน</option>
+                                </select>
                             </div>
                         </div>
 
+                        <div class="mb-3 form-group row">
+                            <label class="col-md-4 col-form-label text-md-right">รูปภาพ</label>
+
+                            <div class="col-md-6">
+                                <input name="path" type="file" class="form-control" >
+                            </div>
+                        </div>
+
+                        <div  class="text-center">
+                            <button type="submit" class="btn btn-primary" style="width: 200px;">
+                                {{ __('เพิ่ม') }}
+                            </button>
+                        </div>
 
                     </form>
                 </div>

@@ -15,6 +15,7 @@ class CreateRestablesTable extends Migration
     {
         Schema::create('restables', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->boolean('status')->default(true);
             $table->timestamps();
             $table->softDeletes();
