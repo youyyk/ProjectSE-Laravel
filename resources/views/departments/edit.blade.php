@@ -9,7 +9,12 @@
         <div class="mb-3 form-group row">
             <label class="col-sm-2 col-form-label">ชื่อแผนก</label>
             <div class="col-sm-3">
-                <input name="name" type="text" class="form-control text-center" value="{{ $department->name }}">
+                <input name="name" type="text" class="form-control text-center @error('name') border border-danger @enderror" value="{{ $department->name }}">
+            </div>
+            <div class = "col-sm-3">
+                @error('name')
+                    <p class = "text-danger">{{$message}}</p>
+                @enderror
             </div>
         </div>
 

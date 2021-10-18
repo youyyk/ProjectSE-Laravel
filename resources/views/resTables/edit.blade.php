@@ -9,9 +9,20 @@
 
         {{--    resTable's name    --}}
         <div class="mb-3 form-group row">
+<<<<<<< HEAD
+            <label class="col-sm-2 col-form-label">Status</label>
+            <div class="col-sm-2">
+                <input name="status" type="text" class="form-control text-center @error('status') border border-danger @enderror" value="{{$resTable->status}}">
+            </div>
+            <div class = "col-sm-3">
+                @error('status')
+                    <p class = "text-danger">{{$message}}</p>
+                @enderror
+=======
             <label class="col-sm-2 col-form-label">ชื่อโต๊ะ</label>
             <div class="col-sm-3">
                 <input name="name" type="text" class="form-control text-center" value="{{ $resTable->name }}">
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
             </div>
         </div>
 {{--            resTable's status    --}}

@@ -42,11 +42,17 @@ class DepartmentController extends Controller
      */
     public function store(DepartmentRequest $request)
     {
+<<<<<<< HEAD
+        $validated = $request -> validate([
+            'name' => ['required',], 
+        ]);
+=======
         $validator = Validator::make($request->all(), [
             'name' => [
                 Rule::unique('departments'),
             ],
         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $department = new Department();
         $department->name = $request->input('name');
 
@@ -92,11 +98,17 @@ class DepartmentController extends Controller
      */
     public function update(DepartmentRequest $request, $id)
     {
+<<<<<<< HEAD
+        $validated = $request -> validate([
+            'name' => ['required',], 
+        ]);
+=======
         $validator = Validator::make($request->all(), [
             'name' => [
                 Rule::unique('departments')->ignore($id),
             ],
         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $department = Department::findOrFail($id);
         $department->name = $request->input('name');
 

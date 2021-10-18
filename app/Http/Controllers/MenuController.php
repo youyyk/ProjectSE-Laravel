@@ -114,11 +114,21 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
+<<<<<<< HEAD
+        $validated = $request -> validate([
+            'name' => ['required',], 
+            'price' => ['required',],
+            'processTime' => ['required',],
+            'category' => ['required',],
+            'department_id'=> ['required',],
+        ]);
+=======
 //         $validator = Validator::make($request->all(), [
 //             'name' => [
 //                 Rule::unique('menus'),
 //             ],
 //         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
 
@@ -172,11 +182,21 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, $id)
     {
+<<<<<<< HEAD
+        $validated = $request -> validate([
+            'name' => ['required',], 
+            'price' => ['required',],
+            'processTime' => ['required',],
+            'category' => ['required',],
+            'department_id'=> ['required',],
+        ]);
+=======
 //         $validator = Validator::make($request->all(), [
 //                 'name' => [
 //                     Rule::unique('menus')->ignore($id),
 //                 ],
 //         ])->validate();
+>>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
         $menu = Menu::findOrFail($id);
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');
