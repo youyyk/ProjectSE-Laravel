@@ -94,16 +94,9 @@
 
 {{--                        <div class="form-group row mb-0">--}}
                         <div  class="text-center">
-{{--                            <span class="col-md-6 offset-md-4">--}}
-<<<<<<< HEAD
-                                <button type="submit" class="btn btn-primary" style="width: 200px;">
-                                    {{ __('Register') }}
-=======
-                            <button type="submit" class="btn btn-primary btn-lg" >
-                                    {{ __('เพิ่ม') }}
->>>>>>> origin/lina
-                                </button>
-{{--                            </span>--}}
+                            <button type="submit" class="btn btn-primary" style="width: 200px;">
+                                {{ __('เพิ่ม') }}
+                            </button>
                         </div>
 
 

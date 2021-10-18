@@ -1,6 +1,4 @@
 @extends('welcome')
-
-
 @section('content')
 
     <h1 class="mt-3">

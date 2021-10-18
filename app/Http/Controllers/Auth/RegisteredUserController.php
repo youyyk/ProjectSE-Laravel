@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Phattarachai\LineNotify\Facade\Line;
 
 class RegisteredUserController extends Controller
 {
@@ -52,6 +53,9 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 //        Auth::login($user);
 
+        $text_line="\nมีการเพิ่ม user ใหม่\nประเภท ".$user->type."\nโดย ".Auth::user()->name;
+        $image_line = $request->file('path');
+        Line::imagePath($image_line)->send($text_line);
         return redirect()->route('users.index');
     }
 }

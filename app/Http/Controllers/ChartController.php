@@ -19,7 +19,7 @@ class ChartController extends Controller
                                 ->groupBy(\DB::raw("(DATE_FORMAT(created_at, '%Y-%m-%d'))"))
                                 ->pluck('total');
         $groupDate = Bill::select(DB::raw("(DATE_FORMAT(created_at, '%Y-%m-%d')) as newDate"))
-                            ->distinct()->orderBy('newDate', 'DESC')->get();
+                                ->distinct()->orderBy('newDate', 'DESC')->get();
         return view('charts.index',[
             'bills' => Bill::orderBy('created_at', 'DESC')->get(),
             'groupTotalByDay' => $groupTotalByDay,
