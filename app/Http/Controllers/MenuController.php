@@ -114,13 +114,14 @@ class MenuController extends Controller
      */
     public function store(MenuRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => [
-                Rule::unique('departments'),
-            ],
-        ])->validate();
+//         $validator = Validator::make($request->all(), [
+//             'name' => [
+//                 Rule::unique('menus'),
+//             ],
+//         ])->validate();
         $menu = new Menu();
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
+
         $menu->price = $request->input('price');
         $menu->processTime = $request->input('processTime');
         $menu->category = $request->input('category');
@@ -169,11 +170,11 @@ class MenuController extends Controller
      */
     public function update(MenuRequest $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => [
-                Rule::unique('menus')->ignore($id),
-            ],
-        ])->validate();
+//         $validator = Validator::make($request->all(), [
+//                 'name' => [
+//                     Rule::unique('menus')->ignore($id),
+//                 ],
+//         ])->validate();
         $menu = Menu::findOrFail($id);
         $menu->name = $request->input('name'); // ชื่อเมนูห้ามซ้ำ
         $menu->price = $request->input('price');

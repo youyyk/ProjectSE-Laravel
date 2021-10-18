@@ -15,7 +15,7 @@
                         <div class="col-sm-5">
                             <input name="image" type="file" class="@error('image') @enderror">
                             @error('image') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
+                            <p class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
                             </p>
                             @enderror
@@ -27,10 +27,10 @@
                         <label class="col-sm-4 col-form-label">ชื่อเมนู</label>
                         <div class="col-sm-5">
                             <input name="name" type="text" value="{{ old('name') }}"
-                                   class="form-control text-center @error('name') border border-danger rounded @enderror"
+                                   class="form-control text-center @error('name') border border-danger rounded is-invalid @enderror"
                                    autocomplete="off">
-                            @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
+                            @error('name')
+                            <p class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
                             </p>
                             @enderror
@@ -41,10 +41,10 @@
                         <label class="col-sm-4 col-form-label">ราคา</label>
                         <div class="col-sm-5">
                             <input name="price" type="number" min="1" value="{{ old('price') }}"
-                                   class="form-control text-center @error('price') border border-danger rounded @enderror"
+                                   class="form-control text-center @error('price') border border-danger rounded is-invalid @enderror"
                                    placeholder="- - -  บาท - - -">
                             @error('price') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
+                            <p class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
                             </p>
                             @enderror
@@ -55,10 +55,10 @@
                         <label class="col-sm-4 col-form-label">ระยะเวลาการทำ</label>
                         <div class="col-sm-5">
                             <input name="processTime" type="number" min="1" value="{{ old('processTime') }}"
-                                   class="form-control text-center @error('processTime') border border-danger rounded @enderror"
+                                   class="form-control text-center @error('processTime') border border-danger rounded is-invalid @enderror"
                                    placeholder="- - -  นาที - - -">
                             @error('processTime') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
+                            <p class="invalid-feedback m-2 fs-6" role="alert">
                                 {{ $message }}
                             </p>
                             @enderror
@@ -73,36 +73,26 @@
                                     style="width: 150px;"
                                     name="category" id="category">
                                 @foreach($categories as $cat)
-                                    <option value="{{ $cat->category }}"  {{ old('cat') === $cat->category ? "selected": "" }}>
+                                    <option value="{{ $cat->category }}"  {{ old('category') === $cat->category ? "selected": "" }}>
                                         {{ $cat->category }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('category') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
-                                {{ $message }}
-                            </p>
-                            @enderror
                         </div>
                     </div>
                     {{--    Department's name    --}}
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">แผนก</label>
                         <div class="col-sm-5">
-                            <select class="text-center bg rounded-1 form-select @error('department_id') border border-danger rounded @enderror"
+                            <select class="text-center bg rounded-1 form-select"
                                     style="width: 150px;"
                                     name="department_id" id="department_id">
                                 @foreach($departments as $depart)
-                                    <option value="{{ $depart->id }}" {{ old('depart') === $depart->id ? "selected": "" }}>
+                                    <option value="{{ $depart->id }}" {{ old('department_id') == $depart->id ? "selected": "" }}>
                                         {{ $depart->name }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('department_id') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="text-danger">
-                                {{ $message }}
-                            </p>
-                            @enderror
                         </div>
                     </div>
                     <a href="{{route("menus.index")}}">

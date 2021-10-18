@@ -21,7 +21,14 @@
                                         รับเงินมา
                                     </td>
                                     <td class="border-2" style="width: 50%">
-                                        <input name="receiveMoney" type="number" class="form-control text-center" autocomplete="off">
+                                        <input name="receiveMoney" type="number" min="1"
+                                               class="form-control text-center @error('receiveMoney') border border-danger rounded is-invalid @enderror"
+                                               autocomplete="off">
+                                        @error('receiveMoney') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                                            <span class="invalid-feedback m-2 fs-6" role="alert">
+                                                {{ $message }}
+                                            </span>
+                                        @enderror
                                     </td>
                                 </tr>
                                 </tbody>

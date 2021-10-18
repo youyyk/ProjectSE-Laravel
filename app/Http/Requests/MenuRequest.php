@@ -24,8 +24,8 @@ class MenuRequest extends FormRequest
     public function rules()
     {
         return [
-             'name' => ['required', 'min:3',],
-             'price' => ['required','integer', 'min:1'],
+             'name' => ['required', 'min:3',], //  'unique:menus,name, :id'
+             'price' => ['required','numeric', 'min:1'],
              'processTime' => ['required','integer', 'min:1'],
              'image' => ['required',]
         ];

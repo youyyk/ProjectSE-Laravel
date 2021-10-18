@@ -7,6 +7,11 @@ use App\Models\Cart;
 use App\Models\Restable;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\BillRequest;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+
+
 class BillController extends Controller
 {
     private $resTable_controller;
@@ -160,10 +165,14 @@ class BillController extends Controller
         return redirect()->back();
     }
 
-    public function payBills(Request $request, Restable $resTable) {
+    public function payBills(BillRequest $request, Restable $resTable)
+    {
         $bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->get();
         $total_all_bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->sum('total');
         $receive = $request->input('receiveMoney');
+        $validated = $request->validate([
+            'receiveMoney' => ['numeric', "min:{$total_all_bills}"]
+        ]);
         foreach ($bills as $bill){
             $bill->paid = 0;
             $bill->save();
@@ -178,8 +187,11 @@ class BillController extends Controller
         ]);
     }
 
-    public function payBill(Request $request, Bill $bill) {
+    public function payBill(BillRequest $request, Bill $bill) {
         $receive = $request->input('receiveMoney');
+        $validated = $request->validate([
+            'receiveMoney' => ['numeric', "min:{$bill->total}"]
+        ]);
         $bill->paid = 0;
         $bill->save();
         return view('bills.paid',[
