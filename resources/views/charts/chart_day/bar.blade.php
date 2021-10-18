@@ -10,16 +10,16 @@
                     <a href="{{route("day.bar")}}" style="text-decoration:none" class="link-light">
                 วัน</a>
                 </button>
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("month.bar")}}" style="text-decoration:none" class="link-light">
+                <button type="button" class="btn btn-light ">
+                    <a href="{{route("month.bar")}}" style="text-decoration:none" class="link-dark">
                 เดือน</a>
                 </button>
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("year.bar")}}" style="text-decoration:none" class="link-light">
+                <button type="button" class="btn btn-light ">
+                    <a href="{{route("year.bar")}}" style="text-decoration:none" class="link-dark">
                 ปี</a>
                 </button>
                 <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ประเภทกราฟ
+                    กราฟแท่ง
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route("day.line")}}">กราฟเส้น</a>
