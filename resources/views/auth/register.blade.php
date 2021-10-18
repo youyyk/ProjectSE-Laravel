@@ -85,14 +85,11 @@
                             </div>
                         </div>
 
-
-{{--                        <div class="form-group row mb-0">--}}
                         <div  class="text-center">
                             <button type="submit" class="btn btn-primary" style="width: 200px;">
                                 {{ __('เพิ่ม') }}
                             </button>
                         </div>
-
 
                     </form>
                 </div>

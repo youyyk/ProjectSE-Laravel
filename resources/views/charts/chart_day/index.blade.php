@@ -8,26 +8,33 @@
         กราฟรายวัน
         <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
-                        ย้อนกลับ</a>
-                </button>
-{{--                <button type="button" class="btn btn-outline-dark ">--}}
-{{--                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">--}}
-{{--                เดือน</a>--}}
-{{--                </button>--}}
-{{--                <button type="button" class="btn btn-outline-dark ">--}}
-{{--                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">--}}
-{{--                ปี</a>--}}
-{{--                </button>--}}
 
-            <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                ประเภทกราฟ
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="{{route("day.line")}}">กราฟเส้น</a>
-                <a class="dropdown-item" href="{{route("day.bar")}}">กราฟแท่ง</a>
-            </div>
+                <button type="button" class="btn btn-outline-dark @if(\Request::routeIs('dayLine')) btn-primary @endif ">
+                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
+                วัน</a>
+                </button>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
+                เดือน</a>
+                </button>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
+                ปี</a>
+                </button>
+                <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    ประเภทกราฟ
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="{{route("day.line")}}">กราฟเส้น</a>
+                    <a class="dropdown-item" href="{{route("day.bar")}}">กราฟแท่ง</a>
+                </div>
+            </span>
+
+            <span class=" btn-group px-2" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">
+                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
+                    ย้อนกลับ</a>
+                </button>
             </span>
         </span>
     </h1>
@@ -35,6 +42,10 @@
 
     </div>
     <hr>
+{{--    ------{{count($groupDate)}}--}}
+{{--    <div>{{$bill_total}}</div>--}}
+{{--    <div>{{$groupDate}}</div>--}}
+
 </div>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -50,6 +61,7 @@
 
 <script type="text/javascript">
     var bill_total =  <?php echo json_encode($bill_total) ?>;
+    var groupDate =  <?php echo json_encode($groupDate) ?>;
 
     Highcharts.chart('container', {
         chart: {
@@ -59,14 +71,14 @@
             text: 'กราฟสรุปจำนวนยอดบิลแต่ละวัน'
         },
         subtitle: {
-            text: 'กราฟเส้น (Line Chart) ประจำปี 2021'
+            text: 'กราฟเส้น (Line Chart) ประจำเดือน'
         },
         xAxis: {
-            categories: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31']
+            categories: groupDate
         },
         yAxis: {
             title: {
-                text: 'จำนวนยอดบิลทั้งหมด (บาท)'
+                text: 'จำนวนยอดชำระทั้งหมด (บาท)'
             }
         },
         legend: {
@@ -100,5 +112,6 @@
     });
 </script>
 
+@include('charts.index')
 
 @endsection

@@ -22,37 +22,8 @@
         </h1>
     </form>
     <hr>
-    <span class="mb-3 float-end">
-        <form class="form-inline" >
-            <form>
-                <span class="float-start px-2">
-                {{-- filter by type --}}
-                <select class="form-select form-select-sm text-center bg rounded-1 form-select"
-                        style="width: 150px; display: inline;"
-                        name="select_r" id="select_r">
-                    <option value="">เลือกหน้าที่</option>
-{{--                    @foreach($types as $type)--}}
-{{--                        <option value="{{ $select_r }}" {{ $filterMenu['select_r'] === $type->type ? "selected" : ""}}>--}}
-{{--                            {{ $type->type }}--}}
-{{--                            </option>--}}
-{{--                    @endforeach--}}
-                    <option value="Admin" {{ $filterMenu['select_r'] === "Admin" ? "selected" : ""}}>Admin</option>
-                    <option value="FrontWorker" {{ $filterMenu['select_r'] === "FrontWorker" ? "selected" : ""}}>FrontWorker</option>
-                    <option value="BackWorker" {{ $filterMenu['select_r'] === "BackWorker" ? "selected" : ""}}>BackWorker</option>
-                </select>
-                </span>
-                <span class="float-start px-2">
-                    <input type="text" class="form-control form-control-sm rounded-2 text-center"
-                           style="padding: 0.25rem 0rem;"
-                           name="search" id="search" autocomplete="off"
-                           placeholder="- - - - ชื่อผู้ใช้งาน - - - -"
-                           value="{{$search_name}}">
-                </span>
-                <button class="btn btn-primary btn-sm" formaction="{{route('user.filter')}}">search</button>
-                <button class="btn btn-warning btn-sm" formaction="{{route('users.index')}}">clear</button>
-            </form>
-        </form>
-    </span>
+    {{-- filter  --}}
+    @include('users.user_component.filterUser',['filterUser'=>$filterUser])
     {{-- ---------------------------------------- card -------------------------------------------}}
 
     <div class="row container-fluid">

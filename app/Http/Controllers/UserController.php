@@ -17,46 +17,36 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-//        $types = User::get()->unique('type');
-        $filterMenu = array('search_name' => '', 'select_r' =>'');
+        $types = User::get()->unique('type');
+        $filterUser = array('search_name' => '', 'selected_r' =>'');
         return view('users.index',[
             'users' => $users,
-            'search_name' => '',
-//            'types' => $types,
-            'select_r' =>'',
-            'filterMenu' => $filterMenu
+            'types' => $types,
+            'filterUser' => $filterUser
         ]);
     }
 
     public function searchCard(Request $request)
     {
-//        if ($request->search ==""){
-//            $users = User::latest('updated_at')->get();
-//        }
-
         if ($request->selected_r != "" & $request->search == ""){
-            $users = User::whereType($request->selected_r)->latest('updated_at')->get();
+            $users = User::whereType($request->selected_r)->get();
         }
         else if ($request->selected_r ==""  & $request->search != ""){
-            $users = User::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+            $users = User::where('name','LIKE',"%".$request->search."%")->get();
         }
         else if ($request->selected_r != ""  & $request->search != ""){
-            $users = User::where('name','LIKE',"%".$request->search."%")->whereType($request->selected_r)->latest('updated_at')->get();
+            $users = User::where('name','LIKE',"%".$request->search."%")->whereType($request->selected_r)->get();
         }
-//        else if ($request->selected_role ==""  & $request->search =="") {
-//            $users = User::where('name', 'LIKE', "%" . $request->search . "%")->whereType($request->selected_role)->latest('updated_at')->get();
-//        }
-        else $users = User::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+        else {
+            $users = User::get();
+        }
 
-//        $users = User::get();
-//        $types = User::get()->unique('type');
-        $filterMenu=array('search_name' => $request->search, 'select_r' => $request->selected_r);
+        $types = User::get()->unique('type');
+        $filterUser=array('search_name' => $request->search, 'selected_r' => $request->selected_r);
         return view('users.index',[
             'users' => $users,
-//            'types' => $types,
-            'filterMenu' => $filterMenu,
-            'search_name' => $request->search,
-            'select_r' => $request->selected_r
+            'types' => $types,
+            'filterUser' => $filterUser,
         ]);
     }
 

@@ -8,12 +8,20 @@
             กราฟรายเดือน
             <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
-                        ย้อนกลับ</a>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
+                วัน</a>
+                </button>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
+                เดือน</a>
+                </button>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
+                ปี</a>
                 </button>
 
-                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ประเภทกราฟ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -21,9 +29,19 @@
                     <a class="dropdown-item" href="{{route("month.bar")}}">กราฟแท่ง</a>
                 </div>
             </span>
+
+            <span class=" btn-group px-2" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">
+                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
+                    ย้อนกลับ</a>
+                </button>
+            </span>
         </span>
         </h1>
         <hr>
+{{--        ------{{count($groupDate)}}--}}
+{{--        <div>{{$bill_total}}</div>--}}
+{{--        <div>{{$groupDate}}</div>--}}
     </div>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -38,6 +56,7 @@
 
     <script type="text/javascript">
         var bill_total =  <?php echo json_encode($bill_total) ?>;
+        var groupDate =  <?php echo json_encode($groupDate) ?>;
 
         Highcharts.chart('container', {
             chart: {
@@ -50,11 +69,11 @@
                 text: 'กราฟเส้น (Line Chart) ประจำปี 2021'
             },
             xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                categories: groupDate
             },
             yAxis: {
                 title: {
-                    text: 'จำนวนยอดบิลทั้งหมด (บาท)'
+                    text: 'จำนวนยอดชำระทั้งหมด (บาท)'
                 }
             },
             legend: {
@@ -87,6 +106,6 @@
             }
         });
     </script>
-
+    @include('charts.index')
 
 @endsection
