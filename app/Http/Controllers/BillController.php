@@ -143,11 +143,12 @@ class BillController extends Controller
     public function showAllBills(Restable $resTable) {
         $bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->get();
         $total_all_bills = Bill::whereRestable_id($resTable->id)->wherePaid(1)->sum('total');
+        $bills_finish = $bills->where('status', false)->count();
         return view('bills.showAllBills',[
             'bills' => $bills,
             'resTable' => $resTable,
             'total_all_bills_or_receive' => array('total_all_bills'=>$total_all_bills,'receive'=>0,'exchange'=>0),
-            'have_bill' => count($bills),
+            'have_bill' => $bills_finish,
         ]);
     }
 
