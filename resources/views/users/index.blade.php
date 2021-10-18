@@ -20,7 +20,6 @@
                 </form>
             </a>
         </span>
-        <span class="float-end"> </span>
     </h1>
     <hr>
     <span class="mb-3 float-end">

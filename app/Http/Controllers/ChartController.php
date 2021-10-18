@@ -15,10 +15,15 @@ class ChartController extends Controller
      */
     public function index()
     {
-        $bills = Bill::get();
-
+        $groupTotalByDay = Bill::select(\DB::raw("SUM(total) as total"))
+                                ->groupBy(\DB::raw("(DATE_FORMAT(created_at, '%Y-%m-%d'))"))
+                                ->pluck('total');
+        $groupDate = Bill::select(DB::raw("(DATE_FORMAT(created_at, '%Y-%m-%d')) as newDate"))
+                            ->distinct()->orderBy('newDate', 'DESC')->get();
         return view('charts.index',[
-            'bills' => $bills
+            'bills' => Bill::orderBy('created_at', 'DESC')->get(),
+            'groupTotalByDay' => $groupTotalByDay,
+            'groupDate' => $groupDate
         ]);
     }
 
@@ -27,7 +32,7 @@ class ChartController extends Controller
         $bills = Bill::get();
         $bill_total = Bill::select(\DB::raw("SUM(total) as total"))
             ->whereYear('created_at', date('Y'))
-            ->groupBy(\DB::raw("Day(created_at)"))
+            ->groupBy(\DB::raw("(DATE_FORMAT(created_at, '%Y-%m-%d'))"))
             ->pluck('total');
 
         for ( $i = 0; $i < count($bill_total); $i++) {

@@ -66,7 +66,14 @@
             </a>
         </span>
     </h3>
-
+    ------{{count($groupDate)}}
+    @foreach($groupDate as $date)
+        <div>{{$date->newDate}}</div>
+    @endforeach
+    ------{{count($groupTotalByDay)}}
+    @foreach($groupTotalByDay as $total)
+        <div>{{$total}}</div>
+    @endforeach
     <table class="table border-2 mt-3">
         <thead>
         <tr>
@@ -91,7 +98,7 @@
                     @if($bill->status==1)
                         <span class="badge rounded-pill bg-success">
                             {{"ว่าง"}}
-                            {{--{{$resTable->status==1?"ว่าง":"ไม่ว่าง"}}--}}
+{{--                            {{$resTable->status==1?"ว่าง":"ไม่ว่าง"}}--}}
                         </span>
                     @else
                         <span class="badge rounded-pill bg-danger">
@@ -100,7 +107,8 @@
                     @endif
                 </td>
 
-                <td class="border-2 p-0.5">{{$bill->user->name}}</td>
+{{--                <td class="border-2 p-0.5">{{$bill->user->name}}</td>--}}
+                <td class="border-2 p-0.5">{{$bill->created_at}}</td>
                 <td class="border-2 p-0.5">{{$bill->resTable->id}}</td>
                 <td class="border-2 p-0.5">
                     @foreach($bill->menus as $menu)

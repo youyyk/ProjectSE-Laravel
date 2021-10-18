@@ -11,12 +11,12 @@
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
-                              @if(\Request::routeIs('users.*')) bg-dark text-white rounded-3 @endif"
+                              @if(\Request::routeIs('users.*') or Request::routeIs('user.*')) bg-dark text-white rounded-3 @endif"
                        href="{{route("users.index")}}">พนักงาน</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
-                          @if(\Request::routeIs('menus.*')) bg-dark text-white rounded-3 @endif"
+                          @if(\Request::routeIs('menus.*') or Request::routeIs('menu.*')) bg-dark text-white rounded-3 @endif"
                        href="{{route("menus.index")}}">รายการอาหาร</a>
                 </li>
                 <li class="nav-item active">
