@@ -27,7 +27,7 @@ class MenuRequest extends FormRequest
              'name' => ['required', 'min:3',], //  'unique:menus,name, :id'
              'price' => ['required','numeric', 'min:1'],
              'processTime' => ['required','integer', 'min:1'],
-             'image' => ['required',]
+//             'image' => ['required',]
         ];
     }
 
@@ -40,7 +40,7 @@ class MenuRequest extends FormRequest
             'name.min' => 'ต้องการชื่ออย่างน้อย 3 ตัวอักษร',
             'price.min' => 'ต้องการราคามากกว่า 1 บาท',
             'processTime.min' => 'ต้องการระยะเวลาในการทำมากกว่า 1 นาที',
-            'image.required' => 'โปรดใส่รูป',
+//            'image.required' => 'โปรดใส่รูป',
 
         ];
     }

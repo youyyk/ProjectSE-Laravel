@@ -130,6 +130,8 @@ class MenuController extends Controller
             $imageFile = $request->file('image');
             $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
             $menu->path = $path;
+        } else {
+            $menu->path = "public/images/noImage.jpg";
         }
 
         $menu->save();

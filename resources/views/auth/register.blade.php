@@ -81,13 +81,7 @@
                             <label class="col-md-4 col-form-label text-md-right">รูปภาพ</label>
 
                             <div class="col-md-6">
-                                <input name="path" type="file" class="form-control @error('path') is-invalid @enderror" >
-
-                                @error('path')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input name="path" type="file" class="form-control" >
                             </div>
                         </div>
 
@@ -95,14 +89,9 @@
 {{--                        <div class="form-group row mb-0">--}}
                         <div  class="text-center">
 {{--                            <span class="col-md-6 offset-md-4">--}}
-<<<<<<< HEAD
-                                <button type="submit" class="btn btn-primary" style="width: 200px;">
-                                    {{ __('Register') }}
-=======
                             <button type="submit" class="btn btn-primary btn-lg" >
                                     {{ __('เพิ่ม') }}
->>>>>>> origin/lina
-                                </button>
+                            </button>
 {{--                            </span>--}}
                         </div>
 

@@ -41,12 +41,18 @@ class RegisteredUserController extends Controller
 
         ]);
 
+        if ($request->has('path')){
+            $path = $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName());
+        } else {
+            $path = "public/images/noImage.jpg";
+        }
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'type' => $request->type,
-            'path' => $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName()),
+            'path' => $path,
         ]);
 
         event(new Registered($user));

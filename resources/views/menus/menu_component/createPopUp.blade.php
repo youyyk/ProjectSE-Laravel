@@ -13,12 +13,7 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">เลือกรูปภาพ</label>
                         <div class="col-sm-5">
-                            <input name="image" type="file" class="@error('image') @enderror">
-                            @error('image') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <p class="invalid-feedback m-2 fs-6" role="alert">
-                                {{ $message }}
-                            </p>
-                            @enderror
+                            <input name="image" type="file">
                         </div>
                     </div>
 
