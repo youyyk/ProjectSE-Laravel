@@ -3,8 +3,8 @@
 {{--@section('content')--}}
 
 
-<div class="container">
-    <h1 class="mt-3 ">
+<div class="container mt-5">
+    <h1 class="mt-3">
         สรุปยอดบิลทั้งหมด
         <span class="float-end btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <button type="button" class="btn btn-warning border-2">
@@ -16,10 +16,7 @@
     </h1>
 
     <hr>
-    <h3 class="mt-3 text-center">
-        รายการบิล
-    </h3>
-    <table class="table border-2 mt-3">
+    <table class="table border-2 mt-3 bg-light">
         <thead>
         <tr>
             <th class="border-2">#</th>
@@ -34,9 +31,7 @@
         @foreach($bills as $bill)
             <tr>
                 <td class="border-2 p-0.5">
-                    <a href="{{route('bills.show',['bill'=>$bill->id])}}" class="text-info">
                         {{$bill->id}}
-                    </a>
                 </td>
                 <td class="border-2 p-0.5">{{$bill->total}}</td>
                 <td class="border-2 p-0.5">

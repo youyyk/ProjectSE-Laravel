@@ -9,7 +9,7 @@
         <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
 
-                <button type="button" class="btn btn-outline-dark @if(\Request::routeIs('dayLine')) btn-primary @endif ">
+                <button type="button" class="btn btn-outline-dark ">
                     <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
                 วัน</a>
                 </button>
@@ -30,7 +30,7 @@
                 </div>
             </span>
 
-            <span class=" btn-group px-2" role="group" aria-label="Third group">
+            <span class=" btn-group px-2 " role="group" aria-label="Third group">
                 <button type="button" class="btn btn-secondary">
                 <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
                     ย้อนกลับ</a>
@@ -52,7 +52,7 @@
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
-<figure class="highcharts-figure">
+<figure class="highcharts-figure m-auto" style="width: 60%">
     <div id="container"></div>
         <p class="highcharts-description">
 
