@@ -99,13 +99,6 @@ class RestTableController extends Controller
      */
     public function update(RestableRequest $request, $id)
     {
-<<<<<<< HEAD
-        $validated = $request -> validate([
-            'status' => ['required',], 
-        ]);
-        $resTable = resTable::findOrFail($id);
-        $resTable->status = $request->input('status');
-=======
         $validator = Validator::make($request->all(), [
             'name' => [
                 Rule::unique('resTables')->ignore($id),
@@ -113,7 +106,6 @@ class RestTableController extends Controller
                 // Rule ต้อง use Illuminate\Validation\Rule;
             ],
         ])->validate();
->>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
 
         $resTable = resTable::findOrFail($id);
         $resTable->name = $request->input('name');

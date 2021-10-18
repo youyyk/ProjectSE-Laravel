@@ -57,7 +57,6 @@ class RegisteredUserController extends Controller
         ]);
 
         event(new Registered($user));
-//        Auth::login($user);
 
         $text_line="\nมีการเพิ่ม user ใหม่\nประเภท ".$user->type."\nโดย ".Auth::user()->name;
         $image_line = $request->file('path');

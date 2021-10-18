@@ -69,19 +69,11 @@ class RegisterController extends Controller
         $imageFile = $data['path']->file('path');
         $path = $imageFile->storeAs('public/images', $imageFile->getClientOriginalName());
 
-//        $imageName = time().'.'.$data['path']->extension();
-//
-//        $data['path']->move(public_path('userimage'), $imageName);
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'type' => $data['type'],
-//            if ($request->has('image')){
-//                $imageFile = $request->file('image');
-//                $path = $imageFile->storeAs('public/images',$imageFile->getClientOriginalName());
-//                $menu->path = $path;
-//            }
             'path' => $path ,
         ]);
     }

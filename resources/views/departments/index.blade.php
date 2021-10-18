@@ -8,16 +8,6 @@
 </style>
 @section('content')
 <div class="container">
-<<<<<<< HEAD
-    <h1 class="mt-3">
-        แผนกครัว
-        <span class="float-end">
-            <form action="{{ route('departments.store') }}" method="POST">
-                @csrf
-                <div class="input-group">
-                  <input type="type" name="name" class="form-control mt-lg-2 text-center @error('name') border border-danger @enderror" placeholder="- - - เพิ่มแผนก - - -">
-                  <div class="input-group-append">
-=======
     <form class="form-inline"
           action="{{ route('departments.store') }}"
           method="POST">
@@ -31,18 +21,17 @@
                            class="rounded-2 text-center form-control @error('name') border border-danger rounded is-invalid @enderror"
                            placeholder="- - - เพิ่มแผนก - - -"
                            autocomplete="off">
-                </span>
->>>>>>> aa358aa5e9b108bb6c325ddc6db8289d4132561f
-                    <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
                     @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                            <span class="invalid-feedback m-2 fs-6" role="alert">
-                                {{ $message }}
-                            </span>
+                        <span class="invalid-feedback m-2 fs-6" role="alert">
+                            {{ $message }}
+                        </span>
                     @enderror
+                </span>
+                    <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
+
             </span>
         </h1>
     </form>
-
 
     <hr>
 
