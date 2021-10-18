@@ -13,7 +13,7 @@
             รายการอาหาร
             <span class="float-end mt-3">
             <a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createMenuModal">
+                <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#createMenuModal">
                     + เพิ่มเมนู
                 </button>
             </a>

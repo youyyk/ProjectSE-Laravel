@@ -6,20 +6,20 @@
             กราฟรายวัน
             <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
+                <button type="button" class="btn btn-dark ">
+                    <a href="{{route("day.bar")}}" style="text-decoration:none" class="link-light">
                 วัน</a>
                 </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
+                <button type="button" class="btn btn-light ">
+                    <a href="{{route("month.bar")}}" style="text-decoration:none" class="link-dark">
                 เดือน</a>
                 </button>
-                <button type="button" class="btn btn-outline-dark ">
-                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
+                <button type="button" class="btn btn-light ">
+                    <a href="{{route("year.bar")}}" style="text-decoration:none" class="link-dark">
                 ปี</a>
                 </button>
                 <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    ประเภทกราฟ
+                    กราฟแท่ง
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route("day.line")}}">กราฟเส้น</a>
@@ -61,6 +61,7 @@
                 label: 'จำนวนยอดชำระทั้งหมด (บาท)',
                 backgroundColor: "#A3DDCB",
                 data: bill_total,
+
             }]
         };
 
@@ -82,7 +83,7 @@
                         display: true,
                         text: 'กราฟแท่ง (Bar Chart) ประจำปี 2021'
                     },
-                }
+                },
             });
         };
     </script>

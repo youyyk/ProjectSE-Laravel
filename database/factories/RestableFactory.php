@@ -22,7 +22,6 @@ class RestableFactory extends Factory
     public function definition()
     {
         return [
-            'status' => $this->faker->boolean(),
         ];
     }
 }

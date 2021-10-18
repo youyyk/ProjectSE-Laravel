@@ -19,11 +19,15 @@ class DepartmentSeeder extends Seeder
         $department->save();
 
         $department = new Department();
-        $department->name = "ขนมหวาน";
+        $department->name = "ครัวไทย";
         $department->save();
 
         $department = new Department();
-        $department->name = "อาหารคาว";
+        $department->name = "นานาชาติ";
+        $department->save();
+
+        $department = new Department();
+        $department->name = "ของหวาน";
         $department->save();
 
         $department = new Department();

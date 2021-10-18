@@ -14,7 +14,7 @@
             ผู้ใช้งาน
             <span class="float-end mt-3">
                 <a>
-                    <button class="btn btn-primary " type="submit">
+                    <button class="btn btn-dark " type="submit">
                         + ผู้ใช้งาน
                     </button>
                 </a>
@@ -39,7 +39,7 @@
                             <tbody>
                             <h4 class="card-title text-dark">{{$user->name}}</h4>
                             <p class="card-text">อีเมล : {{$user->email}}</p>
-                            <p class="card-text">ประเภท :
+                            <p class="card-text" style="font-size: 20px">ประเภท :
                                 @if($user->type=="Admin")
                                 <span class="badge rounded-pill alert-success">
                                     {{"แอดมิน"}}
@@ -49,7 +49,7 @@
                                     {{"พนักงานหน้าร้าน"}}
                                 </span>
                                 @elseif($user->type=="BackWorker")
-                                    <span class="badge rounded-pill alert-secondary">
+                                <span class="badge rounded-pill alert-secondary">
                                     {{"พนักงานหลังร้าน"}}
                                 </span>
 

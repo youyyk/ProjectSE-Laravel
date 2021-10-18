@@ -12,18 +12,18 @@
     <hr>
     <table class="table border-2 mt-3 bg-light">
         <thead>
-        <tr>
+        <tr class="text-center">
             <th class="border-2">#</th>
-            <th class="border-2">Total</th>
-            <th class="border-2">Status</th>
-            <th class="border-2">User (Relation)</th>
-            <th class="border-2">Restable (Relation)</th>
-            <th class="border-2">Menus (Relation)</th>
+            <th class="border-2">ยอดชำระ</th>
+            <th class="border-2">สถานะ</th>
+            <th class="border-2">วัน</th>
+            <th class="border-2">โต๊ะ (Relation)</th>
+            <th class="border-2">เมนู (Relation)</th>
         </tr>
         </thead>
         <tbody>
         @foreach($bills as $bill)
-            <tr>
+            <tr class="text-center">
                 <td class="border-2 p-0.5">
                         {{$bill->id}}
                 </td>

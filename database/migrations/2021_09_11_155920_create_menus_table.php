@@ -19,7 +19,7 @@ class CreateMenusTable extends Migration
             $table->string('name');
             $table->integer('price');
             $table->integer('processTime');
-            $table->enum('category',['Dish','Dessert']);
+            $table->enum('category',['คาว','หวาน','เครื่องดื่ม']);
             $table->string('path')->default("-");
             $table->timestamps();
             $table->softDeletes();

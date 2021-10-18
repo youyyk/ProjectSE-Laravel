@@ -17,7 +17,7 @@
                            placeholder="- - - เพิ่มโต๊ะ - - -"
                            autocomplete="off">
                     <div class="input-group-append px-2">
-                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
+                        <button class="btn btn-dark" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
                     </div>
                     </div>
                 </form>
