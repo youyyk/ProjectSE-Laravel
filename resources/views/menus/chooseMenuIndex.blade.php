@@ -98,7 +98,8 @@
                        style="color: black; text-decoration: none;">
                         <div class="card">
                             <img class="card-img-top"
-                                 src="https://shadow.elemecdn.com/app/element/hamburger.9cf7b091-55e9-11e9-a976-7f4d0b07eef6.png" alt="Card image cap">
+                                 style="height: 250px"
+                                 src="{{url(\Str::replace('public/','storage/',$menu->path))}}" alt="{{$menu->name}}">
                             <div class="card-body">
                                 <table>
                                     <tbody>

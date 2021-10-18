@@ -15,8 +15,19 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->middleware(['auth']);
 
+Route::get('/redirect', function () {
+    if (Auth::user()->isAdmin()){
+        return redirect()->route('users.index');
+    }
+    if (Auth::user()->isFrontWorker()){
+        return redirect()->route('resTables.index');
+    }
+    if (Auth::user()->isBackWorker()){
+        return redirect()->route('backWorker');
+    }
+})->middleware(['auth']);
 //Route::get('/dashboard', function () {
 //    return view('dashboard');
 //})->middleware(['auth'])->name('dashboard');

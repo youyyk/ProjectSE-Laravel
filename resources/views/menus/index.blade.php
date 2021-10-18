@@ -29,7 +29,7 @@
         <div class="row container-fluid">
             @foreach($menus as $menu)
                 <div class="col-sm-2 mb-3">
-                    <div class="card">
+                    <div class="card" style="{{$menu->department_id==1?"opacity:60%":""}}">
                         <img class="card-img-top"
                              style="height: 250px"
                              src="{{url(\Str::replace('public/','storage/',$menu->path))}}"
@@ -45,7 +45,8 @@
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editMenuModal{{$menu->id}}">
                                         แก้ไข
                                     </button>
-                                    <button class=" btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}">
+                                    <button class=" btn {{$menu->department_id==1?"btn-secondary":"btn-danger"}}" data-bs-toggle="modal" data-bs-target="#deleteMenuModal{{$menu->id}}"
+                                        {{$menu->department_id==1?"disabled":""}}>
                                         ลบ
                                     </button>
                                 </span>
