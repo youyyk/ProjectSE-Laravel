@@ -2,8 +2,8 @@
 {{--@inject('RestTableController', 'App\Http\Controllers\RestTableController')--}}
 @section('content')
 
-    <div class="m-5">
-        <h1 class="mt-3">
+    <div class="container m-auto">
+        <h1 class="mt-5">
             รายการโต๊ะ
             <span class="float-end">
                 <form class="form-inline"
@@ -17,7 +17,7 @@
                            placeholder="- - - เพิ่มโต๊ะ - - -"
                            autocomplete="off">
                     <div class="input-group-append px-2">
-                        <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
+                        <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
                     </div>
                     </div>
                 </form>
@@ -32,7 +32,7 @@
 {{--        --}}{{-- Create ResTable --}}
 {{--        @include('resTables.resTable_component.createPopUp')--}}
 
-        <table class="table border-2 text-center">
+        <table class="table border-2 text-center m-auto bg-light">
             <thead>
             <tr class="text-center">
                 <th class="border-2">ชื่อโต๊ะ</th>

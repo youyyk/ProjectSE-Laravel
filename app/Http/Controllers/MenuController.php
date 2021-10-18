@@ -25,7 +25,7 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::latest('updated_at')->get()->sortByDesc('id');
+        $menus = Menu::latest('updated_at')->get()->sortByDesc('department_id');
         $categories = Menu::get()->unique('category');
         $departments = Department::get();
         $filterMenu=array('search_name' => '', 'select_c' =>'เลือกประเภท', 'select_d' => 0);
@@ -39,29 +39,29 @@ class MenuController extends Controller
     public function filterCard(Request $request)
     {
         if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search ==""){
-            $menus = Menu::latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search ==""){
-            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search ==""){
-            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart =="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart !="" & $request->search ==""){
-            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::whereCategory($request->selected_cat)->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat =="" & $request->selected_depart !="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else if ($request->selected_cat !="" & $request->selected_depart =="" & $request->search !=""){
-            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('id');
+            $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         else{
             $menus = Menu::where('name','LIKE',"%".$request->search."%")->whereCategory($request->selected_cat)
-                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('id');
+                ->whereDepartment_id($request->selected_depart)->latest('updated_at')->get()->sortByDesc('department_id');
         }
         return $menus;
     }

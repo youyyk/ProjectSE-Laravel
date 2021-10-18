@@ -25,6 +25,11 @@
                 </button>
 
             </span>
+            <button type="button" class="btn btn-warning border-2">
+                <a href="{{route("todayTotal")}}" style="text-decoration:none" class="link-dark">
+                    ยอดประจำวันนี้
+                </a>
+            </button>
         </span>
     </h1>
 

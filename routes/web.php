@@ -68,6 +68,8 @@ Route::get('/monthBar', [\App\Http\Controllers\ChartController::class, "monthBar
     ->name('month.bar');
 Route::get('/yearBar', [\App\Http\Controllers\ChartController::class, "yearBar"])->middleware(['auth','admin'])
     ->name('year.bar');
+Route::get('/todayTotal', [\App\Http\Controllers\ChartController::class, "notifyTotal"])->middleware(['auth','admin'])
+    ->name('todayTotal');
 
 // ChooseMenu View
 Route::get('/menu/choose/{tableId}', [\App\Http\Controllers\MenuController::class,"chooseMenuIndex"])->middleware(['auth','frontWorker'])
