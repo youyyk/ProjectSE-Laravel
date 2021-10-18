@@ -24,14 +24,11 @@
                             <select class="text-center bg rounded-1 form-select"
                                     style="width: 150px; display: inline;"
                                     name="type" id="type">
-{{--                                @foreach($categories as $cat)--}}
-{{--                                    <option value="{{ $cat->category }}"{{$menu->category == $cat->category ? "selected" : ""}}>--}}
-{{--                                        {{ $cat->category }}--}}
-{{--                                    </option>--}}
-{{--                                @endforeach--}}
-                                <option value="Admin">Admin</option>
-                                <option value="FrontWorker">FrontWorker</option>
-                                <option value="BackWorker">BackWorker</option>
+                                @foreach(["Admin","FrontWorker","BackWorker"] as $type)
+                                    <option value="{{ $type }}"{{$user->type == $type ? "selected" : ""}}>
+                                        {{ $type }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
