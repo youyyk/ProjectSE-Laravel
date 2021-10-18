@@ -2,10 +2,10 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mt-3">
+    <h1 class="mt-5 mb-4">
         รายการบิล
     </h1>
-    <table class="table border-2 text-center">
+    <table class="table border-2 text-center bg-light">
         <thead>
         <tr>
             <th class="border-2">#</th>

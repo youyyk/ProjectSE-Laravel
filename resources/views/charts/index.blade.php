@@ -4,6 +4,16 @@
 
 
 <div class="container">
+    <h1 class="mt-3 ">
+        สรุปยอดบิลทั้งหมด
+        <span class="float-end btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
+            <button type="button" class="btn btn-warning border-2">
+                <a href="{{route("todayTotal")}}" style="text-decoration:none" class="link-dark">
+                    ยอดประจำวันนี้
+                </a>
+            </button>
+        </span>
+    </h1>
 
     <hr>
     <h3 class="mt-3 text-center">

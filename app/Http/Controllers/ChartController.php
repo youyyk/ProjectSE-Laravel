@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bill;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use DB;
+use Phattarachai\LineNotify\Facade\Line;
 
 class ChartController extends Controller
 {
@@ -34,6 +36,16 @@ class ChartController extends Controller
         ]);
     }
 
+    public function notifyTotal(){
+        $todayDate = date("Y-m-d");
+        $bill_total_today = Bill::whereDate('created_at', Carbon::today())->sum('total');
+
+        Line::send("\nยอดขายประจำวันนี้ ". $todayDate .
+            "\nมีค่าเท่ากับ " . $bill_total_today ." บาท"
+        );
+        return redirect()->back();
+    }
+
     public function dayLine()
     {
         $bill_total = Bill::select(\DB::raw("SUM(total) as total"))
@@ -47,6 +59,7 @@ class ChartController extends Controller
         for ( $i = 0; $i < count($bill_total); $i++) {
             $bill_total[$i] = $bill_total[$i]*1;
         }
+
 
         return view('charts.chart_day.index', compact('bill_total', 'groupDate'),[
             'bills' => Bill::orderBy('created_at', 'DESC')->get(),
