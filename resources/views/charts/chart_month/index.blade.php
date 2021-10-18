@@ -29,6 +29,11 @@
                     <a class="dropdown-item" href="{{route("month.bar")}}">กราฟแท่ง</a>
                 </div>
             </span>
+                <button type="button" class="btn btn-primary">
+                <a href="{{route("todayTotal")}}" style="text-decoration:none" class="link-light">
+                    ยอดประจำวันนี้
+                </a>
+            </button>
 
             <span class=" btn-group px-2" role="group" aria-label="Third group">
                 <button type="button" class="btn btn-secondary">
@@ -106,6 +111,6 @@
             }
         });
     </script>
-    @include('charts.index')
+
 
 @endsection

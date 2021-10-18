@@ -4,7 +4,7 @@
 
     <div class="container m-auto">
         <h1 class="mt-5">
-            รายการโต๊ะ
+            การจัดการโต๊ะ
             <span class="float-end">
                 <form class="form-inline"
                       action="{{ route('resTables.store') }}"

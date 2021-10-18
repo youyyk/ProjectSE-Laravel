@@ -31,7 +31,7 @@
                     @include('bills.bill_component.paidPopUpTakeAway',['bill'=>$bill])
                 </div>
                 <div class="card-body" style="margin-top: -15px; margin-bottom: -15px;">
-                    <table class="table border-2 mt-3">
+                    <table class="table border-2 mt-3 bg-light">
                         <thead>
                         <tr class="text-center">
                             <th class="border-2">ชื่อเมนู</th>

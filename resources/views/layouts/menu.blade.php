@@ -12,7 +12,7 @@
                 <li class="nav-item active">
                     <a class="nav-link
                               @if(\Request::routeIs('users.*') or Request::routeIs('user.*')) bg-dark text-white rounded-3 @endif"
-                       href="{{route("users.index")}}">พนักงาน</a>
+                       href="{{route("users.index")}}">ผู้ใช้งาน</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
@@ -27,14 +27,14 @@
                 <li class="nav-item active">
                     <a class="nav-link
                               @if(\Request::routeIs('showAllResTable')) bg-dark text-white rounded-3 @endif"
-                       href="{{route("showAllResTable")}}">รายการโต๊ะ</a>
+                       href="{{route("showAllResTable")}}">การจัดการโต๊ะ</a>
                 </li>
                 @endif
                 @if(!(Auth::user()->isBackWorker()))
                 <li class="nav-item active">
                     <a class="nav-link
                               @if(\Request::routeIs('resTables.*')) bg-dark text-white rounded-3 @endif"
-                       href="{{route("resTables.index")}}">การจัดการโต๊ะ</a>
+                       href="{{route("resTables.index")}}">รายการโต๊ะ</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link

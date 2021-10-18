@@ -10,7 +10,7 @@
                 บิล #{{$id}}
             @endif
         </h3>
-        <table class="table border-2" style="margin: 50px 0px">
+        <table class="table border-2 bg-light" style="margin: 50px 0px">
             <tbody>
                 <tr class="something text-center align-middle">
                     <td style="font-size: 18px; width: 50%">รับเงินมา</td>

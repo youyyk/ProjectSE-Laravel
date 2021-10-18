@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div>
-            <h3 class="text-center" style="margin-top: 20px;">
+            <h3 class="text-center mt-5" style="margin-top: 20px;">
                 บิลทั้งหมดของ {{$resTable->name}}
             </h3>
             <a class="btn btn-secondary"
@@ -27,7 +27,7 @@
                     ({{ $bill->type=="EatIn"?" ร้าน ":" กลับบ้าน " }})
                 </b>
             </h5>
-            <table class="table border-2 mt-3">
+            <table class="table border-2 mt- bg-light">
                 <thead>
                 <tr class="text-center">
                     <th class="border-2">ชื่อเมนู</th>

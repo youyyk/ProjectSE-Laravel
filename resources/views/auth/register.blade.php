@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="margin-top:15%;margin-left: 3%">
         <div class="col-md-8">
             <div class="card" style="margin-top: 20px">
                 <div class="card-header text-center fs-4">{{ __('เพิ่มผู้ใช้งาน') }}</div>

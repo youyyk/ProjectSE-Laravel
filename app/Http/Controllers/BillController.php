@@ -27,7 +27,7 @@ class BillController extends Controller
      */
     public function index()
     {
-        $bills = Bill::get();
+        $bills = Bill::paginate(10);
         return view('bills.index',[
             'bills' => $bills
         ]);

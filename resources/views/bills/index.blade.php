@@ -38,10 +38,10 @@
                             {{$bill->paid==0?"ชำระเงินแล้ว":"ยังไม่ชำระ"}}
                     </span>
                 </td>
-                <td class="border-2 p-0.5" style="width: 30%; font-size: 18px">
+                <td class="border-2 p-0.5" style="width: 25%; font-size: 18px">
                     {{$bill->created_at}}
                 </td>
-                <td class="border-2 p-0.5" style="width: 20%; font-size: 18px">
+                <td class="border-2 p-0.5" style="width: 30%; font-size: 18px">
                     <button type="button"
                             class="btn btn-primary"
                             data-bs-toggle="modal"
@@ -53,6 +53,9 @@
         @endforeach
         </tbody>
     </table>
+    <div class="pagination justify-content-center">
+        {{$bills->links()}}
+    </div>
     @foreach($bills as $bill)
         @include('bills.bill_component.infoBillPopUp',['bill'=>$bill])
     @endforeach
