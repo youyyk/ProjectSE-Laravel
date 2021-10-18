@@ -6,18 +6,32 @@
             กราฟรายวัน
             <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
             <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
-                        ย้อนกลับ</a>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("day.line")}}" style="text-decoration:none" class="link-dark">
+                วัน</a>
                 </button>
-
-                <button class="btn btn-outline-dark dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("month.line")}}" style="text-decoration:none" class="link-dark">
+                เดือน</a>
+                </button>
+                <button type="button" class="btn btn-outline-dark ">
+                    <a href="{{route("year.line")}}" style="text-decoration:none" class="link-dark">
+                ปี</a>
+                </button>
+                <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     ประเภทกราฟ
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                     <a class="dropdown-item" href="{{route("day.line")}}">กราฟเส้น</a>
                     <a class="dropdown-item" href="{{route("day.bar")}}">กราฟแท่ง</a>
                 </div>
+            </span>
+
+            <span class=" btn-group px-2" role="group" aria-label="Third group">
+                <button type="button" class="btn btn-secondary">
+                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
+                    ย้อนกลับ</a>
+                </button>
             </span>
         </span>
         </h1>
@@ -36,10 +50,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
     <script>
         var bill_total =  <?php echo json_encode($bill_total) ?>;
+        var groupDate =  <?php echo json_encode($groupDate) ?>;
         var barChartData = {
-            labels: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30', '31'],
+            labels: groupDate,
             datasets: [{
-                label: 'จำนวนยอดบิลทั้งหมด (บาท)',
+                label: 'จำนวนยอดชำระทั้งหมด (บาท)',
                 backgroundColor: "#A3DDCB",
                 data: bill_total,
             }]
@@ -67,4 +82,5 @@
             });
         };
     </script>
+    @include('charts.index')
 @endsection
