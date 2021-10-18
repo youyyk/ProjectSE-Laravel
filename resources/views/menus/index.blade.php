@@ -11,9 +11,9 @@
     <div class="m-5">
         <h1 class="mt-3">
             รายการอาหาร
-            <span class="float-end">
+            <span class="float-end mt-3">
             <a>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createMenuModal">
+                <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createMenuModal">
                     + เพิ่มเมนู
                 </button>
             </a>

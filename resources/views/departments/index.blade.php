@@ -8,29 +8,30 @@
 </style>
 @section('content')
 <div class="container">
-    <h1 class="mt-3">
-        แผนกครัว
-        <span class="float-end">
-            <form class="form-inline"
-                  action="{{ route('departments.store') }}"
-                  method="POST">
-                @csrf
+    <form class="form-inline"
+          action="{{ route('departments.store') }}"
+          method="POST">
+        @csrf
+        <h1 class="mt-3">
+            แผนกครัว
+            <span class="float-end mt-3">
+                <span class="float-start px-2">
+                    <input type="type" name="name"
+                           style="padding: 0.25rem 0rem; font-size: 18px"
+                           class="rounded-2 text-center form-control @error('name') border border-danger rounded is-invalid @enderror"
+                           placeholder="- - - เพิ่มแผนก - - -"
+                           autocomplete="off">
+                </span>
+                    <button class="btn btn-outline-primary" type="submit">+ เพิ่ม</button>
+                    @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
+                            <span class="invalid-feedback m-2 fs-6" role="alert">
+                                {{ $message }}
+                            </span>
+                    @enderror
+            </span>
+        </h1>
+    </form>
 
-                <input type="type" name="name"
-                       style="padding: 0.25rem 0rem; font-size: 18px"
-                       class="rounded-2 text-center @error('name') border border-danger rounded is-invalid @enderror"
-                       placeholder="- - - เพิ่มแผนก - - -"
-                       autocomplete="off">
-                <button class="btn btn-primary" type="submit">+ เพิ่ม</button>
-                @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                        <span class="invalid-feedback m-2 fs-6" role="alert">
-                            {{ $message }}
-                        </span>
-                @enderror
-
-            </form>
-        </span>
-    </h1>
 
     <hr>
 

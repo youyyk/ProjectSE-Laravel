@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'type',
-        'path'
+        'path',
+        'last_login'
 
     ];
 
@@ -67,6 +68,16 @@ class User extends Authenticatable
         return $this->isType('BackWorker');
     }
 
-
+//    /**
+//     * The user has been authenticated.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  mixed  $user
+//     * @return mixed
+//     */
+//    protected function authenticated(Request $request, $user)
+//    {
+//        //
+//    }
 
 }

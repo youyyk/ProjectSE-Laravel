@@ -15,8 +15,7 @@
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.3",
         "livewire/livewire": "^2.6",
-        "phattarachai/line-notify": "^1.1",
-        "miloschuman/yii2-highcharts-widget": "^8.0"
+        "phattarachai/line-notify": "^1.1"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

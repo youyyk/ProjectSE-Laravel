@@ -17,23 +17,46 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
+//        $types = User::get()->unique('type');
+        $filterMenu = array('search_name' => '', 'select_r' =>'');
         return view('users.index',[
             'users' => $users,
             'search_name' => '',
+//            'types' => $types,
+            'select_r' =>'',
+            'filterMenu' => $filterMenu
         ]);
     }
 
     public function searchCard(Request $request)
     {
-        if ($request->search ==""){
-            $users = User::latest('updated_at')->get();
-        }
+//        if ($request->search ==""){
+//            $users = User::latest('updated_at')->get();
+//        }
 
+        if ($request->selected_r != "" & $request->search == ""){
+            $users = User::whereType($request->selected_r)->latest('updated_at')->get();
+        }
+        else if ($request->selected_r ==""  & $request->search != ""){
+            $users = User::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
+        }
+        else if ($request->selected_r != ""  & $request->search != ""){
+            $users = User::where('name','LIKE',"%".$request->search."%")->whereType($request->selected_r)->latest('updated_at')->get();
+        }
+//        else if ($request->selected_role ==""  & $request->search =="") {
+//            $users = User::where('name', 'LIKE', "%" . $request->search . "%")->whereType($request->selected_role)->latest('updated_at')->get();
+//        }
         else $users = User::where('name','LIKE',"%".$request->search."%")->latest('updated_at')->get();
 
+//        $users = User::get();
+//        $types = User::get()->unique('type');
+        $filterMenu=array('search_name' => $request->search, 'select_r' => $request->selected_r);
         return view('users.index',[
             'users' => $users,
+//            'types' => $types,
+            'filterMenu' => $filterMenu,
             'search_name' => $request->search,
+            'select_r' => $request->selected_r
         ]);
     }
 
@@ -94,16 +117,10 @@ class UserController extends Controller
                 // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
                 // Rule ต้อง use Illuminate\Validation\Rule;
             ],
-//            'email' => [
-//                Rule::unique('users')->ignore($id),
-//                // unique ไม่ซ้ำกับในตาราง ยกเว้น id นี้ที่กำลังแก้ไข
-//                // Rule ต้อง use Illuminate\Validation\Rule;
-//            ],
         ])->validate();
 
         $user = User::findOrFail($id);
         $user->name = $request->input('name');
-//        $user->email = $request->input('email');
         $user->type = $request->input('type');
         if ($request->has('image')){
             $imageFile = $request->file('image');

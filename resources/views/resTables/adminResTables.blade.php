@@ -10,18 +10,22 @@
                       action="{{ route('resTables.store') }}"
                       method="POST">
                     @csrf
+                    <div class="input-group">
                     <input type="text" name="name"
                            style="padding: 0.25rem 0rem; font-size: 18px"
-                           class="rounded-2 text-center @error('name') border border-danger rounded  @enderror"
+                           class="rounded-2 text-center form-control mt-lg-2 form-control-sm @error('name') border border-danger rounded is-invalid @enderror"
                            placeholder="- - - เพิ่มโต๊ะ - - -"
                            autocomplete="off">
-                    <button class="btn btn-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
-                    @error('name') {{-- การแสดงการกรอกข้อมูลผิดพลาด --}}
-                        <p class=" text-danger m-2 fs-6">
-                            {{ $message }}
-                        </p>
-                    @enderror
+                    <div class="input-group-append px-2">
+                        <button class="btn btn-outline-primary" type="submit" data-bs-toggle="modal" data-bs-target="#createTableModal">+ เพิ่มโต๊ะใหม่</button>
+                    </div>
+                    </div>
                 </form>
+                @error('name')
+                    <p class=" text-danger m-2 fs-6" role="alert">
+                        {{ $message }}
+                    </p>
+                @enderror
             </span>
         </h1>
         <hr>
