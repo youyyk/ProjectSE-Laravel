@@ -1,64 +1,64 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Project-WebTech-ResManage
+> โปรเจ็คนี้เป็นโปรเจ็คที่เกี่ยวกับการจัดการภายในร้านอาหารสำหรับพนักงาน ผู้จัดการ และเจ้าของใช้ ซึ่งจะค่อนข้างคล้ายกับระบบ POS ร้านอาหารที่คอยจัดการอยู่ภายในร้าน
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## รายชื่อผู้จัดทำ
+- กันตา คงวัฒนานนท์ 6210450024
+- ยุติธร เกรียงไกรเลิศ 6210450148
+- ณิชนันทน์ จตุปาริสุทธิศิล 6210450571
+- วนิดา ธรรมปัทม์ 6210450717
+- โยษิตา จินดา 6210451411
 
-## About Laravel
+## Install
+```
+git clone https://github.com/youyyk/ProjectWebtech-Laravel.git
+```
+สร้างไฟล์ .env โดย copy จาก .env.example และแก้ไขส่วนของ Database กับ Line Token
+> สามารถอ่านเรื่อง Line Notify ได้ที่ https://github.com/phattarachai/line-notify
+```
+composer install
+npm install
+php artisan key:generate
+php artisan migrate
+php artisan migrate:refresh --seed
+php artisan storage:link
+```
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Run
+```
+php artisan serve
+```
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Features
+มีผู้ใช้ 3 ประเภท
+1. พนักงานหน้าร้าน (FrontWorker)
+   - สามารถสั่งอาหารได้ที่หน้ารายการโต๊ะ โดยสามารถเลือกได้ว่าจะสั่งกลับบ้านหรือทานที่ร้าน
+     - สั่งโดยกดที่โต๊ะ จะสามารถสั่งได้ทั้ง 2 แบบ
+     - สั่งโดยกดที่ปุ่มสั่งกลับบ้าน จะสามารถสั่งกลับบ้านได้เท่านั้น
+   - สามารถยกเลิกเมนูในบิลได้ ถ้าเมนูนั้นยังไม่ได้เริ่มทำ
+     - บิลของทานที่ร้าน ให้กดที่โต๊ะ แล้วเลือก "บิลทั้งหมด" เว็บจะแสดงรายการบิลทั้งหมดของโต๊ะนั้น แล้วจึงกดยกเลิกที่เมนูที่ต้องการยกเลิกได้
+     - บิลของสั่งกลับบ้าน ให้กดที่ "บิลกลับบ้านทั้งหมด" เว็บจะแสดงรายการบิลกลับบ้านทั้งหมดที่ยังไม่ได้ชำระเงิน แล้วจึงกดยกเลิกที่เมนูที่ต้องการยกเลิกได้
+   - สามารถชำระเงินให้ลูกค้าได้
+     - บิลของทานที่ร้าน ให้กดที่โต๊ะ แล้วเลือก "บิลทั้งหมด" จะมีปุ่มชำระเงิน ซึ่งจะกดได้ก็ต่อเมื่อทุกเมนูในทุกบิลทำเสร็จหมดแล้ว
+     - บิลของสั่งกลับบ้าน ให้กดที่ "บิลกลับบ้านทั้งหมด" จะมีปุ่มชำระเงินที่แต่ละบิล ซึ่งสามารถกดได้ทุกเมื่อ
+   - สามารดูรายละเอียดของบิลได้ที่หน้ารายการบิล
+2. พนักงานหลังร้าน (BackWorker)
+   - สามารถกดปุ่มเพื่อเปลี่ยนสถานะของแต่ละเมนูในแต่ละบิลได้ โดยจะมีแค่บิลที่ยังทำไม่เสร็จเท่านั้น
+     - เมนูที่ยังไม่ได้เริ่มทำ(มีสถานะเป็น 'notStarted') ปุ่มจะเขียนว่า "เริ่ม" ให้กดได้ ซึ่งเมื่อกดแล้วสถานะจะเปลี่ยนเป็น 'inProcess'
+     - ถ้าเมนูมีสถานะเป็น 'inProcess' ปุ่มจะเขียนว่า "เสร็จ" ให้กดได้ ซึ่งเมื่อกดแล้วสถานะจะเปลี่ยนเป็น 'finish'
+     - ถ้าเมนูมีสถานะเป็น 'finish' ปุ่มจะเปลี่ยนเป็นปุ่มที่กดไม่ได้
+     - ถ้าทุกเมนูในบิลถูกเปลี่ยนสถานะเป็น 'finish' ทั้งหมดแล้ว บิลจะหายไปจากหน้า
+3. แอดมิน (Admin)
+   - สามารถเข้าถึงข้อมูลของผู้ใช้งานได้ทุกคน
+   - สามารถจัดการข้อมูลผู้ใช้งาน รายการอาหาร แผนกครัว และโต๊ะ(หน้าการจัดการโต๊ะ)
+   - สามารถดูกราฟสรุปยอดขายตามวัน เดือน และปี ได้ใน 2 รูปแบบ คือ กราฟเส้นและกราฟแท่ง
+   - สามารถส่งแจ้งเตือนในไลน์ได้ โดยสามารถส่งยอดสรุปประจำวัน(กดปุ่มยอดประจำวันนี้ในหน้าสรุปยอด) และแจ้งเตือนเมื่อมีการเพิ่มผู้ใช้งาน
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Example Account
 
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[CMS Max](https://www.cmsmax.com/)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Email         | Password | Type        |
+--------------|----------|-------------|
+admin@res.com | 12345678 | Admin       |
+lina@res.com  | 12345678 | FrontWorker |
+dew@res.com   | 12345678 | FrontWorker |
+peang@res.com | 12345678 | BackWorker  |
+ging@res.com  | 12345678 | BackWorker  |
