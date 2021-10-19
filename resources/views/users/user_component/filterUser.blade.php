@@ -9,7 +9,13 @@
                     <option value="">เลือกหน้าที่</option>
                     @foreach($types as $ty)
                         <option value="{{ $ty->type }}" {{$filterUser['selected_r'] === $ty->type ? "selected" : ""}}>
-                        {{ $ty->type }}
+                            @if($ty->type =="Admin")
+                                    แอดมิน
+                            @elseif($ty->type =="FrontWorker")
+                                    พนักงานหน้าร้าน
+                            @elseif($ty->type =="BackWorker")
+                                    พนักงานหลังร้าน
+                            @endif
                         </option>
                     @endforeach
                 </select>

@@ -13,7 +13,7 @@
                     <div class="mb-3 form-group row">
                         <label class="col-sm-4 col-form-label">ชื่อ</label>
                         <div class="col-sm-6">
-                            <input name="name" type="text" class="form-control text-center" value="{{ $user->name }}">
+                            <input name="name" type="text" class="form-control text-center" value="{{ $user->name }}" autocomplete="off">
                         </div>
                     </div>
 
@@ -26,7 +26,13 @@
                                     name="type" id="type">
                                 @foreach(["Admin","FrontWorker","BackWorker"] as $type)
                                     <option value="{{ $type }}"{{$user->type == $type ? "selected" : ""}}>
-                                        {{ $type }}
+                                        @if($type =="Admin")
+                                            แอดมิน
+                                        @elseif($type =="FrontWorker")
+                                            พนักงานหน้าร้าน
+                                        @elseif($type =="BackWorker")
+                                            พนักงานหลังร้าน
+                                        @endif
                                     </option>
                                 @endforeach
                             </select>

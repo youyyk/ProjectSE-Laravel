@@ -60,7 +60,9 @@
                                 <button class=" btn btn-primary" data-bs-toggle="modal" data-bs-target="#editUserModal{{$user->id}}">
                                         แก้ไข
                                 </button>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUserModal{{$user->id}}">
+                                <button class="btn {{Auth::user()->name == $user->name? "btn-secondary":"btn-danger"}}"
+                                        data-bs-toggle="modal" data-bs-target="#deleteUserModal{{$user->id}}"
+                                        {{Auth::user()->name == $user->name? "disabled":""}}>
                                     ลบ
                                 </button>
                             </span>

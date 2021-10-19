@@ -42,10 +42,22 @@ class RegisteredUserController extends Controller
 
         ]);
 
+        $type_line = "";
+        if($request->type =="Admin")
+            $type_line = "แอดมิน";
+        elseif($request->type =="FrontWorker")
+            $type_line = "พนักงานหน้าร้าน";
+        elseif($request->type =="BackWorker")
+            $type_line = "พนักงานหลังร้าน";
+
+        $text_line="\nมีการเพิ่ม user ใหม่\nประเภท ".$type_line."\nโดย ".Auth::user()->name;
+
         if ($request->has('path')){
             $path = $request->file('path')->storeAs('public/images',$request->file('path')->getClientOriginalName());
+            Line::imagePath($request->file('path'))->send($text_line);
         } else {
             $path = "public/images/noImage.jpg";
+            Line::send($text_line);
         }
 
         $user = User::create([
@@ -58,9 +70,6 @@ class RegisteredUserController extends Controller
 
         event(new Registered($user));
 
-        $text_line="\nมีการเพิ่ม user ใหม่\nประเภท ".$user->type."\nโดย ".Auth::user()->name;
-        $image_line = $request->file('path');
-        Line::imagePath($image_line)->send($text_line);
         return redirect()->route('users.index');
     }
 }

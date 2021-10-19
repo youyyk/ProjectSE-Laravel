@@ -15,38 +15,43 @@ class UserSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = "You Yutithorn";
+        $user->name = "ยู";
         $user->email = "admin@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "Admin";
+        $user->path = "public/images/ยู.png";
         $user->save();
 
         $user = new User();
-        $user->name = "Lina Yosita";
+        $user->name = "ลีน่า";
         $user->email = "lina@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "FrontWorker";
+        $user->path = "public/images/ลีน่า.png";
         $user->save();
 
         $user = new User();
-        $user->name = "Dew Wanida";
+        $user->name = "ดิว";
         $user->email = "dew@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "FrontWorker";
+        $user->path = "public/images/ดิว.png";
         $user->save();
 
         $user = new User();
-        $user->name = "Peang Nichanan";
+        $user->name = "แพง";
         $user->email = "peang@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
+        $user->path = "public/images/แพง.png";
         $user->save();
 
         $user = new User();
-        $user->name = "Ging Kanta";
+        $user->name = "กิ่ง";
         $user->email = "ging@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
+        $user->path = "public/images/กิ่ง.png";
         $user->save();
 
 //        for ($i=1; $i<=5; $i++){

@@ -65,7 +65,7 @@
 
                         <div class="mb-3 form-group row">
                             {{--  Dropdown later  --}}
-                            <label class="col-md-4 col-form-label text-md-right" >{{ __('ชนิด') }}</label>
+                            <label class="col-md-4 col-form-label text-md-right" >{{ __('ประเภท') }}</label>
                             <div class="col-md-6">
 
                                 <select class="text-center bg rounded-1 form-select w-100 h-100"

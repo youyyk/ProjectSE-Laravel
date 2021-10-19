@@ -22,7 +22,7 @@
                 <li class="nav-item active">
                     <a class="nav-link
                           @if(\Request::routeIs('departments.*')) bg-dark text-white rounded-3 @endif"
-                       href="{{route("departments.index")}}">แผนกอาหาร</a>
+                       href="{{route("departments.index")}}">แผนกครัว</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
