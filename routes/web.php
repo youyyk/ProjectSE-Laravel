@@ -56,18 +56,12 @@ Route::get('/menu/filter/chooseMenu/{tableId}', [\App\Http\Controllers\MenuContr
     ->name('menu.filter.chooseMenu');
 
 // Charts
-Route::get('/dayLine', [\App\Http\Controllers\ChartController::class, "dayLine"])->middleware(['auth','admin'])
-    ->name('day.line');
-Route::get('/monthLine', [\App\Http\Controllers\ChartController::class, "monthLine"])->middleware(['auth','admin'])
-    ->name('month.line');
-Route::get('/yearLine', [\App\Http\Controllers\ChartController::class, "yearLine"])->middleware(['auth','admin'])
-    ->name('year.line');
-Route::get('/dayBar', [\App\Http\Controllers\ChartController::class, "dayBar"])->middleware(['auth','admin'])
-    ->name('day.bar');
-Route::get('/monthBar', [\App\Http\Controllers\ChartController::class, "monthBar"])->middleware(['auth','admin'])
-    ->name('month.bar');
-Route::get('/yearBar', [\App\Http\Controllers\ChartController::class, "yearBar"])->middleware(['auth','admin'])
-    ->name('year.bar');
+Route::get('/chart/day', [\App\Http\Controllers\ChartController::class, "dayBar"])->middleware(['auth','admin'])
+    ->name('charts.day');
+Route::get('/chart/month', [\App\Http\Controllers\ChartController::class, "monthBar"])->middleware(['auth','admin'])
+    ->name('charts.month');
+Route::get('/chart/year', [\App\Http\Controllers\ChartController::class, "yearBar"])->middleware(['auth','admin'])
+    ->name('charts.year');
 Route::get('/todayTotal', [\App\Http\Controllers\ChartController::class, "notifyTotal"])->middleware(['auth','admin'])
     ->name('todayTotal');
 

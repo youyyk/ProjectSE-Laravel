@@ -1,57 +1,6 @@
-@extends('welcome')
-@section('content')
+@extends('charts.chartHeader')
 
-<div class="container">
-    <h1 class="mt-3">
-        กราฟรายเดือน
-        <span class="float-end dropdown btn-toolbar mt-3" role="toolbar" aria-label="Toolbar with button groups">
-            <span class="btn-group me-2" role="group" aria-label="Second group">
-                <button type="button" class="btn btn-light ">
-                    <a href="{{route("day.bar")}}" style="text-decoration:none" class="link-dark">
-                วัน</a>
-                </button>
-                <button type="button" class="btn btn-dark ">
-                    <a href="{{route("month.bar")}}" style="text-decoration:none" class="link-light">
-                เดือน</a>
-                </button>
-                <button type="button" class="btn btn-light ">
-                    <a href="{{route("year.bar")}}" style="text-decoration:none" class="link-dark">
-                ปี</a>
-                </button>
-
-                <button class="btn btn-warning dropdown-toggle border border-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    กราฟแท่ง
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <a class="dropdown-item" href="{{route("month.line")}}">กราฟเส้น</a>
-                    <a class="dropdown-item" href="{{route("month.bar")}}">กราฟแท่ง</a>
-                </div>
-            </span>
-            <button type="button" class="btn btn-primary">
-                <a href="{{route("todayTotal")}}" style="text-decoration:none" class="link-light">
-                    ยอดประจำวันนี้
-                </a>
-            </button>
-            <span class=" btn-group px-2" role="group" aria-label="Third group">
-                <button type="button" class="btn btn-secondary">
-                <a href="{{route("charts.index")}}" style="text-decoration:none" class="link-light">
-                    ย้อนกลับ</a>
-                </button>
-            </span>
-        </span>
-    </h1>
-    <hr>
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <div class="panel panel-default">
-                <div class="panel-heading text-center">กราฟสรุปจำนวนยอดบิลแต่ละเดือน</div>
-                <div class="panel-body">
-                    <canvas id="canvas" height="280" width="600"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@section('chart-section')
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 <script>
     var bill_total =  <?php echo json_encode($bill_total) ?>;
@@ -81,12 +30,10 @@
                 responsive: true,
                 title: {
                     display: true,
-                    text: 'กราฟแท่ง (Bar Chart) ประจำปี 2021'
+                    text: 'ประจำปี 2021'
                 },
             }
         });
     };
 </script>
-
-
 @endsection

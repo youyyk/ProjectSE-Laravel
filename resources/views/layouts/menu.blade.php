@@ -7,7 +7,7 @@
                 <li class="nav-item active">
                     <a class="nav-link
                               @if(\Request::routeIs('charts.*')) bg-dark text-white rounded-3 @endif"
-                       href="{{route("charts.index")}}">สรุปยอด</a>
+                       href="{{route("charts.day")}}">สรุปยอด</a>
                 </li>
                 <li class="nav-item active">
                     <a class="nav-link
@@ -63,20 +63,6 @@
                             LOGOUT
                         </button>
                     </form>
-{{--                @else--}}
-{{--                    <form action="{{ route('login') }}">--}}
-{{--                        @csrf--}}
-{{--                        <button class="btn btn-outline-success" type="submit">--}}
-{{--                            Login--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
-
-{{--                    <form action="{{ route('register') }}" class="px-2">--}}
-{{--                        @csrf--}}
-{{--                        <button class="btn btn-outline-primary " type="submit">--}}
-{{--                            Register--}}
-{{--                        </button>--}}
-{{--                    </form>--}}
                 @endif
         </div>
     </div>
