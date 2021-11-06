@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('type',['Admin','FrontWorker','BackWorker']);
+            $table->foreignIdFor(\App\Models\Department::class)->nullable();
             $table->string('path')->default("-");
             $table->timestamp('last_login')->nullable();
             $table->rememberToken();
