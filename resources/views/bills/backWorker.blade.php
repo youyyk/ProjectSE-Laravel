@@ -9,6 +9,7 @@
 @section('content')
     <br>
     <div class="row" style="margin-left: 60px; margin-right: 50px">
+        <h1>{{$nameDepartment}}</h1>
         @foreach($bills as $bill)
             @foreach($bill->menus as $menu)
                 @if($menu->department_id == Auth::user()->department_id || Auth::user()->type == "Admin")

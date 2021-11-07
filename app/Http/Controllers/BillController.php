@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Bill;
 use App\Models\Cart;
+use App\Models\Department;
 use App\Models\Restable;
 use Illuminate\Http\Request;
 
 use App\Http\Requests\BillRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -152,9 +154,12 @@ class BillController extends Controller
 
     // Not default method
     public function indexBackWorker() {
+        $department_id = Auth::user()->department_id;
+        $department = Department::findOrFail($department_id);
         $bills = Bill::where('status', true)->get();
         return view('bills.backWorker',[
-            'bills' => $bills
+            'bills' => $bills,
+            'nameDepartment' => $department->name
         ]);
     }
 
