@@ -43,6 +43,7 @@ php artisan serve
    - สามารดูรายละเอียดของบิลได้ที่หน้ารายการบิล
 2. พนักงานหลังร้าน (BackWorker)
    - สามารถกดปุ่มเพื่อเปลี่ยนสถานะของแต่ละเมนูในแต่ละบิลได้ โดยจะมีแค่บิลที่ยังทำไม่เสร็จเท่านั้น
+     - โดยจะแสดงแค่เพียงเมนูที่อยู่ในส่วนรับผิดชอบของพนักงานตามแผนกที่อยู่ ยกเว้นแอดมินเห็นได้ทั้งหมด 
      - เมนูที่ยังไม่ได้เริ่มทำ(มีสถานะเป็น 'notStarted') ปุ่มจะเขียนว่า "เริ่ม" ให้กดได้ ซึ่งเมื่อกดแล้วสถานะจะเปลี่ยนเป็น 'inProcess'
      - ถ้าเมนูมีสถานะเป็น 'inProcess' ปุ่มจะเขียนว่า "เสร็จ" ให้กดได้ ซึ่งเมื่อกดแล้วสถานะจะเปลี่ยนเป็น 'finish'
      - ถ้าเมนูมีสถานะเป็น 'finish' ปุ่มจะเปลี่ยนเป็นปุ่มที่กดไม่ได้
@@ -55,10 +56,16 @@ php artisan serve
 
 ### Example Account
 
-Email         | Password | Type        |
---------------|----------|-------------|
-admin@res.com | 12345678 | Admin       |
-lina@res.com  | 12345678 | FrontWorker |
-dew@res.com   | 12345678 | FrontWorker |
-peang@res.com | 12345678 | BackWorker  |
-ging@res.com  | 12345678 | BackWorker  |
+Email         | Password | Type        | Department        |
+--------------|----------|-------------|-------------|
+admin@res.com | 12345678 | Admin       | All
+lina@res.com  | 12345678 | FrontWorker | -
+dew@res.com   | 12345678 | FrontWorker | -
+peang@res.com | 12345678 | BackWorker  | ครัวไทย
+ging@res.com  | 12345678 | BackWorker  | ของหวาน
+ice@res.com  | 12345678 | BackWorker  | นานาชาติ
+backworker@res.com  | 12345678 | BackWorker  | เครื่องดื่ม
+
+### Unit Testing
+
+### jMeter
