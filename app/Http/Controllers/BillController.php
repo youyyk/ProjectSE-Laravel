@@ -154,12 +154,15 @@ class BillController extends Controller
 
     // Not default method
     public function indexBackWorker() {
-        $department_id = Auth::user()->department_id;
-        $department = Department::findOrFail($department_id);
+        $department = null;
+        if (Auth::user()->type != "Admin") {
+            $department_id = Auth::user()->department_id;
+            $department = Department::findOrFail($department_id);
+        }
         $bills = Bill::where('status', true)->get();
         return view('bills.backWorker',[
             'bills' => $bills,
-            'nameDepartment' => $department->name
+            'nameDepartment' => $department==null?"รวม":$department->name
         ]);
     }
 
