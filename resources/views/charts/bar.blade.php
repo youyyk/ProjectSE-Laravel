@@ -9,8 +9,15 @@
         labels: groupDate,
         datasets: [{
             label: 'จำนวนยอดชำระทั้งหมด (บาท)',
-            backgroundColor: "#CAB8FF",
-            data: bill_total
+            @if(\Request::routeIs('charts.day'))
+                backgroundColor: "#A3DDCB",
+            @elseif(\Request::routeIs('charts.month'))
+                backgroundColor: "#CAB8FF",
+            @elseif(\Request::routeIs('charts.year'))
+                backgroundColor: "#FFBCBC",
+            @endif
+            data: bill_total,
+
         }]
     };
 
@@ -32,7 +39,7 @@
                     display: true,
                     text: 'ประจำปี 2021'
                 },
-            }
+            },
         });
     };
 </script>

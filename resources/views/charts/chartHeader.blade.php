@@ -24,7 +24,7 @@
             </span>
             <button type="button" class="btn btn-primary">
                 <a href="{{route("todayTotal")}}" style="text-decoration:none" class="link-light">
-                    ยอดประจำวันนี้
+                    ส่งยอดประจำวันนี้
                 </a>
             </button>
         </span>
@@ -37,7 +37,7 @@
             <div class="col-md-10 offset-md-1">
                 <div class="panel panel-default">
                     <div class="panel-heading text-center">
-                        @if(\Request::routeIs('charts.index'))
+                        @if(\Request::routeIs('charts.day'))
                             กราฟสรุปจำนวนยอดบิลแต่ละวัน
                         @elseif(\Request::routeIs('charts.month'))
                             กราฟสรุปจำนวนยอดบิลแต่ละเดือน

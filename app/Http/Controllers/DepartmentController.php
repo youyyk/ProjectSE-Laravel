@@ -52,7 +52,7 @@ class DepartmentController extends Controller
 
         $department->save();
 
-        return redirect()->back();
+        return redirect()->route('departments.index');
     }
 
     /**

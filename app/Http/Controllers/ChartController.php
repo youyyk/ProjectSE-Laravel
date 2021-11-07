@@ -45,7 +45,7 @@ class ChartController extends Controller
             $bill_total[$i] = $bill_total[$i]*1;
         }
 
-        return view('charts.chart_day.bar', compact('bill_total', 'groupDate'),[
+        return view('charts.bar', compact('bill_total', 'groupDate'),[
             'bills' => Bill::orderBy('created_at', 'DESC')->get(),
             'groupDate' => $groupDate
         ]);
@@ -104,7 +104,7 @@ class ChartController extends Controller
             }
         }
 
-        return view('charts.chart_month.bar', compact('bill_total', 'groupDate'),[
+        return view('charts.bar', compact('bill_total', 'groupDate'),[
             'bills' => Bill::orderBy('created_at', 'DESC')->get(),
             'groupDate' => $groupDate
         ]);
@@ -125,7 +125,7 @@ class ChartController extends Controller
             $bill_total[$i] = $bill_total[$i]*1;
         }
 
-        return view('charts.chart_year.bar', compact('bill_total', 'groupDate'),[
+        return view('charts.bar', compact('bill_total', 'groupDate'),[
             'bills' => Bill::orderBy('created_at', 'DESC')->get(),
             'groupDate' => $groupDate
         ]);

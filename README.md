@@ -10,7 +10,7 @@
 
 ## Install
 ```
-git clone https://github.com/youyyk/ProjectWebtech-Laravel.git
+git clone https://github.com/youyyk/ProjectSE-Laravel.git
 ```
 สร้างไฟล์ .env โดย copy จาก .env.example และแก้ไขส่วนของ Database กับ Line Token
 > สามารถอ่านเรื่อง Line Notify ได้ที่ https://github.com/phattarachai/line-notify

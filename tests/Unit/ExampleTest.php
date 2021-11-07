@@ -15,4 +15,10 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function test_gogg()
+    {
+        $test = false;
+        $this->assertTrue($test);
+    }
 }
