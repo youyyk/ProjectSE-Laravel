@@ -43,6 +43,7 @@ class UserSeeder extends Seeder
         $user->email = "peang@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
+        $user->department_id = '2';
         $user->path = "public/images/แพง.png";
         $user->save();
 
@@ -51,7 +52,24 @@ class UserSeeder extends Seeder
         $user->email = "ging@res.com";
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
+        $user->department_id = '4';
         $user->path = "public/images/กิ่ง.png";
+        $user->save();
+
+        $user = new User();
+        $user->name = "ไอซ์";
+        $user->email = "ice@res.com";
+        $user->password = \Hash::make('12345678');
+        $user->type = "BackWorker";
+        $user->department_id = '3';
+        $user->save();
+
+        $user = new User();
+        $user->name = "พนักงาน";
+        $user->email = "backworker@res.com";
+        $user->password = \Hash::make('12345678');
+        $user->type = "BackWorker";
+        $user->department_id = '5';
         $user->save();
 
 //        for ($i=1; $i<=5; $i++){

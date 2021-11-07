@@ -12,4 +12,8 @@ class Department extends Model
     public function menus(){
         return $this->hasMany(Menu::class);
     }
+
+    public function users(){
+        return $this->hasMany(User::class);
+    }
 }

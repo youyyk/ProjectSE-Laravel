@@ -51,6 +51,10 @@ class User extends Authenticatable
         return $this->hasMany(Bill::class);
     }
 
+    public function departments(){
+        return $this->belongsTo(Department::class);
+    }
+
     public function isType($type){
         return $this->type === $type;
     }
