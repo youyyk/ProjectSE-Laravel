@@ -72,3 +72,28 @@ backworker@res.com  | 12345678 | BackWorker  | เครื่องดื่ม
 ### jMeter
 ไฟล์ .jmx อยู่ในโฟลเดอร์ fileForSE
 ![alt text](https://github.com/youyyk/ProjectSE-Laravel/blob/youyyk/fileForSE/JMeter.png?raw=true)
+### Git Branch
+ใน git repository จะมี branch อยู่ 8 branch ได้แก่
+- main
+    - branch นี้เป็น branch หลักในการเก็บการทำงาน
+- develop
+    - branch นี้เป็น branch ที่ไว้สำหรับรวมงานของคนในกลุ่มก่อนที่จะนำเข้า main ซึ่งจะมี branch youyyk, kanta, peang, dew, lina และ irada
+- youyyk
+  - branch นี้เป็น branch ของยุติธร
+- kanta
+  - branch นี้เป็น branch ของกันตา
+- peang
+    - branch นี้เป็น branch ของณิชนันทน์
+- dew
+  - branch นี้เป็น branch ของวนิดา
+- lina
+  - branch นี้เป็น branch ของโยษิตา
+- irada
+  - branch นี้เป็น branch ของไอลดา
+<br>
+####นี่คือตัวอย่างการทำงานของ git
+
+![alt text](/Volumes/GoogleDrive/My Drive/Coding/SE/ProjectSE-Laravel/fileForSE/branch.png)
+
+
+
