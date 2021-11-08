@@ -6,8 +6,8 @@
 - ยุติธร เกรียงไกรเลิศ 6210450148
 - ณิชนันทน์ จตุปาริสุทธิศิล 6210450571
 - วนิดา ธรรมปัทม์ 6210450717
+- ไอลดา พินิจศรศาสตร์ 6210450822
 - โยษิตา จินดา 6210451411
-
 ## Install
 ```
 git clone https://github.com/youyyk/ProjectSE-Laravel.git
@@ -67,6 +67,8 @@ ice@res.com  | 12345678 | BackWorker  | นานาชาติ
 backworker@res.com  | 12345678 | BackWorker  | เครื่องดื่ม
 
 ### Unit Testing
+ต้องทำการเพิ่ม database สำหรับการ testing แก้ใน env
 ![alt text](https://github.com/youyyk/ProjectSE-Laravel/blob/youyyk/fileForSE/UnitTesting.png?raw=true)
 ### jMeter
+ไฟล์ .jmx อยู่ในโฟลเดอร์ fileForSE
 ![alt text](https://github.com/youyyk/ProjectSE-Laravel/blob/youyyk/fileForSE/JMeter.png?raw=true)

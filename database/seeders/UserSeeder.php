@@ -62,6 +62,7 @@ class UserSeeder extends Seeder
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
         $user->department_id = '3';
+        $user->path = "public/images/ไอซ์.png";
         $user->save();
 
         $user = new User();
@@ -70,6 +71,7 @@ class UserSeeder extends Seeder
         $user->password = \Hash::make('12345678');
         $user->type = "BackWorker";
         $user->department_id = '5';
+        $user->path = "public/images/workerDummy.jpg";
         $user->save();
 
 //        for ($i=1; $i<=5; $i++){

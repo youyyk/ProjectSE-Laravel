@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bill;
 use App\Models\Cart;
 use App\Models\Department;
+use App\Models\Menu;
 use App\Models\Restable;
 use Illuminate\Http\Request;
 
@@ -179,8 +180,17 @@ class BillController extends Controller
     }
 
     public function cancelMenuInBill(Bill $bill, $menuId) {
+        foreach($bill->menus as $menu) {
+            if($menu->id == $menuId) {
+                $price = $menu->price;
+                $amount = $menu->pivot->amount;
+                break;
+            }
+        }
+        $bill->total -= $price*$amount;
+        $bill->save();
         $bill->menus()->detach($menuId);
-        if (count($bill->menus) == 0){
+        if ($bill->total == 0){
             $this->destroy($bill->id); // delete bill when not have menu
         }
         return redirect()->back();
