@@ -8,6 +8,9 @@
 - วนิดา ธรรมปัทม์ 6210450717
 - ไอลดา พินิจศรศาสตร์ 6210450822
 - โยษิตา จินดา 6210451411
+
+## Project Link
+> http://Ec2-175-41-181-99.ap-southeast-1.compute.amazonaws.com
 ## Install
 ```
 git clone https://github.com/youyyk/ProjectSE-Laravel.git
@@ -91,9 +94,9 @@ backworker@res.com  | 12345678 | BackWorker  | เครื่องดื่ม
 - irada
   - branch นี้เป็น branch ของไอลดา
 <br>
-####นี่คือตัวอย่างการทำงานของ git
+####  นี่คือตัวอย่างการทำงานของ git
 
-![alt text](/Volumes/GoogleDrive/My Drive/Coding/SE/ProjectSE-Laravel/fileForSE/branch.png)
+![alt text](https://github.com/youyyk/ProjectSE-Laravel/blob/main/fileForSE/branch.png?raw=true)
 
 
 
